@@ -1,0 +1,6 @@
+C:/libraries/fftw-3.3.10/build/CMakeFiles/fftw3.dir
+C:/libraries/fftw-3.3.10/build/CMakeFiles/bench.dir
+C:/libraries/fftw-3.3.10/build/CMakeFiles/RUN_TESTS.dir
+C:/libraries/fftw-3.3.10/build/CMakeFiles/INSTALL.dir
+C:/libraries/fftw-3.3.10/build/CMakeFiles/ALL_BUILD.dir
+C:/libraries/fftw-3.3.10/build/CMakeFiles/ZERO_CHECK.dir

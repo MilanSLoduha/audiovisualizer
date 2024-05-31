@@ -1,0 +1,896 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B6D34903-A72D-3F56-8DED-6E7EA1B8A29F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>fftw3</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\libraries\fftw-3.3.10\build\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">fftw3.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">fftw3</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\libraries\fftw-3.3.10\build\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">fftw3.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">fftw3</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\libraries\fftw-3.3.10\build\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">fftw3.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">fftw3</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\libraries\fftw-3.3.10\build\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">fftw3.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">fftw3</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.dll</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;/bigobj;FFTW_DLL;CMAKE_INTDIR="Debug";fftw3_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;/bigobj;FFTW_DLL;CMAKE_INTDIR=\"Debug\";fftw3_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/libraries/fftw-3.3.10/build/Debug/fftw3.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/libraries/fftw-3.3.10/build/Debug/fftw3.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR="Release";fftw3_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR=\"Release\";fftw3_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/libraries/fftw-3.3.10/build/Release/fftw3.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/libraries/fftw-3.3.10/build/Release/fftw3.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR="MinSizeRel";fftw3_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR=\"MinSizeRel\";fftw3_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/libraries/fftw-3.3.10/build/MinSizeRel/fftw3.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/libraries/fftw-3.3.10/build/MinSizeRel/fftw3.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>
+      </ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR="RelWithDebInfo";fftw3_EXPORTS</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;/bigobj;FFTW_DLL;CMAKE_INTDIR=\"RelWithDebInfo\";fftw3_EXPORTS</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>C:\libraries\fftw-3.3.10\.;C:\libraries\fftw-3.3.10\build;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>C:/libraries/fftw-3.3.10/build/RelWithDebInfo/fftw3.lib</ImportLibrary>
+      <ProgramDataBaseFile>C:/libraries/fftw-3.3.10/build/RelWithDebInfo/fftw3.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\libraries\fftw-3.3.10\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/libraries/fftw-3.3.10/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/libraries/fftw-3.3.10 -BC:/libraries/fftw-3.3.10/build --check-stamp-file C:/libraries/fftw-3.3.10/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckPrototypeDefinition.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\libraries\fftw-3.3.10\FFTW3Config.cmake.in;C:\libraries\fftw-3.3.10\FFTW3ConfigVersion.cmake.in;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCXXCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeRCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeSystem.cmake;C:\libraries\fftw-3.3.10\cmake.config.h.in;C:\libraries\fftw-3.3.10\fftw.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\libraries\fftw-3.3.10\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/libraries/fftw-3.3.10/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/libraries/fftw-3.3.10 -BC:/libraries/fftw-3.3.10/build --check-stamp-file C:/libraries/fftw-3.3.10/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckPrototypeDefinition.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\libraries\fftw-3.3.10\FFTW3Config.cmake.in;C:\libraries\fftw-3.3.10\FFTW3ConfigVersion.cmake.in;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCXXCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeRCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeSystem.cmake;C:\libraries\fftw-3.3.10\cmake.config.h.in;C:\libraries\fftw-3.3.10\fftw.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\libraries\fftw-3.3.10\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/libraries/fftw-3.3.10/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/libraries/fftw-3.3.10 -BC:/libraries/fftw-3.3.10/build --check-stamp-file C:/libraries/fftw-3.3.10/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckPrototypeDefinition.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\libraries\fftw-3.3.10\FFTW3Config.cmake.in;C:\libraries\fftw-3.3.10\FFTW3ConfigVersion.cmake.in;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCXXCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeRCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeSystem.cmake;C:\libraries\fftw-3.3.10\cmake.config.h.in;C:\libraries\fftw-3.3.10\fftw.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\libraries\fftw-3.3.10\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/libraries/fftw-3.3.10/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/libraries/fftw-3.3.10 -BC:/libraries/fftw-3.3.10/build --check-stamp-file C:/libraries/fftw-3.3.10/build/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCheckCompilerFlagCommonPatterns.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckCSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFile.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckIncludeFileCXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckPrototypeDefinition.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckSymbolExists.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\CheckTypeSize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\GNUInstallDirs.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckCompilerFlag.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckFlagCommonConfig.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Internal\CheckSourceCompiles.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-3.29\Modules\Platform\WindowsPaths.cmake;C:\libraries\fftw-3.3.10\FFTW3Config.cmake.in;C:\libraries\fftw-3.3.10\FFTW3ConfigVersion.cmake.in;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeCXXCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeRCCompiler.cmake;C:\libraries\fftw-3.3.10\build\CMakeFiles\3.29.2\CMakeSystem.cmake;C:\libraries\fftw-3.3.10\cmake.config.h.in;C:\libraries\fftw-3.3.10\fftw.pc.in;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\libraries\fftw-3.3.10\build\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\api.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\apiplan.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\configure.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-r2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-split-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-split-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute-split-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\execute.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\export-wisdom-to-file.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\export-wisdom-to-string.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\export-wisdom.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\f77api.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\f77funcs.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\fftw3.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\flops.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\forget-wisdom.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\guru.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\guru64.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\import-system-wisdom.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\import-wisdom-from-file.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\import-wisdom-from-string.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\import-wisdom.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\malloc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\map-r2r-kind.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mapflags.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mkprinter-file.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mkprinter-str.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mktensor-iodims.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\mktensor-iodims.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mktensor-iodims64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\mktensor-rowmajor.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-1d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-3d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-c2r-1d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-c2r-2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-c2r-3d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-r2c-1d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-r2c-2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-r2c-3d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft-c2r.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft-c2r.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft-r2c.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft-r2c.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-dft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-r2r.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-r2r.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft-c2r.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft-c2r.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft-r2c.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft-r2c.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\plan-guru-split-dft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-r2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-split-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-split-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-guru64-split-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-many-dft-c2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-many-dft-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-many-dft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-many-r2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-r2r-1d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-r2r-2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-r2r-3d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\plan-r2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\print-plan.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\rdft2-pad.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\the-planner.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\api\version.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\api\x77.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\bluestein.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\buffered.c">
+      <ObjectFileName>$(IntDir)/dft/buffered.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\codelet-dft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\conf.c">
+      <ObjectFileName>$(IntDir)/dft/conf.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\ct.c">
+      <ObjectFileName>$(IntDir)/dft/ct.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\ct.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\dft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\dftw-direct.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\dftw-directsq.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\dftw-generic.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\dftw-genericbuf.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\direct.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\generic.c">
+      <ObjectFileName>$(IntDir)/dft/generic.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\indirect-transpose.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\indirect.c">
+      <ObjectFileName>$(IntDir)/dft/indirect.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\kdft-dif.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\kdft-difsq.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\kdft-dit.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\kdft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\nop.c">
+      <ObjectFileName>$(IntDir)/dft/nop.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\plan.c">
+      <ObjectFileName>$(IntDir)/dft/plan.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\problem.c">
+      <ObjectFileName>$(IntDir)/dft/problem.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\rader.c">
+      <ObjectFileName>$(IntDir)/dft/rader.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\rank-geq2.c">
+      <ObjectFileName>$(IntDir)/dft/rank-geq2.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\solve.c">
+      <ObjectFileName>$(IntDir)/dft/solve.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\vrank-geq1.c">
+      <ObjectFileName>$(IntDir)/dft/vrank-geq1.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\zero.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\scalar\f.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\n.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\scalar\n.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\scalar\q.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\t.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\scalar\t.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\codlist.c">
+      <ObjectFileName>$(IntDir)/dft/scalar/codelets/codlist.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_11.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_13.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_14.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\n1_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\q1_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t1_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\dft\scalar\codelets\t2_8.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\n1b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\n1f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\n2b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\n2f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\n2s.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\q1b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\q1f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t1b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t1bu.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t1f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t1fu.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t2b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t2f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t3b.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\t3f.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\dft\simd\ts.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\align.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\alloc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\assert.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\awake.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\buffered.c">
+      <ObjectFileName>$(IntDir)/kernel/buffered.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\cpy1d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\cpy2d-pair.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\cpy2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\ct.c">
+      <ObjectFileName>$(IntDir)/kernel/ct.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClInclude Include="C:\libraries\fftw-3.3.10\kernel\cycle.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\debug.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\extract-reim.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\hash.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\iabs.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\kernel\ifftw.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\kalloc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\md5-1.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\md5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\minmax.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\ops.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\pickdim.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\plan.c">
+      <ObjectFileName>$(IntDir)/kernel/plan.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\planner.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\primes.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\print.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\problem.c">
+      <ObjectFileName>$(IntDir)/kernel/problem.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\rader.c">
+      <ObjectFileName>$(IntDir)/kernel/rader.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\scan.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\solver.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\solvtab.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\stride.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor1.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tensor9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\tile2d.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\timer.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\transpose.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\trig.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\kernel\twiddle.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\buffered.c">
+      <ObjectFileName>$(IntDir)/rdft/buffered.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\buffered2.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\codelet-rdft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\conf.c">
+      <ObjectFileName>$(IntDir)/rdft/conf.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\ct-hc2c-direct.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\ct-hc2c.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\ct-hc2c.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\dft-r2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\dht-r2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\dht-rader.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\direct-r2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\direct-r2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\direct2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\generic.c">
+      <ObjectFileName>$(IntDir)/rdft/generic.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\hc2hc-direct.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\hc2hc-generic.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\hc2hc.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\hc2hc.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\indirect.c">
+      <ObjectFileName>$(IntDir)/rdft/indirect.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\khc2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\khc2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\kr2c.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\kr2r.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\nop.c">
+      <ObjectFileName>$(IntDir)/rdft/nop.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\nop2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\plan.c">
+      <ObjectFileName>$(IntDir)/rdft/plan.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\plan2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\problem.c">
+      <ObjectFileName>$(IntDir)/rdft/problem.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\problem2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rank-geq2-rdft2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rank-geq2.c">
+      <ObjectFileName>$(IntDir)/rdft/rank-geq2.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rank0-rdft2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rank0.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rdft-dht.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\rdft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rdft2-inplace-strides.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rdft2-rdft.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rdft2-strides.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\rdft2-tensor-max-index.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\solve.c">
+      <ObjectFileName>$(IntDir)/rdft/solve.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\solve2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\vrank-geq1-rdft2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\vrank-geq1.c">
+      <ObjectFileName>$(IntDir)/rdft/vrank-geq1.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\vrank3-transpose.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\hb.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\hc2c.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\hc2cb.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\hc2cf.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\hf.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\hfb.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2c.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cbIII.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cfII.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2r.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2r.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\codlist.c">
+      <ObjectFileName>$(IntDir)/rdft/scalar/r2cb/codlist.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hb_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cb_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\hc2cbdft_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cbIII_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_11.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_128.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_13.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_14.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cb\r2cb_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\codlist.c">
+      <ObjectFileName>$(IntDir)/rdft/scalar/r2cf/codlist.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cf_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hc2cfdft_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf2_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\hf_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cfII_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_10.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_11.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_12.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_128.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_13.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_14.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_15.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_16.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_20.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_25.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_3.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_32.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_4.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_5.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_6.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_64.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_7.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2cf\r2cf_9.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2r\codlist.c">
+      <ObjectFileName>$(IntDir)/rdft/scalar/r2r/codlist.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2r\e01_8.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\rdft\scalar\r2r\e10_8.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\simd\hc2cbv.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\rdft\simd\hc2cfv.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\conf.c">
+      <ObjectFileName>$(IntDir)/reodft/conf.c.obj</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\redft00e-r2hc-pad.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\redft00e-r2hc.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\reodft\reodft.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\reodft00e-splitradix.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\reodft010e-r2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\reodft11e-r2hc-odd.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\reodft11e-r2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\reodft11e-radix2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\rodft00e-r2hc-pad.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\reodft\rodft00e-r2hc.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\altivec.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\amd64-cpuid.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\avx-128-fma.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\avx.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\avx2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\avx512.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\kcvi.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\neon.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-altivec.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-avx-128-fma.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-avx.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-avx2-128.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-avx2.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-avx512.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-common.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-generic128.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-generic256.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-kcvi.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-neon.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-sse2.h" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\simd-vsx.h" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\sse2.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\taint.c" />
+    <ClCompile Include="C:\libraries\fftw-3.3.10\simd-support\vsx.c" />
+    <ClInclude Include="C:\libraries\fftw-3.3.10\simd-support\x86-cpuid.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\libraries\fftw-3.3.10\build\ZERO_CHECK.vcxproj">
+      <Project>{D19D8946-30ED-3B66-B820-72AD8106F8BE}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
