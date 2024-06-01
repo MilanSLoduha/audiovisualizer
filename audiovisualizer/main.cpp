@@ -82,6 +82,8 @@ int main()
     std::cout << "\nIFFT =\n";
     displayReal(x);
 
+
+	//openGL test ...............................................................................................................
     GLFWwindow* window;
 
     /* Initialize the library */
