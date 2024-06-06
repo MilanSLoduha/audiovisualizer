@@ -1,6 +1,7 @@
 #include <fftw3.h>
-#include <GLFW/glfw3.h>
 #include <SFML/Audio.hpp>
+#include "main.hpp"
+//#include <GLFW/glfw3.h>
 
 #include <iostream>
 
@@ -82,40 +83,41 @@ int main()
     // display the results
     std::cout << "\nIFFT =\n";
     displayReal(x);
+	window Window;
 
+    Window.windowRun();
+	////////////opengl test ...............................................................................................................
+ //////////   glfwwindow* window;
 
-	//openGL test ...............................................................................................................
-    GLFWwindow* window;
+ //////////   /* initialize the library */
+ //////////   if (!glfwinit())
+ //////////       return -1;
 
-    /* Initialize the library */
-    if (!glfwInit())
-        return -1;
+ //////////   /* create a windowed mode window and its opengl context */
+ //////////   window = glfwcreatewindow(640, 480, "hello world", null, null);
+ //////////   if (!window)
+ //////////   {
+ //////////       glfwterminate();
+ //////////       return -1;
+ //////////   }
 
-    /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-    if (!window)
-    {
-        glfwTerminate();
-        return -1;
-    }
+ //////////   /* make the window's context current */
+ //////////   glfwmakecontextcurrent(window);
 
-    /* Make the window's context current */
-    glfwMakeContextCurrent(window);
+ //////////   /* loop until the user closes the window */
+ //////////   while (!glfwwindowshouldclose(window))
+ //////////   {
+ //////////       /* render here */
+ //////////       glclear(gl_color_buffer_bit);
 
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
-    {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+ //////////       /* swap front and back buffers */
+ //////////       glfwswapbuffers(window);
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+ //////////       /* poll for and process events */
+ //////////       glfwpollevents();
+ //////////   }
 
-        /* Poll for and process events */
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
+ //////////   glfwterminate();
 
     return 0;
 }
