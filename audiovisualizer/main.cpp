@@ -60,7 +60,7 @@ void displayReal(fftw_complex* y)
 }
 
 /* Test */
-int main()
+int xmain()
 {
     // input array
     fftw_complex x[N];
