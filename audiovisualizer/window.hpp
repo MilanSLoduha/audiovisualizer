@@ -7,9 +7,11 @@ class window {
 public:
 	window();
 	void windowRun();
+	sf::RenderWindow Window;
 	//~window();
 
 private:
+	sf::Event event;
 };
 
 //window::~window()

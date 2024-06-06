@@ -83,7 +83,9 @@ int main()
     // display the results
     std::cout << "\nIFFT =\n";
     displayReal(x);
+
 	window Window;
+
 
     Window.windowRun();
 	////////////opengl test ...............................................................................................................
