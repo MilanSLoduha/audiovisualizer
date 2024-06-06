@@ -148,11 +148,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="chat.cpp" />
+    <ClCompile Include="FFT.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenGLtest.cpp" />
     <ClCompile Include="window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FFT.hpp" />
     <ClInclude Include="Globals.hpp" />
     <ClInclude Include="main.hpp" />
     <ClInclude Include="window.hpp" />
