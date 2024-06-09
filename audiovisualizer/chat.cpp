@@ -23,7 +23,7 @@
 //    fftw_execute(p);
 //
 //    for (int i = 0; i < FFT_SIZE / 2; ++i) {
-//        magnitudes[i] = sqrt(out[i][0] * out[i][0] + out[i][1] * out[i][1]);
+//        magnitudes[i] = sqrt(out[i][0] * out[i][0] + out[i][1] * out[i][1]);/
 //    }
 //
 //    fftw_destroy_plan(p);
