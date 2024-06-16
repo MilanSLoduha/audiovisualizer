@@ -15,9 +15,9 @@ public:
 	
 	std::vector<double> magnitudes;
 
+	const sf::Int16* samples_fft;
 private:
 	static const int N = 1024; // 1024 samples for the FFT - 1024 / 44100 = 0.023 seconds -- values 2^n
-	const sf::Int16* samples;
 	sf::Uint64 sampleCount;
 	unsigned int channelCount;
 };

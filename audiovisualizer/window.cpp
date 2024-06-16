@@ -15,7 +15,7 @@ void window::windowRun()
         while (Window.pollEvent(event))
         {
             handleInput(event, Window, fft);
-            fft.applyFFT(fft.music.getSamples(), fft.magnitudes);
+            fft.applyFFT(fft.samples_fft, fft.magnitudes);
         }
         Window.clear();
         Window.display();

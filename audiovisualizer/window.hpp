@@ -14,7 +14,7 @@ public:
 private:
 	sf::RenderWindow Window;
 	FFT fft;
-	std::vector<sf::Int16> samples;
+	//std::vector<sf::Int16> samples;
 };
 
 //window::~window()
