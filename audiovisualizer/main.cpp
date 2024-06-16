@@ -65,24 +65,24 @@ void displayReal(fftw_complex* y)
 int main()
 {
     // input array
-    fftw_complex x[N];
-    // output array
-    fftw_complex y[N];
-    // fill the first array with some numbers
-    for (int i = 0; i < N; ++i) {
-        x[i][REAL] = i + 1.;        // i.e., { 1, 2, 3, 4, 5, 6, 7, 8 }
-        x[i][IMAG] = 0;
-    }
-    // compute the FFT of x and store the results in y
-    fft(x, y);
-    // display the results
-    std::cout << "FFT =\n";
-    displayComplex(y);
-    // compute the IFFT of y and store the results in x
-    ifft(y, x);
-    // display the results
-    std::cout << "\nIFFT =\n";
-    displayReal(x);
+    //fftw_complex x[N];
+    //// output array
+    //fftw_complex y[N];
+    //// fill the first array with some numbers
+    //for (int i = 0; i < N; ++i) {
+    //    x[i][REAL] = i + 1.;        // i.e., { 1, 2, 3, 4, 5, 6, 7, 8 }
+    //    x[i][IMAG] = 0;
+    //}
+    //// compute the FFT of x and store the results in y
+    //fft(x, y);
+    //// display the results
+    //std::cout << "FFT =\n";
+    //displayComplex(y);
+    //// compute the IFFT of y and store the results in x
+    //ifft(y, x);
+    //// display the results
+    //std::cout << "\nIFFT =\n";
+    //displayReal(x);
 
 	window Window;
 

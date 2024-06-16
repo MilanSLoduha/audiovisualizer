@@ -9,16 +9,17 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual") {
 
 void window::windowRun()
 {
-		fft.song.play();
-	while (Window.isOpen())
-	{
-		while (Window.pollEvent(event))
-		{
-			handleInput(event, Window, fft);
-		}
-		Window.clear();
-		Window.display();
-	}
+    fft.song.play();
+    while (Window.isOpen())
+    {
+        while (Window.pollEvent(event))
+        {
+            handleInput(event, Window, fft);
+            fft.applyFFT(fft.music.getSamples(), fft.magnitudes);
+        }
+        Window.clear();
+        Window.display();
+    }
 }
 
 void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {

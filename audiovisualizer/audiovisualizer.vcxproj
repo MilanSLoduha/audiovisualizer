@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="chat.cpp" />
     <ClCompile Include="FFT.cpp" />
+    <ClCompile Include="funkcne.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="OpenGLtest.cpp" />
     <ClCompile Include="window.cpp" />
