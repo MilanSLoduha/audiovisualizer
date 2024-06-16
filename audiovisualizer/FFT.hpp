@@ -10,7 +10,7 @@ class FFT
 public:
 	FFT();
 	sf::Sound song;
-	void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
+	//void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
 	sf::SoundBuffer music;
 	
 	std::vector<double> magnitudes;
