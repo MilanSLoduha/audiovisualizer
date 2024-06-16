@@ -1,3 +1,4 @@
+/*
 #include "FFT.hpp"
 
 FFT::FFT()
@@ -38,3 +39,4 @@ FFT::FFT()
 	//
 	fftw_destroy_plan(p);
 }
+*/

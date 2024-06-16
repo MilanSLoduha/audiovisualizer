@@ -116,8 +116,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>glfw-3.4.bin.WIN64\lib-vc2022;fftw-3.3.10\build\Debug</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fftw3.lib;$(CoreLibraryDependencies);glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>glfw-3.4.bin.WIN64\lib-vc2022;SFML-2.6.1\lib;fftw-3.3.10\build\Debug</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fftw3.lib;$(CoreLibraryDependencies);glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;sfml-network.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /d /y "fftw-3.3.10\build\Debug\*.dll" "$(TargetDir)"</Command>
@@ -139,8 +139,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-      <AdditionalLibraryDirectories>glfw-3.4.bin.WIN64\lib-vc2022;fftw-3.3.10\build\Release;SFML-2.6.1\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>fftw3.lib;$(CoreLibraryDependencies);glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;SFML-system.lib;SFML-graphics.lib;SFML-audio.lib;SFML-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>glfw-3.4.bin.WIN64\lib-vc2022;SFML-2.6.1\lib;fftw-3.3.10\build\Release</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fftw3.lib;$(CoreLibraryDependencies);glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-system.lib;sfml-window.lib;sfml-graphics.lib;sfml-audio.lib;sfml-network.lib</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy /d /y "fftw-3.3.10\build\Release\*.dll" "$(TargetDir)"</Command>
