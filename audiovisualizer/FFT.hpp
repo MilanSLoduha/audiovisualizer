@@ -20,5 +20,6 @@ public:
 private:
 	sf::Uint64 sampleCount;
 	unsigned int channelCount;
+	unsigned int sampleRate;
 	
 };

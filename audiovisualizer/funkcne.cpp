@@ -13,12 +13,13 @@ FFT::FFT()
 	samples_fft = music.getSamples();
 	sampleCount = music.getSampleCount();
 	channelCount = music.getChannelCount();
-	song.getPlayingOffset().asSeconds();
+	sampleRate = music.getSampleRate();
 
 }
 
 void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 {
+	if (done >= sampleCount) return;
 	fftw_complex* in = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 	fftw_complex* out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 
@@ -36,8 +37,8 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 		}
 		in[i][1] = 0.0; // Imaginary part is zero
 	}
-	if (done % 10 == 0)  printf("%lld\n", done / 44100);
-	done += N;
+	if (done % 10 == 0)  printf("%lld\n", done / sampleRate);
+	done += 2 * N;
 
 	fftw_plan p = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);
