@@ -3,7 +3,7 @@
 
 FFT::FFT()
 {
-	if (!music.loadFromFile("test.wav"))
+	if (!music.loadFromFile("caba neblazni.wav"))
 	{
 		std::cout << "Error loading music file" << std::endl;
 	}
@@ -37,6 +37,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 		}
 		in[i][1] = 0.0; // Imaginary part is zero
 	}
+	if (static_cast<int>(round(song.getPlayingOffset().asSeconds() * 10)) % 10 == 0) done = song.getPlayingOffset().asSeconds() * sampleRate;
 	if (done % 10 == 0)  printf("%lld\n", done / sampleRate);
 	done += 2 * N;
 
