@@ -13,6 +13,7 @@ FFT::FFT()
 	samples_fft = music.getSamples();
 	sampleCount = music.getSampleCount();
 	channelCount = music.getChannelCount();
+	song.getPlayingOffset().asSeconds();
 
 }
 

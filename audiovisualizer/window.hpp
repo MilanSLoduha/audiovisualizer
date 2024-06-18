@@ -17,7 +17,10 @@ private:
 	sf::RenderWindow Window;
 	sf::RectangleShape dot;
 	FFT fft;
-
+	sf::Text time;
+	sf::Font font;
+	std::string timeString;
+	void drawTime();
 	//std::vector<sf::Int16> samples;
 };
 

@@ -3,15 +3,25 @@
 #include "FFT.hpp"
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>
+#include <atomic>
+#include <iomanip>
 
 window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	// Optionally, set framerate limit or other window properties here
 	Window.setFramerateLimit(60);
 	magnitudes.resize(N / 2);
-
+	if (!font.loadFromFile("font.ttf")) {
+		std::cout << "Error loading font" << std::endl;
+	}
 	//dot.setSize(sf::Vector2f(1, 1));
 	dot.setRotation(270);
 	dot.setFillColor(sf::Color::White);
+
+	time.setCharacterSize(width / 64);
+	time.setFillColor(sf::Color::White);
+	time.setPosition(width / 16 * 15, height / 54);
+	time.setFont(font);
+
 }
 
 void window::windowRun()
@@ -24,8 +34,11 @@ void window::windowRun()
             handleInput(event, Window, fft);
         }
         fft.applyFFT(fft.samples_fft, magnitudes);
+
         Window.clear();
 		drawVisualization(magnitudes);
+		drawTime();
+
         Window.display();
     }
 }
@@ -55,6 +68,13 @@ void window::drawVisualization(std::vector<double> magnitudes){
 		Window.draw(dot);
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(23));
+}
+
+void window::drawTime() {
+	timeString = std::to_string(fft.song.getPlayingOffset().asSeconds());
+	timeString.erase(timeString.length() - 4);
+	time.setString(timeString);
+	Window.draw(time);
 }
 //window::~window()
 
