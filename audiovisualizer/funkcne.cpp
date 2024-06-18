@@ -55,4 +55,5 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 
 	fftw_destroy_plan(p);
 	fftw_free(in);
+	fftw_free(out);
 }

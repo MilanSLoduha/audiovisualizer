@@ -15,6 +15,7 @@ public:
 	sf::SoundBuffer music;
 	
 	long long done = 0;
+	int numberOfStripes = N / 2;
 
 	const sf::Int16* samples_fft;
 private:

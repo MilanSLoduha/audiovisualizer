@@ -64,8 +64,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - i), 1));
-		dot.setPosition(sf::Vector2f(i, height));
+		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - i), widthOfDot));
+		dot.setPosition(sf::Vector2f(i * widthOfDot, height));
 		Window.draw(dot);
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(23));
