@@ -7,9 +7,10 @@
 #include <iomanip>
 
 window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
-	// Optionally, set framerate limit or other window properties here
-	Window.setFramerateLimit(60);
+	Window.setFramerateLimit(400);
+
 	magnitudes.resize(N / 2);
+
 	if (!font.loadFromFile("font.ttf")) {
 		std::cout << "Error loading font" << std::endl;
 	}

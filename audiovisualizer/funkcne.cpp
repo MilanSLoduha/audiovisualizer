@@ -3,7 +3,7 @@
 
 FFT::FFT()
 {
-	if (!music.loadFromFile("caba neblazni.wav"))
+	if (!music.loadFromFile("test.wav"))
 	{
 		std::cout << "Error loading music file" << std::endl;
 	}
@@ -36,6 +36,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 		}
 		in[i][1] = 0.0; // Imaginary part is zero
 	}
+	if (done % 10 == 0)  printf("%lld\n", done / 44100);
 	done += N;
 
 	fftw_plan p = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
