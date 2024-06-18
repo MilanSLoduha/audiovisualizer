@@ -10,10 +10,14 @@ public:
 	void windowRun();
 	void handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft);
 	sf::Event event;
+	void drawVisualization(std::vector<double>);
+	std::vector<double> magnitudes;
 	//~window();
 private:
 	sf::RenderWindow Window;
+	sf::RectangleShape dot;
 	FFT fft;
+
 	//std::vector<sf::Int16> samples;
 };
 

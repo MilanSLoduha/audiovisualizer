@@ -9,7 +9,6 @@
 constexpr int REAL = 0;
 constexpr int IMAG = 1;
 // length of the complex arrays
-constexpr int N = 8;
 
 /* Computes the 1-D fast Fourier transform. */
 void fft(fftw_complex* in, fftw_complex* out)

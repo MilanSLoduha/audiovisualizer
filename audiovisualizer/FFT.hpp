@@ -4,6 +4,7 @@
 #include <fftw3.h>
 #include "Globals.hpp"
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 class FFT
 {
@@ -13,11 +14,11 @@ public:
 	void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
 	sf::SoundBuffer music;
 	
-	std::vector<double> magnitudes;
+	long long done = 0;
 
 	const sf::Int16* samples_fft;
 private:
-	static const int N = 1024; // 1024 samples for the FFT - 1024 / 44100 = 0.023 seconds -- values 2^n
 	sf::Uint64 sampleCount;
 	unsigned int channelCount;
+	
 };
