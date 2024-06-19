@@ -18,6 +18,7 @@ public:
 	int numberOfStripes = N / 2;
 
 	const sf::Int16* samples_fft;
+
 private:
 	sf::Uint64 sampleCount;
 	unsigned int channelCount;
