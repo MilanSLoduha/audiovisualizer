@@ -9,7 +9,8 @@
 window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	Window.setFramerateLimit(400);
 
-	magnitudes.resize(N / 2);
+	magnitudes.resize(N / 2 / 1.1);
+	//magnitudes.resize(N / 2);
 
 	if (!font.loadFromFile("font.ttf")) {
 		std::cout << "Error loading font" << std::endl;
@@ -22,6 +23,9 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	time.setFillColor(sf::Color::White);
 	time.setPosition(width / 16 * 15, height / 54);
 	time.setFont(font);
+
+	widthOfDot = std::round(width / magnitudes.size()); // calculate width of dot based on number of stripes and width of window...
+	//doesn't work properly
 
 }
 
@@ -64,7 +68,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - i), widthOfDot));
+		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - i), widthOfDot)); /// (magnitudes.size() - i)
 		dot.setPosition(sf::Vector2f(i * widthOfDot, height));
 		Window.draw(dot);
 	}

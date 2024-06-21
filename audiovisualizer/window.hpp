@@ -21,8 +21,7 @@ private:
 	sf::Font font;
 	std::string timeString;
 	void drawTime();
-	int widthOfDot = std::round(width / fft.numberOfStripes); // calculate width of dot based on number of stripes and width of window...
-															 //doesn't work properly
+	int widthOfDot;
 	//std::vector<sf::Int16> samples;
 };
 
