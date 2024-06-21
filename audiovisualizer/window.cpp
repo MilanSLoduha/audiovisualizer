@@ -64,8 +64,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
 	}
 	if (event.type == sf::Event::MouseWheelScrolled) {
-		if (event.mouseWheelScroll.delta > 0) fft.song.setVolume(fft.song.getVolume() + 10);
-		else fft.song.setVolume(fft.song.getVolume() - 10);
+		if (event.mouseWheelScroll.delta > 0 && fft.song.getVolume() < 100) fft.song.setVolume(fft.song.getVolume() + 10);
+		else if(event.mouseWheelScroll.delta < 0 && fft.song.getVolume() > 0) fft.song.setVolume(fft.song.getVolume() - 10);
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
