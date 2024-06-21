@@ -3,7 +3,7 @@
 
 FFT::FFT()
 {
-	if (!music.loadFromFile("test.wav"))
+	if (!music.loadFromFile("caba neblazni.wav"))
 	{
 		std::cout << "Error loading music file" << std::endl;
 	}
@@ -18,7 +18,7 @@ FFT::FFT()
 
 void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 {
-	if (done >= sampleCount) return;
+	if ((done + N) * channelCount > sampleCount) return;
 	fftw_complex* in = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 	fftw_complex* out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 
@@ -32,7 +32,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	}
 	if (static_cast<int>(round(song.getPlayingOffset().asSeconds() * 10)) % 10 == 0) done = song.getPlayingOffset().asSeconds() * sampleRate;
 	//if (done % 10 == 0)  printf("%lld\n", done / sampleRate); // vypisovac casu
-	done += channelCount * N;
+	done += channelCount * (N * 2);
 
 	fftw_plan p = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);

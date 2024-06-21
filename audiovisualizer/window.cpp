@@ -60,6 +60,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 			else if(fft.song.getStatus() == sf::Sound::Status::Playing) fft.song.pause();
 		}
 		if (event.key.code == sf::Keyboard::Escape) window.close();
+		if (event.key.code == sf::Keyboard::Right) fft.song.setPlayingOffset(fft.song.getPlayingOffset() + sf::seconds(10));
+		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
 	}
 	if (event.type == sf::Event::MouseWheelScrolled) {
 		if (event.mouseWheelScroll.delta > 0) fft.song.setVolume(fft.song.getVolume() + 10);
