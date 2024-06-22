@@ -38,7 +38,11 @@ void window::windowRun()
         {
             handleInput(event, Window, fft);
         }
-        fft.applyFFT(fft.samples_fft, magnitudes);
+		if (clock.getElapsedTime().asMilliseconds() > 23)
+		{
+			fft.applyFFT(fft.samples_fft, magnitudes);
+			clock.restart();
+		}
 
         Window.clear();
 		drawVisualization(magnitudes);
@@ -70,8 +74,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - i), widthOfDot)); /// (magnitudes.size() - i)
-		dot.setPosition(sf::Vector2f(i * widthOfDot, height));
+		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - 0), 1)); /// (magnitudes.size() - i)
+		dot.setPosition(sf::Vector2f(i * 1, height));
 		Window.draw(dot);
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(23));

@@ -22,6 +22,7 @@ private:
 	std::string timeString;
 	void drawTime();
 	int widthOfDot;
+	sf::Clock clock;
 	//std::vector<sf::Int16> samples;
 };
 

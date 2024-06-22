@@ -18,9 +18,12 @@ FFT::FFT()
 
 void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 {
-	if ((done + N) * channelCount > sampleCount) return;
 	fftw_complex* in = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 	fftw_complex* out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
+
+	done = static_cast<long long>(song.getPlayingOffset().asSeconds() * sampleRate); //chats upgrade
+	done += channelCount * static_cast<long long>(N);
+	if ((done + N) * channelCount > sampleCount) return;
 
 	for (int i = 0; i < N; i++)
 	{
@@ -30,9 +33,11 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 
 		in[i][1] = 0.0; // Imaginary part is zero
 	}
-	if (static_cast<int>(round(song.getPlayingOffset().asSeconds() * 10)) % 10 == 0) done = song.getPlayingOffset().asSeconds() * sampleRate;
+	//if (static_cast<int>(round(song.getPlayingOffset().asSeconds() * 10)) % 10 == 0) done = song.getPlayingOffset().asSeconds() * sampleRate;
 	//if (done % 10 == 0)  printf("%lld\n", done / sampleRate); // vypisovac casu
-	done += channelCount * (N * 2);
+	
+
+	//done += channelCount * (N * 0.60);
 
 	fftw_plan p = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);
