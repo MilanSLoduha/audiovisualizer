@@ -4,7 +4,6 @@
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>
 #include <atomic>
-#include <iomanip>
 
 window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	Window.setFramerateLimit(400);
@@ -31,6 +30,14 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 
 void window::windowRun()
 {
+	while (Window.isOpen() && startMenu.startMenu) {
+		startInput();
+
+		Window.clear();
+		startMenu.draw(Window);
+		Window.display();
+	}
+
     fft.song.play();
     while (Window.isOpen())
     {
@@ -88,5 +95,50 @@ void window::drawTime() {
 	Window.draw(time);
 }
 //window::~window()
+
+void window::startInput()
+{
+	bool pressed = true;
+
+	while (Window.pollEvent(event)) {
+		switch (event.type) {
+
+		case sf::Event::Closed: {
+			Window.close();
+
+			break;
+		}
+		}
+
+		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+			pressed = true;
+			if (startMenu.clickBrowse(Window)) {
+				startMenu.button = 1;
+				startMenu.setPressed(startMenu.button);
+			}
+		}
+		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed)
+		{
+			if (startMenu.clickBrowse(Window)) {
+				startMenu.button = 1;
+				startMenu.setUnpressed(startMenu.button);
+
+				pressed = false;
+			}
+
+			else if (startMenu.clickStart(Window)) {
+				startMenu.button = 2;
+				startMenu.setUnpressed(startMenu.button);
+				startMenu.startMenu = false;
+				pressed = false;
+				break;
+			}
+		}
+	}
+}
+
 
 

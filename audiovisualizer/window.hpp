@@ -3,6 +3,7 @@
 #include "FFT.hpp"
 #include <SFML/Graphics.hpp>
 #include "Globals.hpp"
+#include "StartMenu.hpp"
 
 class window {
 public:
@@ -23,6 +24,9 @@ private:
 	void drawTime();
 	int widthOfDot;
 	sf::Clock clock;
+	StartMenu startMenu;
+
+	void startInput();
 	//std::vector<sf::Int16> samples;
 };
 
