@@ -26,11 +26,11 @@ StartMenu::StartMenu()
 
 	BrowseButton.setTexture(buttonTexture);
 	BrowseButton.setPosition( width / 10 * 8, height / 10 * 2);
-	BrowseButton.setScale(0.04, 0.04);
+	BrowseButton.setScale(width / 48000., width / 48000.);
 
 	StartButton.setTexture(buttonTexture);
 	StartButton.setPosition(width / 10 * 8, height / 10 * 8);
-	StartButton.setScale(0.04, 0.04);
+	StartButton.setScale(width / 48000., width / 48000.);
 
 	browseText.setCharacterSize(width / 64);
 	browseText.setFillColor(sf::Color::White);
@@ -43,6 +43,9 @@ StartMenu::StartMenu()
 	startText.setPosition(width / 10 * 8, height / 10 * 8);
 	startText.setFont(font);
 	startText.setString("Start");
+
+	background.setTexture(backgroundTexture);
+	background.setScale(width / 1920., width / 1920.);
 
 
 
@@ -78,6 +81,7 @@ void StartMenu::setUnpressed(int& button) {
 
 void StartMenu::draw(sf::RenderWindow& window)
 {
+	window.draw(background);
 	window.draw(BrowseButton);
 	window.draw(StartButton);
 	window.draw(browseText);
@@ -93,47 +97,47 @@ void StartMenu::draw(sf::RenderWindow& window)
 
 
 
-//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
-//{
-//	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-//		COINIT_DISABLE_OLE1DDE);
-//	if (SUCCEEDED(hr))
-//	{
-//		IFileOpenDialog* pFileOpen;
-//
-//		// Create the FileOpenDialog object.
-//		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
-//			IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-//
-//		if (SUCCEEDED(hr))
-//		{
-//			// Show the Open dialog box.
-//			hr = pFileOpen->Show(NULL);
-//
-//			// Get the file name from the dialog box.
-//			if (SUCCEEDED(hr))
-//			{
-//				IShellItem* pItem;
-//				hr = pFileOpen->GetResult(&pItem);
-//				if (SUCCEEDED(hr))
-//				{
-//					PWSTR pszFilePath;
-//					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-//
-//					// Display the file name to the user.
-//					if (SUCCEEDED(hr))
-//					{
-//						MessageBoxW(NULL, pszFilePath, L"File Path", MB_OK);
-//						CoTaskMemFree(pszFilePath);
-//					}
-//					pItem->Release();
-//				}
-//			}
-//			pFileOpen->Release();
-//		}
-//		CoUninitialize();
-//	}
-//	return 0;
-//}
+//////int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
+//////{
+//////	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
+//////		COINIT_DISABLE_OLE1DDE);
+//////	if (SUCCEEDED(hr))
+//////	{
+//////		IFileOpenDialog* pFileOpen;
+//////
+//////		// Create the FileOpenDialog object.
+//////		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
+//////			IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
+//////
+//////		if (SUCCEEDED(hr))
+//////		{
+//////			// Show the Open dialog box.
+//////			hr = pFileOpen->Show(NULL);
+//////
+//////			// Get the file name from the dialog box.
+//////			if (SUCCEEDED(hr))
+//////			{
+//////				IShellItem* pItem;
+//////				hr = pFileOpen->GetResult(&pItem);
+//////				if (SUCCEEDED(hr))
+//////				{
+//////					PWSTR pszFilePath;
+//////					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
+//////
+//////					// Display the file name to the user.
+//////					if (SUCCEEDED(hr))
+//////					{
+//////						MessageBoxW(NULL, pszFilePath, L"File Path", MB_OK);
+//////						CoTaskMemFree(pszFilePath);
+//////					}
+//////					pItem->Release();
+//////				}
+//////			}
+//////			pFileOpen->Release();
+//////		}
+//////		CoUninitialize();
+//////	}
+//////	return 0;
+//////}
 //https://learn.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box
 

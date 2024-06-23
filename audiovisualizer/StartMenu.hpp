@@ -18,6 +18,8 @@ public:
 	sf::Sprite BrowseButton;
 	sf::Sprite StartButton;
 
+	sf::Sprite background;
+
 	sf::Text browseText;
 	sf::Text startText;
 

@@ -1,6 +1,6 @@
 #pragma once
 
-constexpr int width = 1920 / 1;
+constexpr int width = 1920 / 2;
 constexpr int height = width / 16 * 8;
 static const int N = 4096;  // 1024 samples for the FFT - 1024 / 44100 = 0.023 seconds -- values 2^n
 /*
