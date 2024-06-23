@@ -11,9 +11,6 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	magnitudes.resize(N / 2 / 1.1);
 	//magnitudes.resize(N / 2);
 
-	if (!font.loadFromFile("font.ttf")) {
-		std::cout << "Error loading font" << std::endl;
-	}
 	//dot.setSize(sf::Vector2f(1, 1));
 	dot.setRotation(270);
 	dot.setFillColor(sf::Color::White);
@@ -21,7 +18,7 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	time.setCharacterSize(width / 64);
 	time.setFillColor(sf::Color::White);
 	time.setPosition(width / 16 * 15, height / 54);
-	time.setFont(font);
+	time.setFont(startMenu.font);
 
 	widthOfDot = std::round(width / magnitudes.size()); // calculate width of dot based on number of stripes and width of window...
 	//doesn't work properly
@@ -116,8 +113,15 @@ void window::startInput()
 				startMenu.button = 1;
 				startMenu.setPressed(startMenu.button);
 			}
+			else if (startMenu.clickStart(Window)) {
+				startMenu.button = 2;
+				startMenu.setPressed(startMenu.button);
+			}
 		}
 		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
 			startMenu.setUnpressed(startMenu.button);
 		}
 		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed)

@@ -19,7 +19,6 @@ private:
 	sf::RectangleShape dot;
 	FFT fft;
 	sf::Text time;
-	sf::Font font;
 	std::string timeString;
 	void drawTime();
 	int widthOfDot;

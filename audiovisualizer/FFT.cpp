@@ -8,7 +8,6 @@ FFT::FFT()
 		std::cout << "Error loading music file" << std::endl;
 	}
 	song.setBuffer(music);
-	//song.play();
 
 	samples_fft = music.getSamples();
 	sampleCount = music.getSampleCount();

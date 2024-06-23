@@ -18,6 +18,11 @@ public:
 	sf::Sprite BrowseButton;
 	sf::Sprite StartButton;
 
+	sf::Text browseText;
+	sf::Text startText;
+
+	sf::Font font;
+
 	void setPressed(int&);
 	void setUnpressed(int&);
 	void draw(sf::RenderWindow&);

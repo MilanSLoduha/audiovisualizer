@@ -20,6 +20,10 @@ StartMenu::StartMenu()
 		std::cout << "Error loading pressed button texture" << std::endl;
 	}
 
+	if (!font.loadFromFile("font.ttf")) {
+		std::cout << "Error loading font" << std::endl;
+	}
+
 	BrowseButton.setTexture(buttonTexture);
 	BrowseButton.setPosition( width / 10 * 8, height / 10 * 2);
 	BrowseButton.setScale(0.04, 0.04);
@@ -27,6 +31,20 @@ StartMenu::StartMenu()
 	StartButton.setTexture(buttonTexture);
 	StartButton.setPosition(width / 10 * 8, height / 10 * 8);
 	StartButton.setScale(0.04, 0.04);
+
+	browseText.setCharacterSize(width / 64);
+	browseText.setFillColor(sf::Color::White);
+	browseText.setPosition(width / 10 * 8, height / 10 * 2);
+	browseText.setFont(font);
+	browseText.setString("Browse");
+
+	startText.setCharacterSize(width / 64);
+	startText.setFillColor(sf::Color::White);
+	startText.setPosition(width / 10 * 8, height / 10 * 8);
+	startText.setFont(font);
+	startText.setString("Start");
+
+
 
 }
 
@@ -62,6 +80,8 @@ void StartMenu::draw(sf::RenderWindow& window)
 {
 	window.draw(BrowseButton);
 	window.draw(StartButton);
+	window.draw(browseText);
+	window.draw(startText);
 }
 
 
