@@ -41,9 +41,6 @@
     <ClInclude Include="Globals.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="FFT.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -157,7 +157,6 @@
   <ItemGroup>
     <ClInclude Include="FFT.hpp" />
     <ClInclude Include="Globals.hpp" />
-    <ClInclude Include="main.hpp" />
     <ClInclude Include="StartMenu.hpp" />
     <ClInclude Include="window.hpp" />
   </ItemGroup>
