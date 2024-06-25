@@ -19,6 +19,24 @@ StartMenu::StartMenu()
 	if (!pressedButtonTexture.loadFromFile(TexturePath + "Button3.png")) {
 		std::cout << "Error loading pressed button texture" << std::endl;
 	}
+	if (!leftResolutionTexture.loadFromFile(TexturePath + "left.png")) {
+		std::cout << "Error loading leftResolution texture" << std::endl;
+	}
+	if (!rightResolutionTexture.loadFromFile(TexturePath + "right.png")) {
+		std::cout << "Error loading rightResolution texture" << std::endl;
+	}
+	if (!pressedleftResolutionTexture.loadFromFile(TexturePath + "leftPressed.png")) {
+		std::cout << "Error loading pressedleftResolution texture" << std::endl;
+	}
+	if (!pressedrightResolutionTexture.loadFromFile(TexturePath + "rightPressed.png")) {
+		std::cout << "Error loading pressedrightResolution texture" << std::endl;
+	}
+	if (!ApplyButtonTexture.loadFromFile(TexturePath + "apply.png")) {
+		std::cout << "Error loading ApplyButton texture" << std::endl;
+	}
+	if (!pressedApplyButtonTexture.loadFromFile(TexturePath + "applyPressed.png")) {
+		std::cout << "Error loading pressedApplyButton texture" << std::endl;
+	}
 
 	if (!font.loadFromFile("font.ttf")) {
 		std::cout << "Error loading font" << std::endl;
@@ -44,6 +62,18 @@ StartMenu::StartMenu()
 	startText.setFont(font);
 	startText.setString("Start");
 
+	leftResolution.setTexture(leftResolutionTexture);
+	leftResolution.setPosition(width / 10 * 7.6, height / 10 * 3);
+	leftResolution.setScale(width / 4800., width / 4800.);
+
+	rightResolution.setTexture(rightResolutionTexture);
+	rightResolution.setPosition(width / 10 * 9.2, height / 10 * 3);
+	rightResolution.setScale(width / 4800., width / 4800.);
+
+	ApplyButton.setTexture(ApplyButtonTexture);
+	ApplyButton.setPosition(width / 10 * 7.0, height / 10 * 3);
+	ApplyButton.setScale(width / 4800., width / 4800.);
+
 	background.setTexture(backgroundTexture);
 	background.setScale(width / 1920., width / 1920.);
 
@@ -61,12 +91,36 @@ bool StartMenu::clickStart(const sf::RenderWindow& window)
 	return StartButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
 }
 
+bool StartMenu::clickLeftResolution(const sf::RenderWindow& window)
+{
+	return leftResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
+bool StartMenu::clickRightResolution(const sf::RenderWindow& window)
+{
+	return rightResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
+bool StartMenu::clickApply(const sf::RenderWindow& window)
+{
+	return ApplyButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
 void StartMenu::setPressed(int& button) {
 	if (button == 1) {
 		BrowseButton.setTexture(pressedButtonTexture);
 	}
 	else if (button == 2) {
 		StartButton.setTexture(pressedButtonTexture);
+	}
+	else if (button == 3) {
+		leftResolution.setTexture(pressedleftResolutionTexture);
+	}
+	else if (button == 4) {
+		rightResolution.setTexture(pressedrightResolutionTexture);
+	}
+	else if (button == 5) {
+		ApplyButton.setTexture(pressedApplyButtonTexture);
 	}
 }
 
@@ -77,6 +131,15 @@ void StartMenu::setUnpressed(int& button) {
 	else if (button == 2) {
 		StartButton.setTexture(buttonTexture);
 	}
+	else if (button == 3) {
+		leftResolution.setTexture(leftResolutionTexture);
+	}
+	else if (button == 4) {
+		rightResolution.setTexture(rightResolutionTexture);
+	}
+	else if (button == 5) {
+		ApplyButton.setTexture(ApplyButtonTexture);
+	}
 }
 
 void StartMenu::draw(sf::RenderWindow& window)
@@ -86,6 +149,9 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(StartButton);
 	window.draw(browseText);
 	window.draw(startText);
+	window.draw(leftResolution);
+	window.draw(rightResolution);
+	window.draw(ApplyButton);
 }
 
 

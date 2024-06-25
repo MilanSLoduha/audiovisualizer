@@ -14,9 +14,15 @@ private:
 public:
 	bool clickBrowse(const sf::RenderWindow&);
 	bool clickStart(const sf::RenderWindow&);
+	bool clickRightResolution(const sf::RenderWindow& window);
+	bool clickLeftResolution(const sf::RenderWindow& window);
+	bool clickApply(const sf::RenderWindow& window);
 
 	sf::Sprite BrowseButton;
 	sf::Sprite StartButton;
+	sf::Sprite leftResolution;
+	sf::Sprite rightResolution;
+	sf::Sprite ApplyButton;
 
 	sf::Sprite background;
 
@@ -36,6 +42,12 @@ public:
 	sf::Texture buttonTexture;
 	sf::Texture pressedButtonTexture;
 	sf::Texture backgroundTexture;
+	sf::Texture leftResolutionTexture;
+	sf::Texture rightResolutionTexture;
+	sf::Texture pressedleftResolutionTexture;
+	sf::Texture pressedrightResolutionTexture;
+	sf::Texture ApplyButtonTexture;
+	sf::Texture pressedApplyButtonTexture;
 
 	std::string TexturePath;
 

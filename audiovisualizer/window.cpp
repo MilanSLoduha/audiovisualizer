@@ -107,7 +107,7 @@ void window::startInput()
 		}
 		}
 
-		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
+		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) { //if button is pressed
 			pressed = true;
 			if (startMenu.clickBrowse(Window)) {
 				startMenu.button = 1;
@@ -117,19 +117,40 @@ void window::startInput()
 				startMenu.button = 2;
 				startMenu.setPressed(startMenu.button);
 			}
+			else if (startMenu.clickLeftResolution(Window)) {
+				startMenu.button = 3;
+				startMenu.setPressed(startMenu.button);
+			}
+			else if (startMenu.clickRightResolution(Window)) {
+				startMenu.button = 4;
+				startMenu.setPressed(startMenu.button);
+			}
+			else if (startMenu.clickApply(Window)) {
+				startMenu.button = 5;
+				startMenu.setPressed(startMenu.button);
+			}
 		}
-		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) {
+		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
 			startMenu.setUnpressed(startMenu.button);
 		}
 		else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
 			startMenu.setUnpressed(startMenu.button);
 		}
-		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed)
+		else if (!startMenu.clickLeftResolution(Window) && startMenu.button == 3) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		else if (!startMenu.clickRightResolution(Window) && startMenu.button == 4) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+
+		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed) //if mouse button is released
 		{
 			if (startMenu.clickBrowse(Window)) {
 				startMenu.button = 1;
 				startMenu.setUnpressed(startMenu.button);
-
 				pressed = false;
 			}
 
@@ -138,7 +159,21 @@ void window::startInput()
 				startMenu.setUnpressed(startMenu.button);
 				startMenu.startMenu = false;
 				pressed = false;
-				break;
+			}
+			else if (startMenu.clickLeftResolution(Window)) {
+				startMenu.button = 3;
+				startMenu.setUnpressed(startMenu.button);
+				pressed = false;
+			}
+			else if (startMenu.clickRightResolution(Window)) {
+				startMenu.button = 4;
+				startMenu.setUnpressed(startMenu.button);
+				pressed = false;
+			}
+			else if (startMenu.clickApply(Window)) {
+				startMenu.button = 5;
+				startMenu.setUnpressed(startMenu.button);
+				pressed = false;
 			}
 		}
 	}
