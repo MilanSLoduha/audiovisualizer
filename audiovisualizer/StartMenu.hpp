@@ -25,6 +25,8 @@ public:
 	bool clickApply(const sf::RenderWindow& window);
 	bool clickYesFull(const sf::RenderWindow& window);
 
+	//color picker https://learn.microsoft.com/en-us/cpp/mfc/reference/cmfccolorpickerctrl-class?view=msvc-170
+
 	sf::Sprite BrowseButton;
 	sf::Sprite StartButton;
 	sf::Sprite leftResolution;
