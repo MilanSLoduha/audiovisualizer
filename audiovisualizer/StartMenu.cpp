@@ -120,7 +120,7 @@ void StartMenu::setSizes()
 	ApplyButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
 	ApplyButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
-	background.setScale(width[curRes] / 1920., width[curRes] / 1920.);
+	background.setScale(width[curRes] / 1920., height[curRes] / 1080.);
 
 	resolutionText.setCharacterSize(width[curRes] / 64);
 	resolutionText.setPosition(width[curRes] / 10 * 8.2, height[curRes] / 10 * 3.3);
