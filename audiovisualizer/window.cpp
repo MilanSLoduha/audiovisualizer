@@ -105,6 +105,13 @@ void window::startInput()
 		}
 		}
 
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			sf::Vector2i mousePos = sf::Mouse::getPosition(Window);
+
+			if (startMenu.palette.getGlobalBounds().contains(Window.mapPixelToCoords(mousePos))) {
+				startMenu.getColors(Window);
+			}
+		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) { //if button is pressed
 			pressed = true;
 			if (startMenu.clickBrowse(Window)) {
@@ -227,6 +234,7 @@ void window::applyRes()
 		startMenu.setFullScreen = false;
 	}
 	else Window.setSize(sf::Vector2u(width[startMenu.curRes], height[startMenu.curRes]));
+	dot.setFillColor(startMenu.color.getFillColor());
 }
 
 void window::setSizes()

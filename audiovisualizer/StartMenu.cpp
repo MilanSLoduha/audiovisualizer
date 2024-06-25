@@ -42,7 +42,10 @@ StartMenu::StartMenu()
 	if (!noFullTexture.loadFromFile(TexturePath + "no.png")) {
 		std::cout << "Error loading noFull texture" << std::endl;
 	}
-	if (!paletteTexture.loadFromFile(TexturePath + "palette.png")) {
+	if (!paletteImage.loadFromFile(TexturePath + "palette1.png")) {
+		std::cout << "Error loading palette texture" << std::endl;
+	}
+	if (!paletteTexture.loadFromImage(paletteImage)) {
 		std::cout << "Error loading palette texture" << std::endl;
 	}
 
@@ -105,9 +108,12 @@ StartMenu::StartMenu()
 	ApplyColor.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 4.2);
 	ApplyColor.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
-	palette.setTexture(&paletteTexture);
+
+	palette.setTexture(paletteTexture);
 	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
+	palette.setScale(0.63,0.63);
+	//palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
+
 
 	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
 	color.setFillColor(sf::Color::White);
@@ -117,10 +123,16 @@ StartMenu::StartMenu()
 
 }
 
+void StartMenu::getColors(const sf::RenderWindow& window)
+{
+	sf::Vector2f localPos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)) - palette.getPosition();
+	color.setFillColor(paletteImage.getPixel(localPos.x * 1.59, localPos.y * 1.59));
+}
+
 void StartMenu::setSizes()
 {
 	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
+	palette.setScale(0.63, 0.63);
 
 	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
 	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));

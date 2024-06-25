@@ -12,12 +12,15 @@ private:
 	int selected;
 	int max;
 	sf::RenderWindow colorPicker;
+
 public:
 	void setSizes();
 
 	int curRes = 0;
 	bool fullScreen = false;
 	bool setFullScreen = false;
+	
+	void getColors(const sf::RenderWindow& window);
 
 	bool clickBrowse(const sf::RenderWindow&);
 	bool clickStart(const sf::RenderWindow&);
@@ -38,10 +41,11 @@ public:
 	sf::Sprite yesFull;
 	sf::Sprite ChooseColorButton;
 	sf::Sprite ApplyColor;
+	sf::Sprite palette;
 
 	sf::Sprite background;
 
-	sf::RectangleShape palette;
+	sf::Image paletteImage;
 	sf::RectangleShape color;
 
 	sf::Text browseText;
