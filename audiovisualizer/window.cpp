@@ -5,8 +5,8 @@
 #include <chrono>
 #include <atomic>
 
-window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
-	Window.setFramerateLimit(400);
+window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual") {
+	Window.setFramerateLimit(60);
 
 	magnitudes.resize(N / 2 / 1.1);
 	//magnitudes.resize(N / 2);
@@ -15,18 +15,19 @@ window::window() : Window(sf::VideoMode(width, height), "Krilo - visual"){
 	dot.setRotation(270);
 	dot.setFillColor(sf::Color::White);
 
-	time.setCharacterSize(width / 64);
+	time.setCharacterSize(width[startMenu.curRes] / 64);
 	time.setFillColor(sf::Color::White);
-	time.setPosition(width / 16 * 15, height / 54);
+	time.setPosition(width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54);
 	time.setFont(startMenu.font);
 
-	widthOfDot = std::round(width / magnitudes.size()); // calculate width of dot based on number of stripes and width of window...
+	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size()); // calculate width of dot based on number of stripes and width of window...
 	//doesn't work properly
 
 }
 
 void window::windowRun()
 {
+	setSizes();
 	while (Window.isOpen() && startMenu.startMenu) {
 		startInput();
 
@@ -79,7 +80,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - 0), 1)); /// (magnitudes.size() - i)
-		dot.setPosition(sf::Vector2f(i * 1, height));
+		dot.setPosition(sf::Vector2f(i * 1, height[startMenu.curRes]));
 		Window.draw(dot);
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -160,23 +161,59 @@ void window::startInput()
 				startMenu.startMenu = false;
 				pressed = false;
 			}
-			else if (startMenu.clickLeftResolution(Window)) {
+			else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
 				startMenu.button = 3;
 				startMenu.setUnpressed(startMenu.button);
 				pressed = false;
+				startMenu.changeResolution(-1);
 			}
-			else if (startMenu.clickRightResolution(Window)) {
+			else if (startMenu.clickRightResolution(Window)) { //if right resolution button is clicked
 				startMenu.button = 4;
 				startMenu.setUnpressed(startMenu.button);
 				pressed = false;
+				startMenu.changeResolution(1);
 			}
-			else if (startMenu.clickApply(Window)) {
+			else if (startMenu.clickApply(Window)) { //if apply button is clicked
 				startMenu.button = 5;
 				startMenu.setUnpressed(startMenu.button);
 				pressed = false;
+				applyRes();
+			}
+			else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
+				startMenu.button = 6;
+				if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
+				else startMenu.setPressed(startMenu.button);
+				startMenu.fullScreen = !startMenu.fullScreen;
 			}
 		}
 	}
+}
+
+void window::applyRes()
+{
+	if (startMenu.fullScreen && !startMenu.setFullScreen) {
+		Window.create(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual", sf::Style::None);
+		startMenu.setSizes();
+		setSizes();
+
+		startMenu.setFullScreen = true;
+	}
+	else if (!startMenu.fullScreen && startMenu.setFullScreen) {
+		Window.create(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual", sf::Style::Close);
+		startMenu.setSizes();
+		setSizes();
+
+		startMenu.setFullScreen = false;
+	}
+	else Window.setSize(sf::Vector2u(width[startMenu.curRes], height[startMenu.curRes]));
+}
+
+void window::setSizes()
+{
+	time.setCharacterSize(width[startMenu.curRes] / 64);
+	time.setPosition(width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54);
+	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size());
+
 }
 
 

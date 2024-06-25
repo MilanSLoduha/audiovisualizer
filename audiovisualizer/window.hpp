@@ -25,6 +25,10 @@ private:
 	sf::Clock clock;
 	StartMenu startMenu;
 
+	void setSizes();
+
+	void applyRes();
+
 	void startInput();
 	//std::vector<sf::Int16> samples;
 };

@@ -1,7 +1,10 @@
 #pragma once
 
-constexpr int width = 1920 / 2;
-constexpr int height = width / 16 * 8;
+#include <vector> 
+
+static const std::vector<int> width({ 1920, 1680, 1366, 1280, 960 });
+static const std::vector<int> height({ 1080, 1050, 768, 800, 540 });//width / 16 * 8;
+
 static const int N = 4096;  // 1024 samples for the FFT - 1024 / 44100 = 0.023 seconds -- values 2^n
 /*
 1024 or lower appears to be way too small

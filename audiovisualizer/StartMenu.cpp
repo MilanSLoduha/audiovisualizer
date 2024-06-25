@@ -37,48 +37,96 @@ StartMenu::StartMenu()
 	if (!pressedApplyButtonTexture.loadFromFile(TexturePath + "applyPressed.png")) {
 		std::cout << "Error loading pressedApplyButton texture" << std::endl;
 	}
+	if (!yesFullTexture.loadFromFile(TexturePath + "yes.png")) {
+		std::cout << "Error loading yesFull texture" << std::endl;
+	}
+	if (!noFullTexture.loadFromFile(TexturePath + "no.png")) {
+		std::cout << "Error loading noFull texture" << std::endl;
+	}
 
 	if (!font.loadFromFile("font.ttf")) {
 		std::cout << "Error loading font" << std::endl;
 	}
 
 	BrowseButton.setTexture(buttonTexture);
-	BrowseButton.setPosition( width / 10 * 8, height / 10 * 2);
-	BrowseButton.setScale(width / 48000., width / 48000.);
+	BrowseButton.setPosition( width[curRes] / 10 * 8, height[curRes] / 10 * 2);
+	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
 
 	StartButton.setTexture(buttonTexture);
-	StartButton.setPosition(width / 10 * 8, height / 10 * 8);
-	StartButton.setScale(width / 48000., width / 48000.);
+	StartButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
+	StartButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
 
-	browseText.setCharacterSize(width / 64);
+	browseText.setCharacterSize(width[curRes] / 64);
 	browseText.setFillColor(sf::Color::White);
-	browseText.setPosition(width / 10 * 8, height / 10 * 2);
+	browseText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
 	browseText.setFont(font);
 	browseText.setString("Browse");
 
-	startText.setCharacterSize(width / 64);
+	startText.setCharacterSize(width[curRes] / 64);
 	startText.setFillColor(sf::Color::White);
-	startText.setPosition(width / 10 * 8, height / 10 * 8);
+	startText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
 	startText.setFont(font);
 	startText.setString("Start");
 
 	leftResolution.setTexture(leftResolutionTexture);
-	leftResolution.setPosition(width / 10 * 7.6, height / 10 * 3);
-	leftResolution.setScale(width / 4800., width / 4800.);
+	leftResolution.setPosition(width[curRes] / 10 * 7.6, height[curRes] / 10 * 3);
+	leftResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	rightResolution.setTexture(rightResolutionTexture);
-	rightResolution.setPosition(width / 10 * 9.2, height / 10 * 3);
-	rightResolution.setScale(width / 4800., width / 4800.);
+	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
+	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	ApplyButton.setTexture(ApplyButtonTexture);
-	ApplyButton.setPosition(width / 10 * 7.0, height / 10 * 3);
-	ApplyButton.setScale(width / 4800., width / 4800.);
+	ApplyButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
+	ApplyButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	background.setTexture(backgroundTexture);
-	background.setScale(width / 1920., width / 1920.);
+	background.setScale(width[curRes] / 1920., width[curRes] / 1920.);
 
+	resolutionText.setCharacterSize(width[curRes] / 64);
+	resolutionText.setFillColor(sf::Color::Cyan);
+	resolutionText.setOutlineColor(sf::Color::Black);
+	resolutionText.setOutlineThickness(2);
+	resolutionText.setPosition(width[curRes] / 10 * 8.2, height[curRes] / 10 * 3.3);
+	resolutionText.setFont(font);
+	resolutionText.setString(std::to_string(width[curRes]) + "x" + std::to_string(height[curRes]));
 
+	yesFull.setTexture(noFullTexture);
+	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
+	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
+}
+
+void StartMenu::setSizes()
+{
+	BrowseButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
+	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
+
+	StartButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
+	StartButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
+
+	browseText.setCharacterSize(width[curRes] / 64);
+	browseText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
+
+	startText.setCharacterSize(width[curRes] / 64);
+	startText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
+
+	leftResolution.setPosition(width[curRes] / 10 * 7.6, height[curRes] / 10 * 3);
+	leftResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
+	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	ApplyButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
+	ApplyButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	background.setScale(width[curRes] / 1920., width[curRes] / 1920.);
+
+	resolutionText.setCharacterSize(width[curRes] / 64);
+	resolutionText.setPosition(width[curRes] / 10 * 8.2, height[curRes] / 10 * 3.3);
+
+	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
+	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 }
 
 bool StartMenu::clickBrowse(const sf::RenderWindow& window)
@@ -106,6 +154,11 @@ bool StartMenu::clickApply(const sf::RenderWindow& window)
 	return ApplyButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
 }
 
+bool StartMenu::clickYesFull(const sf::RenderWindow& window)
+{
+	return yesFull.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
 void StartMenu::setPressed(int& button) {
 	if (button == 1) {
 		BrowseButton.setTexture(pressedButtonTexture);
@@ -121,6 +174,9 @@ void StartMenu::setPressed(int& button) {
 	}
 	else if (button == 5) {
 		ApplyButton.setTexture(pressedApplyButtonTexture);
+	}
+	else if (button == 6) {
+		yesFull.setTexture(yesFullTexture);
 	}
 }
 
@@ -140,6 +196,9 @@ void StartMenu::setUnpressed(int& button) {
 	else if (button == 5) {
 		ApplyButton.setTexture(ApplyButtonTexture);
 	}
+	else if (button == 6) {
+		yesFull.setTexture(noFullTexture);
+	}
 }
 
 void StartMenu::draw(sf::RenderWindow& window)
@@ -152,6 +211,22 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(leftResolution);
 	window.draw(rightResolution);
 	window.draw(ApplyButton);
+	window.draw(resolutionText);
+	window.draw(yesFull);
+}
+
+void StartMenu::changeResolution(int diff)
+{
+	if (diff == 1) {
+		curRes++;
+		if (curRes >= width.size()) curRes = 0;
+	}
+	else if (diff == -1) {
+		curRes--;
+		if (curRes < 0) curRes = width.size() - 1;
+	}
+	resolutionText.setString(std::to_string(width[curRes]) + "x" + std::to_string(height[curRes]));
+
 }
 
 
