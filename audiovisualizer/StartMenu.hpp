@@ -4,13 +4,14 @@
 #include <SFML/Graphics.hpp>
 #include <shobjidl.h>
 #include <Windows.h>
-
+#include "Globals.hpp"
 
 class StartMenu
 {
 private:
 	int selected;
 	int max;
+	sf::RenderWindow colorPicker;
 public:
 	void setSizes();
 
@@ -24,6 +25,8 @@ public:
 	bool clickLeftResolution(const sf::RenderWindow& window);
 	bool clickApply(const sf::RenderWindow& window);
 	bool clickYesFull(const sf::RenderWindow& window);
+	bool clickApplyColor(const sf::RenderWindow& window);
+	bool clickChooseColor(const sf::RenderWindow& window);
 
 	//color picker https://learn.microsoft.com/en-us/cpp/mfc/reference/cmfccolorpickerctrl-class?view=msvc-170
 
@@ -31,10 +34,15 @@ public:
 	sf::Sprite StartButton;
 	sf::Sprite leftResolution;
 	sf::Sprite rightResolution;
-	sf::Sprite ApplyButton;
+	sf::Sprite ApplyResolutionButton;
 	sf::Sprite yesFull;
+	sf::Sprite ChooseColorButton;
+	sf::Sprite ApplyColor;
 
 	sf::Sprite background;
+
+	sf::RectangleShape palette;
+	sf::RectangleShape color;
 
 	sf::Text browseText;
 	sf::Text startText;
@@ -62,6 +70,7 @@ public:
 	sf::Texture pressedApplyButtonTexture;
 	sf::Texture yesFullTexture;
 	sf::Texture noFullTexture;
+	sf::Texture paletteTexture;
 
 	std::string TexturePath;
 

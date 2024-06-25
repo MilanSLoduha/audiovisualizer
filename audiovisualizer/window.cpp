@@ -127,6 +127,14 @@ void window::startInput()
 				startMenu.button = 5;
 				startMenu.setPressed(startMenu.button);
 			}
+			else if (startMenu.clickChooseColor(Window)) {
+				startMenu.button = 7;
+				startMenu.setPressed(startMenu.button);
+			}
+			else if (startMenu.clickApplyColor(Window)) {
+				startMenu.button = 8;
+				startMenu.setPressed(startMenu.button);
+			}
 		}
 		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
 			startMenu.setUnpressed(startMenu.button);
@@ -141,6 +149,12 @@ void window::startInput()
 			startMenu.setUnpressed(startMenu.button);
 		}
 		else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
+			startMenu.setUnpressed(startMenu.button);
+		}
+		else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
 			startMenu.setUnpressed(startMenu.button);
 		}
 
@@ -181,6 +195,16 @@ void window::startInput()
 				if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
 				else startMenu.setPressed(startMenu.button);
 				startMenu.fullScreen = !startMenu.fullScreen;
+			}
+			else if (startMenu.clickChooseColor(Window)) { //if choose color button is clicked
+				startMenu.button = 7;
+				startMenu.setUnpressed(startMenu.button);
+				pressed = false;
+			}
+			else if (startMenu.clickApplyColor(Window)) { //if apply color button is clicked
+				startMenu.button = 8;
+				startMenu.setUnpressed(startMenu.button);
+				pressed = false;
 			}
 		}
 	}

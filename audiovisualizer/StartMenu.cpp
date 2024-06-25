@@ -1,7 +1,6 @@
 #include "StartMenu.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Globals.hpp"
 
 StartMenu::StartMenu()
 {
@@ -43,6 +42,9 @@ StartMenu::StartMenu()
 	if (!noFullTexture.loadFromFile(TexturePath + "no.png")) {
 		std::cout << "Error loading noFull texture" << std::endl;
 	}
+	if (!paletteTexture.loadFromFile(TexturePath + "palette.png")) {
+		std::cout << "Error loading palette texture" << std::endl;
+	}
 
 	if (!font.loadFromFile("font.ttf")) {
 		std::cout << "Error loading font" << std::endl;
@@ -76,9 +78,9 @@ StartMenu::StartMenu()
 	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
 	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
-	ApplyButton.setTexture(ApplyButtonTexture);
-	ApplyButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
-	ApplyButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	ApplyResolutionButton.setTexture(ApplyButtonTexture);
+	ApplyResolutionButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
+	ApplyResolutionButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	background.setTexture(backgroundTexture);
 	background.setScale(width[curRes] / 1920., width[curRes] / 1920.);
@@ -95,10 +97,34 @@ StartMenu::StartMenu()
 	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
 	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
+	ChooseColorButton.setTexture(ApplyButtonTexture);
+	ChooseColorButton.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 4.2);
+	ChooseColorButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	ApplyColor.setTexture(ApplyButtonTexture);
+	ApplyColor.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 4.2);
+	ApplyColor.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	palette.setTexture(&paletteTexture);
+	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
+	palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
+
+	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
+	color.setFillColor(sf::Color::White);
+	color.setOutlineColor(sf::Color::Black);
+	color.setOutlineThickness(2);
+	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
+
 }
 
 void StartMenu::setSizes()
 {
+	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
+	palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
+
+	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
+	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
+
 	BrowseButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
 	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
 
@@ -117,8 +143,8 @@ void StartMenu::setSizes()
 	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
 	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
-	ApplyButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
-	ApplyButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	ApplyResolutionButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
+	ApplyResolutionButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	background.setScale(width[curRes] / 1920., height[curRes] / 1080.);
 
@@ -127,6 +153,12 @@ void StartMenu::setSizes()
 
 	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
 	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	ChooseColorButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 5);
+	ChooseColorButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+
+	ApplyColor.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 6);
+	ApplyColor.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 }
 
 bool StartMenu::clickBrowse(const sf::RenderWindow& window)
@@ -151,12 +183,22 @@ bool StartMenu::clickRightResolution(const sf::RenderWindow& window)
 
 bool StartMenu::clickApply(const sf::RenderWindow& window)
 {
-	return ApplyButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	return ApplyResolutionButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
 }
 
 bool StartMenu::clickYesFull(const sf::RenderWindow& window)
 {
 	return yesFull.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
+bool StartMenu::clickApplyColor(const sf::RenderWindow& window)
+{
+	return ApplyColor.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
+bool StartMenu::clickChooseColor(const sf::RenderWindow& window)
+{
+	return ChooseColorButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
 }
 
 void StartMenu::setPressed(int& button) {
@@ -173,10 +215,16 @@ void StartMenu::setPressed(int& button) {
 		rightResolution.setTexture(pressedrightResolutionTexture);
 	}
 	else if (button == 5) {
-		ApplyButton.setTexture(pressedApplyButtonTexture);
+		ApplyResolutionButton.setTexture(pressedApplyButtonTexture);
 	}
 	else if (button == 6) {
 		yesFull.setTexture(yesFullTexture);
+	}
+	else if (button == 7) {
+		ChooseColorButton.setTexture(pressedApplyButtonTexture);
+	}
+	else if (button == 8) {
+		ApplyColor.setTexture(pressedApplyButtonTexture);
 	}
 }
 
@@ -194,10 +242,16 @@ void StartMenu::setUnpressed(int& button) {
 		rightResolution.setTexture(rightResolutionTexture);
 	}
 	else if (button == 5) {
-		ApplyButton.setTexture(ApplyButtonTexture);
+		ApplyResolutionButton.setTexture(ApplyButtonTexture);
 	}
 	else if (button == 6) {
 		yesFull.setTexture(noFullTexture);
+	}
+	else if (button == 7) {
+		ChooseColorButton.setTexture(ApplyButtonTexture);
+	}
+	else if (button == 8) {
+		ApplyColor.setTexture(ApplyButtonTexture);
 	}
 }
 
@@ -210,9 +264,13 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(startText);
 	window.draw(leftResolution);
 	window.draw(rightResolution);
-	window.draw(ApplyButton);
+	window.draw(ApplyResolutionButton);
 	window.draw(resolutionText);
 	window.draw(yesFull);
+	window.draw(ChooseColorButton);
+	window.draw(ApplyColor);
+	window.draw(palette);
+	window.draw(color);
 }
 
 void StartMenu::changeResolution(int diff)
