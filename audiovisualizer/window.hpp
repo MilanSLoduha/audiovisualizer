@@ -15,6 +15,7 @@ public:
 	std::vector<double> magnitudes;
 	//~window();
 private:
+	bool timeVisible = true;
 	sf::RenderWindow Window;
 	sf::RectangleShape dot;
 	FFT fft;

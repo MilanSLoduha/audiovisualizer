@@ -15,14 +15,8 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 	dot.setRotation(270);
 	dot.setFillColor(sf::Color::White);
 
-	time.setCharacterSize(width[startMenu.curRes] / 64);
 	time.setFillColor(sf::Color::White);
-	time.setPosition(width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54);
 	time.setFont(startMenu.font);
-
-	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size()); // calculate width of dot based on number of stripes and width of window...
-	//doesn't work properly
-
 }
 
 void window::windowRun()
@@ -51,7 +45,7 @@ void window::windowRun()
 
         Window.clear();
 		drawVisualization(magnitudes);
-		drawTime();
+		if (timeVisible) drawTime();
 
         Window.display();
     }
@@ -71,6 +65,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		if (event.key.code == sf::Keyboard::Escape) window.close();
 		if (event.key.code == sf::Keyboard::Right) fft.song.setPlayingOffset(fft.song.getPlayingOffset() + sf::seconds(10));
 		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
+		if (event.key.code == sf::Keyboard::T) timeVisible = !timeVisible;
 	}
 	if (event.type == sf::Event::MouseWheelScrolled) {
 		if (event.mouseWheelScroll.delta > 0 && fft.song.getVolume() < 100) fft.song.setVolume(fft.song.getVolume() + 10);
@@ -88,6 +83,8 @@ void window::drawVisualization(std::vector<double> magnitudes){
 
 void window::drawTime() {
 	timeString = std::to_string(fft.song.getPlayingOffset().asSeconds());
+	timeString.erase(timeString.length() - 4);
+	timeString += " / " + std::to_string(fft.music.getDuration().asSeconds());
 	timeString.erase(timeString.length() - 4);
 	time.setString(timeString);
 	Window.draw(time);
@@ -211,9 +208,8 @@ void window::applyRes()
 void window::setSizes()
 {
 	time.setCharacterSize(width[startMenu.curRes] / 64);
-	time.setPosition(width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54);
 	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size());
-
+	time.setPosition(width[startMenu.curRes] / 16 * 13.5, height[startMenu.curRes] / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 }
 
 
