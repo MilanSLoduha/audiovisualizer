@@ -1,21 +1,29 @@
 #pragma once
 
-
 #include <SFML/Graphics.hpp>
 #include <shobjidl.h>
 #include <Windows.h>
 #include "Globals.hpp"
 
+class Button : public sf::Sprite
+{
+public:
+	Button() {};
+	bool isClicked(sf::RenderWindow&);
+
+	void setPressed();
+	void setUnpressed();
+
+	sf::Vector2<sf::Texture*> textures; //x is for pressed, y is for unpressed
+};
+
 class StartMenu
 {
-private:
-	int selected;
-	int max;
-	sf::RenderWindow colorPicker;
-
 public:
+	StartMenu();
 	void setSizes();
 
+	bool isActive;
 	int curRes = 0;
 	int wantedRes = 0;
 	bool fullScreen = false;
@@ -24,26 +32,22 @@ public:
 	void resizePalette();	
 	void getColors(const sf::RenderWindow& window);
 
-	bool clickBrowse(const sf::RenderWindow&);
-	bool clickStart(const sf::RenderWindow&);
-	bool clickRightResolution(const sf::RenderWindow& window);
-	bool clickLeftResolution(const sf::RenderWindow& window);
-	bool clickApply(const sf::RenderWindow& window);
-	bool clickYesFull(const sf::RenderWindow& window);
-	bool clickApplyColor(const sf::RenderWindow& window);
-	bool clickChooseColor(const sf::RenderWindow& window);
+	void draw(sf::RenderWindow&);
+	void changeResolution(int);
 
-	//color picker https://learn.microsoft.com/en-us/cpp/mfc/reference/cmfccolorpickerctrl-class?view=msvc-170
+	Button Browse;
+	Button Start;
+	Button DecRes;
+	Button IncRes;
+	Button ApplyRes;
+	Button Fullscreen;
+	Button PickColor;
+	Button ApplyColor;
+	
+	Button palette;
 
-	sf::Sprite BrowseButton;
-	sf::Sprite StartButton;
-	sf::Sprite leftResolution;
-	sf::Sprite rightResolution;
-	sf::Sprite ApplyResolutionButton;
-	sf::Sprite yesFull;
-	sf::Sprite ChooseColorButton;
-	sf::Sprite ApplyColor;
-	sf::Sprite palette;
+	Button* pressed = nullptr;
+	std::vector<Button*> buttons{ &Browse, &Start, &DecRes, &IncRes, &ApplyRes, &Fullscreen, &PickColor, &ApplyColor };
 
 	sf::Sprite background;
 
@@ -55,32 +59,26 @@ public:
 	sf::Text resolutionText;
 
 	sf::Font font;
-
-	void setPressed(int&);
-	void setUnpressed(int&);
-	void draw(sf::RenderWindow&);
-	void changeResolution(int);
-
-	//void draw(sf::RenderWindow&);
+	
 	//void startInput();
-	StartMenu();
+
+	//sf::Texture 
 
 	sf::Texture buttonTexture;
 	sf::Texture pressedButtonTexture;
-	sf::Texture backgroundTexture;
 	sf::Texture leftResolutionTexture;
-	sf::Texture rightResolutionTexture;
 	sf::Texture pressedleftResolutionTexture;
+	sf::Texture rightResolutionTexture;
 	sf::Texture pressedrightResolutionTexture;
 	sf::Texture ApplyButtonTexture;
 	sf::Texture pressedApplyButtonTexture;
 	sf::Texture yesFullTexture;
 	sf::Texture noFullTexture;
+	sf::Texture backgroundTexture;
 	sf::Texture paletteTexture;
 
-	std::string TexturePath;
-
-
-	bool startMenu;
-	int button;
+	std::string TexturePath = "Textures/";
+	//int button;
 };
+
+	//color picker https://learn.microsoft.com/en-us/cpp/mfc/reference/cmfccolorpickerctrl-class?view=msvc-170

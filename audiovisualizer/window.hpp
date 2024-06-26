@@ -13,7 +13,7 @@ public:
 	sf::Event event;
 	void drawVisualization(std::vector<double>);
 	std::vector<double> magnitudes;
-	//~window();
+
 private:
 	bool timeVisible = true;
 	sf::RenderWindow Window;
@@ -35,7 +35,3 @@ private:
 	void startInput();
 	//std::vector<sf::Int16> samples;
 };
-
-//window::~window()
-//{
-//}

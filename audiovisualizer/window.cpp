@@ -22,7 +22,7 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 void window::windowRun()
 {
 	setSizes();
-	while (Window.isOpen() && startMenu.startMenu) {
+	while (Window.isOpen() && startMenu.isActive) {
 		startInput();
 
 		Window.clear();
@@ -114,105 +114,35 @@ void window::startInput()
 		}
 		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) { //if button is pressed
 			pressed = true;
-			if (startMenu.clickBrowse(Window)) {
-				startMenu.button = 1;
-				startMenu.setPressed(startMenu.button);
+
+			//check if each button is clicked
+			for (auto& b : startMenu.buttons) {
+				if (b->isClicked(Window)) {
+					b->setPressed();
+					startMenu.pressed = b;
+					break;
+				}
 			}
-			else if (startMenu.clickStart(Window)) {
-				startMenu.button = 2;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickLeftResolution(Window)) {
-				startMenu.button = 3;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickRightResolution(Window)) {
-				startMenu.button = 4;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickApply(Window)) {
-				startMenu.button = 5;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickChooseColor(Window)) {
-				startMenu.button = 7;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickApplyColor(Window)) {
-				startMenu.button = 8;
-				startMenu.setPressed(startMenu.button);
-			}
-		}
-		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickLeftResolution(Window) && startMenu.button == 3) {
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickRightResolution(Window) && startMenu.button == 4) {
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
-			startMenu.setUnpressed(startMenu.button);
-		}
-		else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
-			startMenu.setUnpressed(startMenu.button);
 		}
 
+		//if mouse is not on button but mouse button is pressed
+		for (auto& b : startMenu.buttons) {
+			if (b->isClicked(Window) && startMenu.pressed == b) {
+				b->setUnpressed();
+				startMenu.pressed = nullptr;
+				break;
+			}
+		}
+		
 		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed) //if mouse button is released
 		{
-			if (startMenu.clickBrowse(Window)) {
-				startMenu.button = 1;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-			}
-
-			else if (startMenu.clickStart(Window)) {
-				startMenu.button = 2;
-				startMenu.setUnpressed(startMenu.button);
-				startMenu.startMenu = false;
-				dot.setFillColor(startMenu.color.getFillColor());
-				pressed = false;
-			}
-			else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
-				startMenu.button = 3;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				startMenu.changeResolution(-1);
-			}
-			else if (startMenu.clickRightResolution(Window)) { //if right resolution button is clicked
-				startMenu.button = 4;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				startMenu.changeResolution(1);
-			}
-			else if (startMenu.clickApply(Window)) { //if apply button is clicked
-				startMenu.button = 5;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				applyRes();
-			}
-			else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
-				startMenu.button = 6;
-				if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
-				else startMenu.setPressed(startMenu.button);
-				startMenu.fullScreen = !startMenu.fullScreen;
-			}
-			else if (startMenu.clickChooseColor(Window)) { //if choose color button is clicked
-				startMenu.button = 7;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-			}
-			else if (startMenu.clickApplyColor(Window)) { //if apply color button is clicked
-				startMenu.button = 8;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
+			for (auto& b : startMenu.buttons) {
+				if (b->isClicked(Window)) {
+					b->setUnpressed();
+					startMenu.pressed = b;
+					pressed = false;
+					break;
+				}
 			}
 		}
 	}
@@ -247,6 +177,3 @@ void window::setSizes()
 	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size());
 	time.setPosition(width[startMenu.curRes] / 16 * 13.5, height[startMenu.curRes] / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 }
-
-
-
