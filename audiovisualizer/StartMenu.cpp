@@ -111,7 +111,8 @@ StartMenu::StartMenu()
 
 	palette.setTexture(paletteTexture);
 	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setScale(0.63,0.63);
+	palette.setScale(width[curRes] / 1920. * 1.26, width[curRes] / 1920. * 1.26);
+	//palette.setScale(0.63,0.63);
 	//palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
 
 
@@ -123,19 +124,29 @@ StartMenu::StartMenu()
 
 }
 
+void StartMenu::resizePalette()
+{
+	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
+	palette.setScale(width[curRes] / 1920. * 1.26, width[curRes] / 1920. * 1.26);
+
+	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
+	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
+}
+
 void StartMenu::getColors(const sf::RenderWindow& window)
 {
 	sf::Vector2f localPos = static_cast<sf::Vector2f>(sf::Mouse::getPosition(window)) - palette.getPosition();
-	color.setFillColor(paletteImage.getPixel(localPos.x * 1.59, localPos.y * 1.59));
+	if (localPos.x >= 0 && localPos.y >= 0 && localPos.x < palette.getGlobalBounds().width && localPos.y < palette.getGlobalBounds().height) {
+		localPos.x /= palette.getScale().x; // Adjust for scaling
+		localPos.y /= palette.getScale().y; // Adjust for scaling
+
+		sf::Color pickedColor = paletteImage.getPixel(localPos.x, localPos.y);
+		color.setFillColor(pickedColor);
+	}
 }
 
 void StartMenu::setSizes()
 {
-	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setScale(0.63, 0.63);
-
-	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
-	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
 
 	BrowseButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
 	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
@@ -288,14 +299,14 @@ void StartMenu::draw(sf::RenderWindow& window)
 void StartMenu::changeResolution(int diff)
 {
 	if (diff == 1) {
-		curRes++;
-		if (curRes >= width.size()) curRes = 0;
+		wantedRes++;
+		if (wantedRes >= width.size()) wantedRes = 0;
 	}
 	else if (diff == -1) {
-		curRes--;
-		if (curRes < 0) curRes = width.size() - 1;
+		wantedRes--;
+		if (wantedRes < 0) wantedRes = width.size() - 1;
 	}
-	resolutionText.setString(std::to_string(width[curRes]) + "x" + std::to_string(height[curRes]));
+	resolutionText.setString(std::to_string(width[wantedRes]) + "x" + std::to_string(height[wantedRes]));
 
 }
 

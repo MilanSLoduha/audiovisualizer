@@ -17,9 +17,11 @@ public:
 	void setSizes();
 
 	int curRes = 0;
+	int wantedRes = 0;
 	bool fullScreen = false;
 	bool setFullScreen = false;
 	
+	void resizePalette();	
 	void getColors(const sf::RenderWindow& window);
 
 	bool clickBrowse(const sf::RenderWindow&);

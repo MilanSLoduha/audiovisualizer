@@ -26,6 +26,8 @@ private:
 	sf::Clock clock;
 	StartMenu startMenu;
 
+	int style = sf::Style::Close;
+
 	void setSizes();
 
 	void applyRes();

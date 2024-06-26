@@ -177,6 +177,7 @@ void window::startInput()
 				startMenu.button = 2;
 				startMenu.setUnpressed(startMenu.button);
 				startMenu.startMenu = false;
+				dot.setFillColor(startMenu.color.getFillColor());
 				pressed = false;
 			}
 			else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
@@ -220,21 +221,24 @@ void window::startInput()
 void window::applyRes()
 {
 	if (startMenu.fullScreen && !startMenu.setFullScreen) {
-		Window.create(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual", sf::Style::None);
-		startMenu.setSizes();
-		setSizes();
+		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::None);
 
+		style = sf::Style::None;
 		startMenu.setFullScreen = true;
 	}
 	else if (!startMenu.fullScreen && startMenu.setFullScreen) {
-		Window.create(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual", sf::Style::Close);
-		startMenu.setSizes();
-		setSizes();
+		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::Close);
 
+		style = sf::Style::Close;
 		startMenu.setFullScreen = false;
 	}
-	else Window.setSize(sf::Vector2u(width[startMenu.curRes], height[startMenu.curRes]));
-	dot.setFillColor(startMenu.color.getFillColor());
+	else {
+		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", style);
+	}
+	startMenu.curRes = startMenu.wantedRes;
+	startMenu.setSizes();
+	setSizes();
+	startMenu.resizePalette();
 }
 
 void window::setSizes()
