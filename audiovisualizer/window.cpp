@@ -145,24 +145,31 @@ void window::startInput()
 		}
 		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickLeftResolution(Window) && startMenu.button == 3) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickRightResolution(Window) && startMenu.button == 4) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 		else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
 			startMenu.setUnpressed(startMenu.button);
+			startMenu.button = 0;
 		}
 
 		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed) //if mouse button is released
