@@ -9,48 +9,50 @@ StartMenu::StartMenu()
 	max = 2;
 	startMenu = true;
 
-	if (!backgroundTexture.loadFromFile(TexturePath + "background.png")) {
-		std::cout << "Error loading background texture" << std::endl;
-	}
-	if (!buttonTexture.loadFromFile(TexturePath + "Button2.png")) {
-		std::cout << "Error loading button texture" << std::endl;
-	}
-	if (!pressedButtonTexture.loadFromFile(TexturePath + "Button3.png")) {
-		std::cout << "Error loading pressed button texture" << std::endl;
-	}
-	if (!leftResolutionTexture.loadFromFile(TexturePath + "left.png")) {
-		std::cout << "Error loading leftResolution texture" << std::endl;
-	}
-	if (!rightResolutionTexture.loadFromFile(TexturePath + "right.png")) {
-		std::cout << "Error loading rightResolution texture" << std::endl;
-	}
-	if (!pressedleftResolutionTexture.loadFromFile(TexturePath + "leftPressed.png")) {
-		std::cout << "Error loading pressedleftResolution texture" << std::endl;
-	}
-	if (!pressedrightResolutionTexture.loadFromFile(TexturePath + "rightPressed.png")) {
-		std::cout << "Error loading pressedrightResolution texture" << std::endl;
-	}
-	if (!ApplyButtonTexture.loadFromFile(TexturePath + "apply.png")) {
-		std::cout << "Error loading ApplyButton texture" << std::endl;
-	}
-	if (!pressedApplyButtonTexture.loadFromFile(TexturePath + "applyPressed.png")) {
-		std::cout << "Error loading pressedApplyButton texture" << std::endl;
-	}
-	if (!yesFullTexture.loadFromFile(TexturePath + "yes.png")) {
-		std::cout << "Error loading yesFull texture" << std::endl;
-	}
-	if (!noFullTexture.loadFromFile(TexturePath + "no.png")) {
-		std::cout << "Error loading noFull texture" << std::endl;
-	}
-	if (!paletteImage.loadFromFile(TexturePath + "palette1.png")) {
-		std::cout << "Error loading palette texture" << std::endl;
-	}
-	if (!paletteTexture.loadFromImage(paletteImage)) {
-		std::cout << "Error loading palette texture" << std::endl;
-	}
+	{
+		if (!backgroundTexture.loadFromFile(TexturePath + "background.png")) {
+			std::cout << "Error loading background texture" << std::endl;
+		}
+		if (!buttonTexture.loadFromFile(TexturePath + "Button2.png")) {
+			std::cout << "Error loading button texture" << std::endl;
+		}
+		if (!pressedButtonTexture.loadFromFile(TexturePath + "Button3.png")) {
+			std::cout << "Error loading pressed button texture" << std::endl;
+		}
+		if (!leftResolutionTexture.loadFromFile(TexturePath + "left.png")) {
+			std::cout << "Error loading leftResolution texture" << std::endl;
+		}
+		if (!rightResolutionTexture.loadFromFile(TexturePath + "right.png")) {
+			std::cout << "Error loading rightResolution texture" << std::endl;
+		}
+		if (!pressedleftResolutionTexture.loadFromFile(TexturePath + "leftPressed.png")) {
+			std::cout << "Error loading pressedleftResolution texture" << std::endl;
+		}
+		if (!pressedrightResolutionTexture.loadFromFile(TexturePath + "rightPressed.png")) {
+			std::cout << "Error loading pressedrightResolution texture" << std::endl;
+		}
+		if (!ApplyButtonTexture.loadFromFile(TexturePath + "apply.png")) {
+			std::cout << "Error loading ApplyButton texture" << std::endl;
+		}
+		if (!pressedApplyButtonTexture.loadFromFile(TexturePath + "applyPressed.png")) {
+			std::cout << "Error loading pressedApplyButton texture" << std::endl;
+		}
+		if (!yesFullTexture.loadFromFile(TexturePath + "yes.png")) {
+			std::cout << "Error loading yesFull texture" << std::endl;
+		}
+		if (!noFullTexture.loadFromFile(TexturePath + "no.png")) {
+			std::cout << "Error loading noFull texture" << std::endl;
+		}
+		if (!paletteImage.loadFromFile(TexturePath + "palette1.png")) {
+			std::cout << "Error loading palette texture" << std::endl;
+		}
+		if (!paletteTexture.loadFromImage(paletteImage)) {
+			std::cout << "Error loading palette texture" << std::endl;
+		}
 
-	if (!font.loadFromFile("font.ttf")) {
-		std::cout << "Error loading font" << std::endl;
+		if (!font.loadFromFile("font.ttf")) {
+			std::cout << "Error loading font" << std::endl;
+		}
 	}
 
 	BrowseButton.setTexture(buttonTexture);
