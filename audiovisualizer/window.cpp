@@ -177,7 +177,9 @@ void window::startInput()
 			if (startMenu.clickBrowse(Window)) {
 				startMenu.button = 1;
 				startMenu.setUnpressed(startMenu.button);
+				startMenu.browseFile();
 				pressed = false;
+				std::cout << startMenu.MusicPath << std::endl;
 			}
 
 			else if (startMenu.clickStart(Window)) {

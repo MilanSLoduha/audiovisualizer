@@ -33,6 +33,8 @@ public:
 	bool clickApplyColor(const sf::RenderWindow& window);
 	bool clickChooseColor(const sf::RenderWindow& window);
 
+	void browseFile();
+
 	//color picker https://learn.microsoft.com/en-us/cpp/mfc/reference/cmfccolorpickerctrl-class?view=msvc-170
 
 	sf::Sprite BrowseButton;
@@ -80,6 +82,8 @@ public:
 
 	std::string TexturePath;
 
+	std::string MusicPath;
+	std::string BackgroundPath;
 
 	bool startMenu;
 	int button;

@@ -313,55 +313,52 @@ void StartMenu::changeResolution(int diff)
 }
 
 
+void StartMenu::browseFile()
+{
+	wchar_t  szFilePath[MAX_PATH];       //  file path string buffer
+	szFilePath[0] = 0;                   //  initialize string buffer
+	COMDLG_FILTERSPEC imgfiles[3] = { {L"Image Files", L"*.jpg;*.png;*.bmp;*.tif"},
+									  {L"Music Files", L"*.mp3;*.waw;"},
+									  {L"All Files",L"*.*"} };  //  file types to be displayed
 
+	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
+	if (SUCCEEDED(hr))
+	{
+		IFileOpenDialog* pFileOpen = NULL;
 
+		// Create the FileOpenDialog object.
+		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL, IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
 
+		if (SUCCEEDED(hr))
+		{
+			// Show the Open dialog box.
+			pFileOpen->SetFileTypes(3, imgfiles);   //  choose file types to be displayed
+			pFileOpen->SetTitle(L"Open File");         //  heading of dialog box
+			hr = pFileOpen->Show(NULL);
 
-
-
-
-//////int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR pCmdLine, int nCmdShow)
-//////{
-//////	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED |
-//////		COINIT_DISABLE_OLE1DDE);
-//////	if (SUCCEEDED(hr))
-//////	{
-//////		IFileOpenDialog* pFileOpen;
-//////
-//////		// Create the FileOpenDialog object.
-//////		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL,
-//////			IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-//////
-//////		if (SUCCEEDED(hr))
-//////		{
-//////			// Show the Open dialog box.
-//////			hr = pFileOpen->Show(NULL);
-//////
-//////			// Get the file name from the dialog box.
-//////			if (SUCCEEDED(hr))
-//////			{
-//////				IShellItem* pItem;
-//////				hr = pFileOpen->GetResult(&pItem);
-//////				if (SUCCEEDED(hr))
-//////				{
-//////					PWSTR pszFilePath;
-//////					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pszFilePath);
-//////
-//////					// Display the file name to the user.
-//////					if (SUCCEEDED(hr))
-//////					{
-//////						MessageBoxW(NULL, pszFilePath, L"File Path", MB_OK);
-//////						CoTaskMemFree(pszFilePath);
-//////					}
-//////					pItem->Release();
-//////				}
-//////			}
-//////			pFileOpen->Release();
-//////		}
-//////		CoUninitialize();
-//////	}
-//////	return 0;
-//////}
+			// Get the file name from the dialog box.
+			if (SUCCEEDED(hr))
+			{
+				IShellItem* pItem;
+				hr = pFileOpen->GetResult(&pItem);
+				if (SUCCEEDED(hr))
+				{
+					LPWSTR pTemp;
+					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pTemp);
+					wcscpy_s(szFilePath, MAX_PATH, pTemp);
+					if (SUCCEEDED(hr))  CoTaskMemFree(pTemp);
+					pItem->Release();
+				}
+			}
+			pFileOpen->Release();
+		}
+		CoUninitialize();
+	}
+	std::string temp = std::string(szFilePath, szFilePath + wcslen(szFilePath));
+	if (temp.find(".mp3") != std::string::npos || temp.find(".waw") != std::string::npos) MusicPath = std::string(szFilePath, szFilePath + wcslen(szFilePath));
+	else if (temp.find(".jpg") != std::string::npos || temp.find(".png") != std::string::npos || temp.find(".bmp") != std::string::npos || temp.find(".tif") != std::string::npos) BackgroundPath = std::string(szFilePath, szFilePath + wcslen(szFilePath));
+	return;
+}
 //https://learn.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box
-
+//https://cplusplus.com/forum/windows/275617/
