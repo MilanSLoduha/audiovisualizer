@@ -26,6 +26,9 @@ private:
 	sf::Clock clock;
 	StartMenu startMenu;
 
+	sf::Texture backgroundTexture;
+	sf::Sprite background;
+
 	int style = sf::Style::Close;
 
 	void setSizes();
@@ -33,6 +36,7 @@ private:
 	void applyRes();
 
 	void startInput();
+	void prepareStart();
 	//std::vector<sf::Int16> samples;
 };
 

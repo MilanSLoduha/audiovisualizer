@@ -5,6 +5,9 @@
 #include <shobjidl.h>
 #include <Windows.h>
 #include "Globals.hpp"
+#include <codecvt>
+#include <locale>
+#include <string>
 
 class StartMenu
 {
@@ -82,8 +85,8 @@ public:
 
 	std::string TexturePath;
 
-	std::string MusicPath;
-	std::string BackgroundPath;
+	std::wstring MusicPath;
+	std::wstring  BackgroundPath;
 
 	bool startMenu;
 	int button;

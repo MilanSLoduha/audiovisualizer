@@ -179,14 +179,13 @@ void window::startInput()
 				startMenu.setUnpressed(startMenu.button);
 				startMenu.browseFile();
 				pressed = false;
-				std::cout << startMenu.MusicPath << std::endl;
 			}
 
 			else if (startMenu.clickStart(Window)) {
 				startMenu.button = 2;
 				startMenu.setUnpressed(startMenu.button);
 				startMenu.startMenu = false;
-				dot.setFillColor(startMenu.color.getFillColor());
+				prepareStart();
 				pressed = false;
 			}
 			else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
@@ -224,6 +223,17 @@ void window::startInput()
 				pressed = false;
 			}
 		}
+	}
+}
+
+void window::prepareStart()
+{
+	fft.loadMusic(startMenu.MusicPath);
+
+	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
+	if (!startMenu.BackgroundPath.empty()) {
+		//backgroundTexture.loadFromFile(startMenu.BackgroundPath);
+		background.setTexture(backgroundTexture);
 	}
 }
 

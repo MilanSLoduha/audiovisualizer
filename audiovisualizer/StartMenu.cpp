@@ -316,7 +316,7 @@ void StartMenu::changeResolution(int diff)
 void StartMenu::browseFile()
 {
 	wchar_t  szFilePath[MAX_PATH];       //  file path string buffer
-	szFilePath[0] = 0;                   //  initialize string buffer
+	szFilePath[0] = { 0 };                   //  initialize string buffer
 	COMDLG_FILTERSPEC imgfiles[3] = { {L"Image Files", L"*.jpg;*.png;*.bmp;*.tif"},
 									  {L"Music Files", L"*.mp3;*.waw;"},
 									  {L"All Files",L"*.*"} };  //  file types to be displayed
@@ -355,9 +355,22 @@ void StartMenu::browseFile()
 		}
 		CoUninitialize();
 	}
-	std::string temp = std::string(szFilePath, szFilePath + wcslen(szFilePath));
-	if (temp.find(".mp3") != std::string::npos || temp.find(".waw") != std::string::npos) MusicPath = std::string(szFilePath, szFilePath + wcslen(szFilePath));
-	else if (temp.find(".jpg") != std::string::npos || temp.find(".png") != std::string::npos || temp.find(".bmp") != std::string::npos || temp.find(".tif") != std::string::npos) BackgroundPath = std::string(szFilePath, szFilePath + wcslen(szFilePath));
+	//std::wcout << szFilePath << std::endl;
+	//std::string temp = std::string(szFilePath, szFilePath + wcslen(szFilePath));
+	std::wstring wideFilePath(szFilePath);
+	std::string temp(wideFilePath.begin(), wideFilePath.end());
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	std::string utf8Input = converter.to_bytes(wideFilePath);
+
+	if (temp.find(".mp3") != std::string::npos || temp.find(".waw") != std::string::npos)
+	{
+		MusicPath = wideFilePath;
+	}
+	else if (temp.find(".jpg") != std::string::npos || temp.find(".png") != std::string::npos ||
+		temp.find(".bmp") != std::string::npos || temp.find(".tif") != std::string::npos)
+	{
+		BackgroundPath = wideFilePath;
+	}
 	return;
 }
 //https://learn.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box

@@ -1,19 +1,19 @@
 #include "FFT.hpp"
 #include <iostream>
 
-FFT::FFT()
-{
-	if (!music.loadFromFile("caba neblazni.wav"))
-	{
-		std::cout << "Error loading music file" << std::endl;
-	}
-	song.setBuffer(music);
-
-	samples_fft = music.getSamples();
-	sampleCount = music.getSampleCount();
-	channelCount = music.getChannelCount();
-	sampleRate = music.getSampleRate();
-}
+//FFT::FFT()
+//{
+//	if (!music.loadFromFile("caba neblazni.wav"))
+//	{
+//		std::cout << "Error loading music file" << std::endl;
+//	}
+//	song.setBuffer(music);
+//
+//	samples_fft = music.getSamples();
+//	sampleCount = music.getSampleCount();
+//	channelCount = music.getChannelCount();
+//	sampleRate = music.getSampleRate();
+//}
 
 void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 {
@@ -54,4 +54,30 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	fftw_destroy_plan(p);
 	fftw_free(in);
 	fftw_free(out);
+}
+
+void FFT::loadMusic(std::wstring& path)
+{	
+	/*std::cout << path << std::endl;
+	path = "C:\\Users\\danie\\source\\repos\\audiovisualizer\\audiovisualizer\\èaba òeblázni.mp3";
+	std::cout << path << std::endl;*/
+	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+	std::string utf8Path = converter.to_bytes(path);
+
+	if (path.empty()) {
+		if (!music.loadFromFile("caba neblazni.wav")) {
+			std::cout << "error loading music file" << std::endl;
+		}
+	}
+	else {
+		if (!music.loadFromFile(utf8Path)) {
+			std::cout << "error loading music file" << std::endl;
+		}
+	}
+	song.setBuffer(music);
+		
+	samples_fft = music.getSamples();
+	sampleCount = music.getSampleCount();
+	channelCount = music.getChannelCount();
+	sampleRate = music.getSampleRate();
 }
