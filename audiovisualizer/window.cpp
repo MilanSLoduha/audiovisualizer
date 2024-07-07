@@ -17,11 +17,11 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 
 	time.setFillColor(sf::Color::White);
 	time.setFont(startMenu.font);
+
+	style = sf::Style::Default;
 }
 
-void window::windowRun()
-{
-	setSizes();
+void window::runStartMenu() {
 	while (Window.isOpen() && startMenu.startMenu) {
 		startInput();
 
@@ -29,6 +29,12 @@ void window::windowRun()
 		startMenu.draw(Window);
 		Window.display();
 	}
+}
+
+void window::windowRun()
+{
+	setSizes();
+	runStartMenu();
 
     fft.song.play();
     while (Window.isOpen())
@@ -62,10 +68,14 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 			if (fft.song.getStatus() == sf::Sound::Status::Paused) fft.song.play();
 			else if(fft.song.getStatus() == sf::Sound::Status::Playing) fft.song.pause();
 		}
-		if (event.key.code == sf::Keyboard::Escape) window.close();
+		if (event.key.code == sf::Keyboard::Escape) {
+			startMenu.startMenu = true;
+			runStartMenu();
+		}
 		if (event.key.code == sf::Keyboard::Right) fft.song.setPlayingOffset(fft.song.getPlayingOffset() + sf::seconds(10));
 		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
 		if (event.key.code == sf::Keyboard::T) timeVisible = !timeVisible;
+		if (event.key.code == sf::Keyboard::Up) std::cout << window.getSize().x << "  " << window.getSize().y << std::endl;
 	}
 	if (event.type == sf::Event::MouseWheelScrolled) {
 		if (event.mouseWheelScroll.delta > 0 && fft.song.getVolume() < 100) fft.song.setVolume(fft.song.getVolume() + 10);
@@ -75,7 +85,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - 0), 1)); /// (magnitudes.size() - i)
-		dot.setPosition(sf::Vector2f(i * 1, height[startMenu.curRes]));
+		dot.setPosition(sf::Vector2f(i * 1, startMenu.actualHeight));
 		Window.draw(dot);
 	}
 	std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -100,11 +110,20 @@ void window::startInput()
 
 		case sf::Event::Closed: {
 			Window.close();
+			break;
+		case sf::Event::Resized: {
+			startMenu.actualWidth = event.size.width;
+			startMenu.actualHeight = event.size.height;
+			Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
+			startMenu.setSizes();
+			setSizes();
+			startMenu.resizePalette();
+			break;
+		}
 
 			break;
 		}
 		}
-
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			sf::Vector2i mousePos = sf::Mouse::getPosition(Window);
 
@@ -177,8 +196,8 @@ void window::startInput()
 			if (startMenu.clickBrowse(Window)) {
 				startMenu.button = 1;
 				startMenu.setUnpressed(startMenu.button);
-				startMenu.browseFile();
 				pressed = false;
+				startMenu.browseFile();
 			}
 
 			else if (startMenu.clickStart(Window)) {
@@ -229,7 +248,7 @@ void window::startInput()
 void window::prepareStart()
 {
 	fft.loadMusic(startMenu.MusicPath);
-
+	setSizes();
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
 	if (!startMenu.BackgroundPath.empty()) {
 		//backgroundTexture.loadFromFile(startMenu.BackgroundPath);
@@ -246,14 +265,17 @@ void window::applyRes()
 		startMenu.setFullScreen = true;
 	}
 	else if (!startMenu.fullScreen && startMenu.setFullScreen) {
-		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::Close);
+		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::Default);
 
-		style = sf::Style::Close;
+		style = sf::Style::Default;
 		startMenu.setFullScreen = false;
 	}
 	else {
 		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", style);
 	}
+	startMenu.actualHeight = height[startMenu.wantedRes];
+	startMenu.actualWidth = width[startMenu.wantedRes];
+
 	startMenu.curRes = startMenu.wantedRes;
 	startMenu.setSizes();
 	setSizes();
@@ -262,9 +284,10 @@ void window::applyRes()
 
 void window::setSizes()
 {
-	time.setCharacterSize(width[startMenu.curRes] / 64);
-	widthOfDot = std::round(width[startMenu.curRes] / magnitudes.size());
-	time.setPosition(width[startMenu.curRes] / 16 * 13.5, height[startMenu.curRes] / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
+	time.setCharacterSize(startMenu.actualWidth / 64);
+	widthOfDot = std::round(startMenu.actualWidth / magnitudes.size());
+	std::cout << widthOfDot << std::endl;
+	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 }
 
 

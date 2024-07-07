@@ -18,6 +18,9 @@ private:
 	sf::RenderWindow colorPicker;
 
 public:
+	int actualWidth = height[0];
+	int actualHeight = height[0];
+
 	void setSizes();
 
 	int curRes = 0;

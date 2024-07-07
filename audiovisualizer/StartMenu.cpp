@@ -128,11 +128,11 @@ StartMenu::StartMenu()
 
 void StartMenu::resizePalette()
 {
-	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setScale(width[curRes] / 1920. * 1.26, width[curRes] / 1920. * 1.26);
+	palette.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 4);
+	palette.setScale(actualWidth / 1920. * 1.26, actualHeight / 1360.8);
 
-	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
-	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
+	color.setPosition(actualWidth / 10 * 9.55, actualHeight / 10 * 4.03);
+	color.setSize(sf::Vector2f(actualWidth / 23, actualHeight / 12.94));
 }
 
 void StartMenu::getColors(const sf::RenderWindow& window)
@@ -150,40 +150,40 @@ void StartMenu::getColors(const sf::RenderWindow& window)
 void StartMenu::setSizes()
 {
 
-	BrowseButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
-	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
+	BrowseButton.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 2);
+	BrowseButton.setScale(actualWidth / 48000., actualHeight / 27000.);
 
-	StartButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
-	StartButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
+	StartButton.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 8);
+	StartButton.setScale(actualWidth / 48000., actualHeight / 27000.);
 
-	browseText.setCharacterSize(width[curRes] / 64);
-	browseText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
+	browseText.setCharacterSize(actualWidth / 64);
+	browseText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 2);
 
-	startText.setCharacterSize(width[curRes] / 64);
-	startText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
+	startText.setCharacterSize(actualWidth / 64);
+	startText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 8);
 
-	leftResolution.setPosition(width[curRes] / 10 * 7.6, height[curRes] / 10 * 3);
-	leftResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	leftResolution.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 3);
+	leftResolution.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
-	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	rightResolution.setPosition(actualWidth / 10 * 9.2, actualHeight / 10 * 3);
+	rightResolution.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	ApplyResolutionButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
-	ApplyResolutionButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	ApplyResolutionButton.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 3);
+	ApplyResolutionButton.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	background.setScale(width[curRes] / 1920., height[curRes] / 1080.);
+	background.setScale(actualWidth / 1920., actualHeight / 1080.);
 
-	resolutionText.setCharacterSize(width[curRes] / 64);
-	resolutionText.setPosition(width[curRes] / 10 * 8.2, height[curRes] / 10 * 3.3);
+	resolutionText.setCharacterSize(actualWidth / 64);
+	resolutionText.setPosition(actualWidth / 10 * 8.2, actualHeight / 10 * 3.3);
 
-	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
-	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	yesFull.setPosition(actualWidth / 10 * 7, actualHeight / 10 * 3);
+	yesFull.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	ChooseColorButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 5);
-	ChooseColorButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	ChooseColorButton.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 5);
+	ChooseColorButton.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	ApplyColor.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 6);
-	ApplyColor.setScale(width[curRes] / 4800., width[curRes] / 4800.);
+	ApplyColor.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
+	ApplyColor.setScale(actualWidth / 4800., actualHeight / 2700.);
 }
 
 bool StartMenu::clickBrowse(const sf::RenderWindow& window)
@@ -336,7 +336,7 @@ void StartMenu::browseFile() {
 			// Show the Open dialog box.
 			pFileOpen->SetFileTypes(3, imgfiles);  // choose file types to be displayed
 			pFileOpen->SetTitle(L"Open File");     // heading of dialog box
-			hr = pFileOpen->Show(NULL);
+			hr = pFileOpen->Show(GetForegroundWindow());
 
 			// Get the file name from the dialog box.
 			if (SUCCEEDED(hr)) {
@@ -376,5 +376,6 @@ void StartMenu::browseFile() {
 		BackgroundPath = path;
 	}
 }
+
 //https://learn.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box
 //https://cplusplus.com/forum/windows/275617/

@@ -15,8 +15,8 @@ public:
 	std::vector<double> magnitudes;
 	//~window();
 private:
-	bool timeVisible = true;
 	sf::RenderWindow Window;
+	bool timeVisible = true;
 	sf::RectangleShape dot;
 	FFT fft;
 	sf::Text time;
@@ -29,12 +29,13 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 
-	int style = sf::Style::Close;
+	int style;
 
 	void setSizes();
 
 	void applyRes();
 
+	void runStartMenu();
 	void startInput();
 	void prepareStart();
 	//std::vector<sf::Int16> samples;
