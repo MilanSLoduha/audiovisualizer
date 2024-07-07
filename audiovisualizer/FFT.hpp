@@ -7,6 +7,7 @@
 #include <locale>
 #include <codecvt>
 #include <SFML/Graphics.hpp>
+#include <fstream>
 
 class FFT
 {
@@ -16,7 +17,7 @@ public:
 	void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
 	sf::SoundBuffer music;
 	
-	void loadMusic( std::wstring &path);
+	void loadMusic( std::string &path);
 
 	long long done = 0;
 

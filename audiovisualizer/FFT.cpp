@@ -56,13 +56,13 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	fftw_free(out);
 }
 
-void FFT::loadMusic(std::wstring& path)
+void FFT::loadMusic(std::string& path)
 {	
 	/*std::cout << path << std::endl;
-	path = "C:\\Users\\danie\\source\\repos\\audiovisualizer\\audiovisualizer\\èaba òeblázni.mp3";
-	std::cout << path << std::endl;*/
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	std::string utf8Path = converter.to_bytes(path);
+	path = "C:\\Users\\danie\\source\\repos\\audiovisualizer\\audiovisualizer\\èaba òeblázni.mp3";
+	//std::string utf8Path = converter.to_bytes(path);*/
+	//while (path.find("\\") != std::string::npos) path.replace(path.find("\\"), 1, "/");
 
 	if (path.empty()) {
 		if (!music.loadFromFile("caba neblazni.wav")) {
@@ -70,7 +70,7 @@ void FFT::loadMusic(std::wstring& path)
 		}
 	}
 	else {
-		if (!music.loadFromFile(utf8Path)) {
+		if (!music.loadFromFile(std::string(path))) {
 			std::cout << "error loading music file" << std::endl;
 		}
 	}

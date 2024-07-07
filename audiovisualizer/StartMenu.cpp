@@ -313,41 +313,42 @@ void StartMenu::changeResolution(int diff)
 }
 
 
-void StartMenu::browseFile()
-{
-	wchar_t  szFilePath[MAX_PATH];       //  file path string buffer
-	szFilePath[0] = { 0 };                   //  initialize string buffer
-	COMDLG_FILTERSPEC imgfiles[3] = { {L"Image Files", L"*.jpg;*.png;*.bmp;*.tif"},
-									  {L"Music Files", L"*.mp3;*.waw;"},
-									  {L"All Files",L"*.*"} };  //  file types to be displayed
+std::string utf16_to_utf8(const std::wstring& utf16_string) {
+	int utf8_length = WideCharToMultiByte(CP_UTF8, 0, utf16_string.c_str(), -1, nullptr, 0, nullptr, nullptr);
+	std::string utf8_string(utf8_length, 0);
+	WideCharToMultiByte(CP_UTF8, 0, utf16_string.c_str(), -1, &utf8_string[0], utf8_length, nullptr, nullptr);
+	return utf8_string;
+}
+
+void StartMenu::browseFile() {
+	wchar_t szFilePath[MAX_PATH] = { 0 };  // file path string buffer
+	COMDLG_FILTERSPEC imgfiles[3] = { {L"Music Files", L"*.mp3;*.wav;"},
+									  {L"Image Files", L"*.jpg;*.png;*.bmp;*.tif"},
+									  {L"All Files", L"*.*"} };  // file types to be displayed
 
 	HRESULT hr = CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
-
-	if (SUCCEEDED(hr))
-	{
+	if (SUCCEEDED(hr)) {
 		IFileOpenDialog* pFileOpen = NULL;
 
 		// Create the FileOpenDialog object.
 		hr = CoCreateInstance(CLSID_FileOpenDialog, NULL, CLSCTX_ALL, IID_IFileOpenDialog, reinterpret_cast<void**>(&pFileOpen));
-
-		if (SUCCEEDED(hr))
-		{
+		if (SUCCEEDED(hr)) {
 			// Show the Open dialog box.
-			pFileOpen->SetFileTypes(3, imgfiles);   //  choose file types to be displayed
-			pFileOpen->SetTitle(L"Open File");         //  heading of dialog box
+			pFileOpen->SetFileTypes(3, imgfiles);  // choose file types to be displayed
+			pFileOpen->SetTitle(L"Open File");     // heading of dialog box
 			hr = pFileOpen->Show(NULL);
 
 			// Get the file name from the dialog box.
-			if (SUCCEEDED(hr))
-			{
+			if (SUCCEEDED(hr)) {
 				IShellItem* pItem;
 				hr = pFileOpen->GetResult(&pItem);
-				if (SUCCEEDED(hr))
-				{
+				if (SUCCEEDED(hr)) {
 					LPWSTR pTemp;
 					hr = pItem->GetDisplayName(SIGDN_FILESYSPATH, &pTemp);
-					wcscpy_s(szFilePath, MAX_PATH, pTemp);
-					if (SUCCEEDED(hr))  CoTaskMemFree(pTemp);
+					if (SUCCEEDED(hr)) {
+						wcsncpy_s(szFilePath, pTemp, _TRUNCATE);
+						CoTaskMemFree(pTemp);
+					}
 					pItem->Release();
 				}
 			}
@@ -355,23 +356,25 @@ void StartMenu::browseFile()
 		}
 		CoUninitialize();
 	}
-	//std::wcout << szFilePath << std::endl;
-	//std::string temp = std::string(szFilePath, szFilePath + wcslen(szFilePath));
-	std::wstring wideFilePath(szFilePath);
-	std::string temp(wideFilePath.begin(), wideFilePath.end());
-	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
-	std::string utf8Input = converter.to_bytes(wideFilePath);
 
-	if (temp.find(".mp3") != std::string::npos || temp.find(".waw") != std::string::npos)
-	{
-		MusicPath = wideFilePath;
+	std::string path;
+
+	wchar_t shortPath[MAX_PATH] = { 0 };
+	if (GetShortPathName(szFilePath, shortPath, MAX_PATH)) {
+		std::wstring shortFilePath(shortPath);
+		std::string shortUtf8Path = utf16_to_utf8(shortFilePath);
+		path = shortUtf8Path;
 	}
-	else if (temp.find(".jpg") != std::string::npos || temp.find(".png") != std::string::npos ||
-		temp.find(".bmp") != std::string::npos || temp.find(".tif") != std::string::npos)
-	{
-		BackgroundPath = wideFilePath;
+
+	std::string utf8Input = utf16_to_utf8(szFilePath);
+
+	if (utf8Input.find(".mp3") != std::string::npos || utf8Input.find(".wav") != std::string::npos) {
+		MusicPath = path;
 	}
-	return;
+	else if (utf8Input.find(".jpg") != std::string::npos || utf8Input.find(".png") != std::string::npos ||
+		utf8Input.find(".bmp") != std::string::npos || utf8Input.find(".tif") != std::string::npos) {
+		BackgroundPath = path;
+	}
 }
 //https://learn.microsoft.com/en-us/windows/win32/learnwin32/example--the-open-dialog-box
 //https://cplusplus.com/forum/windows/275617/

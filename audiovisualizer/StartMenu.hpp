@@ -8,6 +8,7 @@
 #include <codecvt>
 #include <locale>
 #include <string>
+#include <fstream>
 
 class StartMenu
 {
@@ -85,8 +86,8 @@ public:
 
 	std::string TexturePath;
 
-	std::wstring MusicPath;
-	std::wstring  BackgroundPath;
+	std::string MusicPath;
+	std::string  BackgroundPath;
 
 	bool startMenu;
 	int button;
