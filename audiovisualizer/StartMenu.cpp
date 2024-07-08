@@ -123,7 +123,18 @@ StartMenu::StartMenu()
 	color.setOutlineColor(sf::Color::Black);
 	color.setOutlineThickness(2);
 	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
+	
+	musicText.setString("Default music selected");
+	musicText.setCharacterSize(width[curRes] / 64);
+	musicText.setFillColor(sf::Color::White);
+	musicText.setPosition(width[curRes] / 10 * 6, height[curRes] / 10 * 1);
+	musicText.setFont(font);
 
+	backgroundText.setString("Default background selected");
+	backgroundText.setCharacterSize(width[curRes] / 64);
+	backgroundText.setFillColor(sf::Color::White);
+	backgroundText.setPosition(width[curRes] / 10 * 6, height[curRes] / 10 * 1.3);
+	backgroundText.setFont(font);
 }
 
 void StartMenu::resizePalette()
@@ -149,6 +160,11 @@ void StartMenu::getColors(const sf::RenderWindow& window)
 
 void StartMenu::setSizes()
 {
+	musicText.setCharacterSize(actualWidth / 64);
+	musicText.setPosition(actualWidth / 10 * 6, actualHeight / 10 * 1);
+
+	backgroundText.setCharacterSize(actualWidth / 64);
+	backgroundText.setPosition(actualWidth / 10 * 6, actualHeight / 10 * 1.3);
 
 	BrowseButton.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 2);
 	BrowseButton.setScale(actualWidth / 48000., actualHeight / 27000.);
@@ -280,6 +296,14 @@ void StartMenu::setUnpressed(int& button) {
 	}
 }
 
+std::string StartMenu::getName(std::string& path)
+{
+	int pos = 0;
+	if(path.find('\\')) pos  = path.find_last_of('\\');
+	else if (path.find('/')) pos = path.find_last_of('/');
+	return path.substr(pos + 1);
+}
+
 void StartMenu::draw(sf::RenderWindow& window)
 {
 	window.draw(background);
@@ -296,6 +320,8 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(ApplyColor);
 	window.draw(palette);
 	window.draw(color);
+	window.draw(backgroundText);
+	window.draw(musicText);
 }
 
 void StartMenu::changeResolution(int diff)
@@ -370,10 +396,14 @@ void StartMenu::browseFile() {
 
 	if (utf8Input.find(".mp3") != std::string::npos || utf8Input.find(".wav") != std::string::npos) {
 		MusicPath = path;
+		musicName = getName(utf8Input);
+		musicText.setString(musicName);
 	}
 	else if (utf8Input.find(".jpg") != std::string::npos || utf8Input.find(".png") != std::string::npos ||
 		utf8Input.find(".bmp") != std::string::npos || utf8Input.find(".tif") != std::string::npos) {
 		BackgroundPath = path;
+		backgroundName = getName(utf8Input);
+		backgroundText.setString(backgroundName);
 	}
 }
 

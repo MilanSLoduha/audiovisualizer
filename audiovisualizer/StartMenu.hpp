@@ -70,6 +70,8 @@ public:
 	void draw(sf::RenderWindow&);
 	void changeResolution(int);
 
+	std::string getName(std::string&);
+
 	//void draw(sf::RenderWindow&);
 	//void startInput();
 	StartMenu();
@@ -90,7 +92,12 @@ public:
 	std::string TexturePath;
 
 	std::string MusicPath;
-	std::string  BackgroundPath;
+	std::string BackgroundPath;
+	std::string backgroundName;
+	std::string musicName;
+
+	sf::Text backgroundText;
+	sf::Text musicText;
 
 	bool startMenu;
 	int button;

@@ -21,6 +21,12 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 	style = sf::Style::Default;
 }
 
+void window::loadBackground()
+{
+	backgroundTexture.loadFromFile(startMenu.BackgroundPath);
+	background.setTexture(backgroundTexture);
+}
+
 void window::runStartMenu() {
 	while (Window.isOpen() && startMenu.startMenu) {
 		startInput();
@@ -50,9 +56,9 @@ void window::windowRun()
 		}
 
         Window.clear();
+		Window.draw(background);
 		drawVisualization(magnitudes);
 		if (timeVisible) drawTime();
-
         Window.display();
     }
 }
@@ -80,6 +86,15 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 	if (event.type == sf::Event::MouseWheelScrolled) {
 		if (event.mouseWheelScroll.delta > 0 && fft.song.getVolume() < 100) fft.song.setVolume(fft.song.getVolume() + 10);
 		else if(event.mouseWheelScroll.delta < 0 && fft.song.getVolume() > 0) fft.song.setVolume(fft.song.getVolume() - 10);
+	}
+
+	if (event.type == sf::Event::Resized) {
+		startMenu.actualWidth = event.size.width;
+		startMenu.actualHeight = event.size.height;
+		Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
+		startMenu.setSizes();
+		setSizes();
+		startMenu.resizePalette();
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
@@ -114,7 +129,11 @@ void window::startInput()
 		case sf::Event::Resized: {
 			startMenu.actualWidth = event.size.width;
 			startMenu.actualHeight = event.size.height;
+			xPos = Window.getPosition().x;
+			yPos = Window.getPosition().y;
 			Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
+			Window.setPosition(sf::Vector2i(xPos, yPos));
+			Window.setFramerateLimit(60);
 			startMenu.setSizes();
 			setSizes();
 			startMenu.resizePalette();
@@ -251,8 +270,7 @@ void window::prepareStart()
 	setSizes();
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
 	if (!startMenu.BackgroundPath.empty()) {
-		//backgroundTexture.loadFromFile(startMenu.BackgroundPath);
-		background.setTexture(backgroundTexture);
+		loadBackground();
 	}
 }
 
@@ -275,6 +293,7 @@ void window::applyRes()
 	}
 	startMenu.actualHeight = height[startMenu.wantedRes];
 	startMenu.actualWidth = width[startMenu.wantedRes];
+	Window.setFramerateLimit(60);
 
 	startMenu.curRes = startMenu.wantedRes;
 	startMenu.setSizes();

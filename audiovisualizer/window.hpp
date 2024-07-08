@@ -29,11 +29,15 @@ private:
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
 
+	int xPos;
+	int yPos;
+
 	int style;
 
 	void setSizes();
 
 	void applyRes();
+	void loadBackground();
 
 	void runStartMenu();
 	void startInput();
