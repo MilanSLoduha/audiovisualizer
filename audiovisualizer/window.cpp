@@ -14,6 +14,8 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 	//dot.setSize(sf::Vector2f(1, 1));
 	dot.setRotation(270);
 	dot.setFillColor(sf::Color::White);
+	dot.setOutlineColor(sf::Color::Cyan);
+	//dot.setOutlineThickness(1);	
 
 	time.setFillColor(sf::Color::White);
 	time.setFont(startMenu.font);
@@ -100,10 +102,10 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = 0; i < magnitudes.size(); i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - 0), 1)); /// (magnitudes.size() - i)
-		dot.setPosition(sf::Vector2f(i * 1, startMenu.actualHeight));
+		dot.setPosition(sf::Vector2f(i * 3, startMenu.actualHeight));
 		Window.draw(dot);
 	}
-	std::this_thread::sleep_for(std::chrono::milliseconds(23));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
 }
 
 void window::drawTime() {
