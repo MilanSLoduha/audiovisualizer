@@ -105,6 +105,9 @@ StartMenu::StartMenu()
 	backgroundText.setFillColor(sf::Color::White);
 	backgroundText.setFont(font);
 
+	formMax.setTexture(leftResolutionTexture);
+	formMin.setTexture(rightResolutionTexture);
+
 	resizePalette();
 	setSizes();
 }
@@ -172,6 +175,24 @@ void StartMenu::setSizes()
 
 	ApplyColor.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
 	ApplyColor.setScale(actualWidth / 4800., actualHeight / 2700.);
+
+	formMax.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7);
+	formMax.setScale(actualWidth / 4800., actualHeight / 2700.);
+
+	formMin.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7);
+	formMin.setScale(actualWidth / 4800., actualHeight / 2700.);
+
+	formMinText.setCharacterSize(actualWidth / 64);
+	formMinText.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7.3);
+
+	formMaxText.setCharacterSize(actualWidth / 64);
+	formMaxText.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7.3);
+
+	formMaxText.setString("Default");
+	formMaxText.setFont(font);
+
+	formMinText.setString("Default");
+	formMinText.setFont(font);
 }
 
 bool StartMenu::clickBrowse(const sf::RenderWindow& window)
@@ -212,6 +233,16 @@ bool StartMenu::clickApplyColor(const sf::RenderWindow& window)
 bool StartMenu::clickChooseColor(const sf::RenderWindow& window)
 {
 	return ChooseColorButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+}
+
+bool StartMenu::clikedFormMax(const sf::RenderWindow& window)
+{
+	return formMax.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+}
+
+bool StartMenu::clikedFormMin(const sf::RenderWindow& window)
+{
+	return formMin.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 }
 
 void StartMenu::setPressed(int& button) {
@@ -294,6 +325,10 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(color);
 	window.draw(backgroundText);
 	window.draw(musicText);
+	window.draw(formMax);	
+	window.draw(formMin);
+	window.draw(formMaxText);
+	window.draw(formMinText);
 }
 
 void StartMenu::changeResolution(int diff)

@@ -54,6 +54,21 @@ public:
 	sf::Sprite ApplyColor;
 	sf::Sprite palette;
 
+	sf::Sprite formMin;
+	sf::Sprite formMax;
+
+	bool formMinSelected;
+	bool formMaxSelected;
+
+	bool clikedFormMin(const sf::RenderWindow& window);
+	bool clikedFormMax(const sf::RenderWindow& window);
+
+	sf::Text formMinText;
+	sf::Text formMaxText;
+
+	std::string formMinString;
+	std::string formMaxString;
+
 	sf::Sprite background;
 
 	sf::Image paletteImage;

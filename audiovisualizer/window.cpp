@@ -127,10 +127,10 @@ void window::startInput()
 
 	while (Window.pollEvent(event)) {
 		switch (event.type) {
-
 		case sf::Event::Closed: {
 			Window.close();
 			break;
+		}
 		case sf::Event::Resized: {
 			startMenu.actualWidth = event.size.width;
 			startMenu.actualHeight = event.size.height;
@@ -144,133 +144,195 @@ void window::startInput()
 			startMenu.resizePalette();
 			break;
 		}
-
+		case sf::Event::KeyPressed: {
+			if (startMenu.formMinSelected || startMenu.formMaxSelected) {
+				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
+					if (startMenu.formMinSelected) {
+						startMenu.formMinString += char(event.key.code + 22);
+						startMenu.formMinText.setString(startMenu.formMinString);
+					}
+					else {
+						startMenu.formMaxString += char(event.key.code + 22);
+						startMenu.formMaxText.setString(startMenu.formMaxString);
+					}
+					break;
+				}
+				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
+					if (startMenu.formMinSelected) {
+						startMenu.formMinString += char(event.key.code - 27);
+						startMenu.formMinText.setString(startMenu.formMinString);
+					}
+					else {
+						startMenu.formMaxString += char(event.key.code - 27);
+						startMenu.formMaxText.setString(startMenu.formMaxString);
+					}
+					break;
+				}
+				else if (event.key.code == sf::Keyboard::Backspace) {
+					if (startMenu.formMinSelected) {
+						if (!startMenu.formMinString.empty()) {
+							startMenu.formMinString.pop_back();
+							if (!startMenu.formMinString.empty()) {
+								startMenu.formMinText.setString(startMenu.formMinString);
+							}
+							else {
+								startMenu.formMinText.setString("Default");
+							}
+						}
+					}
+					else {
+						if (!startMenu.formMaxString.empty()) {
+							startMenu.formMaxString.pop_back();
+							if (!startMenu.formMaxString.empty()) {
+								startMenu.formMaxText.setString(startMenu.formMaxString);
+							}
+							else {
+								startMenu.formMaxText.setString("Default");
+							}
+						}
+					}
+					break;
+				}
+				break;
+			}
 			break;
 		}
 		}
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			sf::Vector2i mousePos = sf::Mouse::getPosition(Window);
+								  if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+									  sf::Vector2i mousePos = sf::Mouse::getPosition(Window);
 
-			if (startMenu.palette.getGlobalBounds().contains(Window.mapPixelToCoords(mousePos))) {
-				startMenu.getColors(Window);
-			}
-		}
-		if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) { //if button is pressed
-			pressed = true;
-			if (startMenu.clickBrowse(Window)) {
-				startMenu.button = 1;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickStart(Window)) {
-				startMenu.button = 2;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickLeftResolution(Window)) {
-				startMenu.button = 3;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickRightResolution(Window)) {
-				startMenu.button = 4;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickApply(Window)) {
-				startMenu.button = 5;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickChooseColor(Window)) {
-				startMenu.button = 7;
-				startMenu.setPressed(startMenu.button);
-			}
-			else if (startMenu.clickApplyColor(Window)) {
-				startMenu.button = 8;
-				startMenu.setPressed(startMenu.button);
-			}
-		}
-		if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickLeftResolution(Window) && startMenu.button == 3) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickRightResolution(Window) && startMenu.button == 4) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
-		else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
-			startMenu.setUnpressed(startMenu.button);
-			startMenu.button = 0;
-		}
+									  if (startMenu.palette.getGlobalBounds().contains(Window.mapPixelToCoords(mousePos))) {
+										  startMenu.getColors(Window);
+									  }
+								  }
+								  if (event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) { //if button is pressed
+									  pressed = true;
+									  if (startMenu.clickBrowse(Window)) {
+										  startMenu.button = 1;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickStart(Window)) {
+										  startMenu.button = 2;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickLeftResolution(Window)) {
+										  startMenu.button = 3;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickRightResolution(Window)) {
+										  startMenu.button = 4;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickApply(Window)) {
+										  startMenu.button = 5;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickChooseColor(Window)) {
+										  startMenu.button = 7;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clickApplyColor(Window)) {
+										  startMenu.button = 8;
+										  startMenu.setPressed(startMenu.button);
+									  }
+									  else if (startMenu.clikedFormMin(Window)) {
+										  startMenu.formMinSelected = true;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }
+									  else if (startMenu.clikedFormMax(Window)) {
+										  startMenu.formMaxSelected = true;
+										  startMenu.formMinSelected = false;
+										  break;
+									  }
+									  startMenu.formMinSelected = false;
+									  startMenu.formMaxSelected = false;
+								  }
+								  if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickStart(Window) && startMenu.button == 2) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickLeftResolution(Window) && startMenu.button == 3) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickRightResolution(Window) && startMenu.button == 4) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
+								  else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
+									  startMenu.setUnpressed(startMenu.button);
+									  startMenu.button = 0;
+								  }
 
-		if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed) //if mouse button is released
-		{
-			if (startMenu.clickBrowse(Window)) {
-				startMenu.button = 1;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				startMenu.browseFile();
-			}
+								  if (event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Left && pressed) //if mouse button is released
+								  {
+									  if (startMenu.clickBrowse(Window)) {
+										  startMenu.button = 1;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+										  startMenu.browseFile();
+									  }
 
-			else if (startMenu.clickStart(Window)) {
-				startMenu.button = 2;
-				startMenu.setUnpressed(startMenu.button);
-				startMenu.startMenu = false;
-				prepareStart();
-				pressed = false;
-			}
-			else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
-				startMenu.button = 3;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				startMenu.changeResolution(-1);
-			}
-			else if (startMenu.clickRightResolution(Window)) { //if right resolution button is clicked
-				startMenu.button = 4;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				startMenu.changeResolution(1);
-			}
-			else if (startMenu.clickApply(Window)) { //if apply button is clicked
-				startMenu.button = 5;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-				applyRes();
-			}
-			else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
-				startMenu.button = 6;
-				if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
-				else startMenu.setPressed(startMenu.button);
-				startMenu.fullScreen = !startMenu.fullScreen;
-			}
-			else if (startMenu.clickChooseColor(Window)) { //if choose color button is clicked
-				startMenu.button = 7;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-			}
-			else if (startMenu.clickApplyColor(Window)) { //if apply color button is clicked
-				startMenu.button = 8;
-				startMenu.setUnpressed(startMenu.button);
-				pressed = false;
-			}
+									  else if (startMenu.clickStart(Window)) {
+										  startMenu.button = 2;
+										  startMenu.setUnpressed(startMenu.button);
+										  startMenu.startMenu = false;
+										  prepareStart();
+										  pressed = false;
+									  }
+									  else if (startMenu.clickLeftResolution(Window)) { //if left resolution button is clicked
+										  startMenu.button = 3;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+										  startMenu.changeResolution(-1);
+									  }
+									  else if (startMenu.clickRightResolution(Window)) { //if right resolution button is clicked
+										  startMenu.button = 4;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+										  startMenu.changeResolution(1);
+									  }
+									  else if (startMenu.clickApply(Window)) { //if apply button is clicked
+										  startMenu.button = 5;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+										  applyRes();
+									  }
+									  else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
+										  startMenu.button = 6;
+										  if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
+										  else startMenu.setPressed(startMenu.button);
+										  startMenu.fullScreen = !startMenu.fullScreen;
+									  }
+									  else if (startMenu.clickChooseColor(Window)) { //if choose color button is clicked
+										  startMenu.button = 7;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+									  }
+									  else if (startMenu.clickApplyColor(Window)) { //if apply color button is clicked
+										  startMenu.button = 8;
+										  startMenu.setUnpressed(startMenu.button);
+										  pressed = false;
+									  }
+								  }
 		}
-	}
+	
+
 }
-
-void window::prepareStart()
-{
+void window::prepareStart() {
 	fft.loadMusic(startMenu.MusicPath);
 	setSizes();
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
