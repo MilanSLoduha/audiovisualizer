@@ -21,6 +21,8 @@ window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMen
 	time.setFont(startMenu.font);
 
 	style = sf::Style::Default;
+
+	//if (icon.loadFromFile(startMenu.TexturePath + "icon.png")) Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 }
 
 void window::loadBackground()
@@ -94,6 +96,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		startMenu.actualWidth = event.size.width;
 		startMenu.actualHeight = event.size.height;
 		Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
+		//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		startMenu.setSizes();
 		setSizes();
 		startMenu.resizePalette();
@@ -296,6 +299,7 @@ void window::applyRes()
 	startMenu.actualHeight = height[startMenu.wantedRes];
 	startMenu.actualWidth = width[startMenu.wantedRes];
 	Window.setFramerateLimit(60);
+	//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
 	startMenu.curRes = startMenu.wantedRes;
 	startMenu.setSizes();

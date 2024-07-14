@@ -25,6 +25,7 @@ private:
 	int widthOfDot;
 	sf::Clock clock;
 	StartMenu startMenu;
+	sf::Image icon;
 
 	sf::Texture backgroundTexture;
 	sf::Sprite background;
