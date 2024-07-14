@@ -50,91 +50,63 @@ StartMenu::StartMenu()
 			std::cout << "Error loading palette texture" << std::endl;
 		}
 
-		if (!font.loadFromFile("font.ttf")) {
+		if (!font.loadFromFile("Roboto-Regular.ttf")) {
 			std::cout << "Error loading font" << std::endl;
 		}
 	}
 
 	BrowseButton.setTexture(buttonTexture);
-	BrowseButton.setPosition( width[curRes] / 10 * 8, height[curRes] / 10 * 2);
-	BrowseButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
 
 	StartButton.setTexture(buttonTexture);
-	StartButton.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
-	StartButton.setScale(width[curRes] / 48000., width[curRes] / 48000.);
 
-	browseText.setCharacterSize(width[curRes] / 64);
 	browseText.setFillColor(sf::Color::White);
-	browseText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 2);
 	browseText.setFont(font);
 	browseText.setString("Browse");
 
-	startText.setCharacterSize(width[curRes] / 64);
 	startText.setFillColor(sf::Color::White);
-	startText.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 8);
 	startText.setFont(font);
 	startText.setString("Start");
 
 	leftResolution.setTexture(leftResolutionTexture);
-	leftResolution.setPosition(width[curRes] / 10 * 7.6, height[curRes] / 10 * 3);
-	leftResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	rightResolution.setTexture(rightResolutionTexture);
-	rightResolution.setPosition(width[curRes] / 10 * 9.2, height[curRes] / 10 * 3);
-	rightResolution.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	ApplyResolutionButton.setTexture(ApplyButtonTexture);
-	ApplyResolutionButton.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 3);
-	ApplyResolutionButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	background.setTexture(backgroundTexture);
-	background.setScale(width[curRes] / 1920., width[curRes] / 1920.);
 
-	resolutionText.setCharacterSize(width[curRes] / 64);
 	resolutionText.setFillColor(sf::Color::Cyan);
 	resolutionText.setOutlineColor(sf::Color::Black);
 	resolutionText.setOutlineThickness(2);
-	resolutionText.setPosition(width[curRes] / 10 * 8.2, height[curRes] / 10 * 3.3);
 	resolutionText.setFont(font);
 	resolutionText.setString(std::to_string(width[curRes]) + "x" + std::to_string(height[curRes]));
 
 	yesFull.setTexture(noFullTexture);
-	yesFull.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 3);
-	yesFull.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	ChooseColorButton.setTexture(ApplyButtonTexture);
-	ChooseColorButton.setPosition(width[curRes] / 10 * 7, height[curRes] / 10 * 4.2);
-	ChooseColorButton.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 	ApplyColor.setTexture(ApplyButtonTexture);
-	ApplyColor.setPosition(width[curRes] / 10 * 6.4, height[curRes] / 10 * 4.2);
-	ApplyColor.setScale(width[curRes] / 4800., width[curRes] / 4800.);
 
 
 	palette.setTexture(paletteTexture);
-	palette.setPosition(width[curRes] / 10 * 8, height[curRes] / 10 * 4);
-	palette.setScale(width[curRes] / 1920. * 1.26, width[curRes] / 1920. * 1.26);
 	//palette.setScale(0.63,0.63);
 	//palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
 
 
-	color.setSize(sf::Vector2f(width[curRes] / 23, width[curRes] / 23));
 	color.setFillColor(sf::Color::White);
 	color.setOutlineColor(sf::Color::Black);
 	color.setOutlineThickness(2);
-	color.setPosition(width[curRes] / 10 * 9.55, height[curRes] / 10 * 4.03);
 	
 	musicText.setString("Default music selected");
-	musicText.setCharacterSize(width[curRes] / 64);
 	musicText.setFillColor(sf::Color::White);
-	musicText.setPosition(width[curRes] / 10 * 6, height[curRes] / 10 * 1);
 	musicText.setFont(font);
 
 	backgroundText.setString("Default background selected");
-	backgroundText.setCharacterSize(width[curRes] / 64);
 	backgroundText.setFillColor(sf::Color::White);
-	backgroundText.setPosition(width[curRes] / 10 * 6, height[curRes] / 10 * 1.3);
 	backgroundText.setFont(font);
+
+	resizePalette();
+	setSizes();
 }
 
 void StartMenu::resizePalette()
@@ -298,10 +270,10 @@ void StartMenu::setUnpressed(int& button) {
 
 std::string StartMenu::getName(std::string& path)
 {
-	int pos = 0;
-	if(path.find('\\')) pos  = path.find_last_of('\\');
-	else if (path.find('/')) pos = path.find_last_of('/');
-	return path.substr(pos + 1);
+	size_t pos = path.find_last_of("/\\");
+	std::string result = path.substr(pos == std::string::npos ? 0 : pos + 1);
+	std::cout << result << std::endl;
+	return result;
 }
 
 void StartMenu::draw(sf::RenderWindow& window)
@@ -388,8 +360,7 @@ void StartMenu::browseFile() {
 	wchar_t shortPath[MAX_PATH] = { 0 };
 	if (GetShortPathName(szFilePath, shortPath, MAX_PATH)) {
 		std::wstring shortFilePath(shortPath);
-		std::string shortUtf8Path = utf16_to_utf8(shortFilePath);
-		path = shortUtf8Path;
+		path = utf16_to_utf8(shortFilePath);
 	}
 
 	std::string utf8Input = utf16_to_utf8(szFilePath);

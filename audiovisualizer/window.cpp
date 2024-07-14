@@ -307,7 +307,6 @@ void window::setSizes()
 {
 	time.setCharacterSize(startMenu.actualWidth / 64);
 	widthOfDot = std::round(startMenu.actualWidth / magnitudes.size());
-	std::cout << widthOfDot << std::endl;
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 }
 
