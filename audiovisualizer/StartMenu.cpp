@@ -189,11 +189,11 @@ void StartMenu::setSizes()
 
 	formMinText.setCharacterSize(actualWidth / 64);
 	formMinText.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7.3);
-	//formMinText.setColor();
+	formMinText.setFillColor(sf::Color::Black);
 
 	formMaxText.setCharacterSize(actualWidth / 64);
 	formMaxText.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7.3);
-	//formMaxText.setColor(sf::Color::White);
+	formMaxText.setFillColor(sf::Color::Black);
 
 	formMaxText.setString("Default");
 	formMaxText.setFont(font);
