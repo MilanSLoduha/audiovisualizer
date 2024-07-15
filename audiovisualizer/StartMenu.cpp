@@ -49,6 +49,9 @@ StartMenu::StartMenu()
 		if (!paletteTexture.loadFromImage(paletteImage)) {
 			std::cout << "Error loading palette texture" << std::endl;
 		}
+		if (!formTexture.loadFromFile(TexturePath + "text.png")) {
+			std::cout << "Error loading palette texture" << std::endl;
+		}
 
 		if (!font.loadFromFile("Roboto-Regular.ttf")) {
 			std::cout << "Error loading font" << std::endl;
@@ -105,8 +108,8 @@ StartMenu::StartMenu()
 	backgroundText.setFillColor(sf::Color::White);
 	backgroundText.setFont(font);
 
-	formMax.setTexture(leftResolutionTexture);
-	formMin.setTexture(rightResolutionTexture);
+	formMax.setTexture(formTexture);
+	formMin.setTexture(formTexture);
 
 	resizePalette();
 	setSizes();
@@ -179,16 +182,18 @@ void StartMenu::setSizes()
 	ApplyColor.setScale(actualWidth / 4800., actualHeight / 2700.);
 
 	formMax.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7);
-	formMax.setScale(actualWidth / 4800., actualHeight / 2700.);
+	formMax.setScale(actualWidth / 12000., actualHeight / 9000.);
 
 	formMin.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7);
-	formMin.setScale(actualWidth / 4800., actualHeight / 2700.);
+	formMin.setScale(actualWidth / 12000., actualHeight / 9000.);
 
 	formMinText.setCharacterSize(actualWidth / 64);
 	formMinText.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7.3);
+	//formMinText.setColor();
 
 	formMaxText.setCharacterSize(actualWidth / 64);
 	formMaxText.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7.3);
+	//formMaxText.setColor(sf::Color::White);
 
 	formMaxText.setString("Default");
 	formMaxText.setFont(font);

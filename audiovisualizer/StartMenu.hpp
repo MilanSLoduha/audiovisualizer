@@ -103,6 +103,7 @@ public:
 	sf::Texture yesFullTexture;
 	sf::Texture noFullTexture;
 	sf::Texture paletteTexture;
+	sf::Texture formTexture;
 
 	std::string TexturePath;
 
