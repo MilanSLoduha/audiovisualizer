@@ -115,10 +115,12 @@ StartMenu::StartMenu()
 void StartMenu::resizePalette()
 {
 	palette.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 4);
-	palette.setScale(actualWidth / 1920. * 1.26, actualHeight / 1360.8);
+	//palette.setScale(actualWidth / 1920. * 1.26, actualHeight / 1360.8);
+	palette.setScale(actualWidth / 1920. * 1.26, actualWidth / 1920. * 1.26);
 
 	color.setPosition(actualWidth / 10 * 9.55, actualHeight / 10 * 4.03);
-	color.setSize(sf::Vector2f(actualWidth / 23, actualHeight / 12.94));
+	//color.setSize(sf::Vector2f(actualWidth / 23, actualHeight / 12.94));
+	color.setSize(sf::Vector2f(actualWidth / 23, actualWidth / 23));
 }
 
 void StartMenu::getColors(const sf::RenderWindow& window)

@@ -283,7 +283,9 @@ void window::startInput()
 										  startMenu.button = 1;
 										  startMenu.setUnpressed(startMenu.button);
 										  pressed = false;
+										  Window.setVisible(false);
 										  startMenu.browseFile();
+										  Window.setVisible(true);
 									  }
 
 									  else if (startMenu.clickStart(Window)) {
