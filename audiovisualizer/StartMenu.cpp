@@ -181,25 +181,29 @@ void StartMenu::setSizes()
 	ApplyColor.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
 	ApplyColor.setScale(actualWidth / 4800., actualHeight / 2700.);
 
-	formMax.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7);
+	formMax.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7);
 	formMax.setScale(actualWidth / 12000., actualHeight / 9000.);
 
-	formMin.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7);
+	formMin.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7);
 	formMin.setScale(actualWidth / 12000., actualHeight / 9000.);
 
 	formMinText.setCharacterSize(actualWidth / 64);
-	formMinText.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7.3);
+	formMinText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 7.3);
 	formMinText.setFillColor(sf::Color::Black);
 
 	formMaxText.setCharacterSize(actualWidth / 64);
-	formMaxText.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7.3);
+	formMaxText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 7.3);
 	formMaxText.setFillColor(sf::Color::Black);
 
-	formMaxText.setString("Default");
+	formMinString = "Default";
+	formMaxString = "Default";
+
+	formMaxText.setString(formMaxString);
 	formMaxText.setFont(font);
 
-	formMinText.setString("Default");
+	formMinText.setString(formMinString);
 	formMinText.setFont(font);
+
 }
 
 bool StartMenu::clickBrowse(const sf::RenderWindow& window)

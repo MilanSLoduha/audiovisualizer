@@ -148,55 +148,85 @@ void window::startInput()
 			if (startMenu.formMinSelected || startMenu.formMaxSelected) {
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
 					if (startMenu.formMinSelected) {
+						if (startMenu.formMinString == "Default") {
+							startMenu.formMinString = "";
+						}
 						startMenu.formMinString += char(event.key.code + 22);
 						startMenu.formMinText.setString(startMenu.formMinString);
 					}
 					else {
+						if (startMenu.formMaxString == "Default") {
+							startMenu.formMaxString = "";
+						}
 						startMenu.formMaxString += char(event.key.code + 22);
 						startMenu.formMaxText.setString(startMenu.formMaxString);
 					}
-					break;
 				}
 				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
 					if (startMenu.formMinSelected) {
+						if (startMenu.formMinString == "Default") {
+							startMenu.formMinString = "";
+						}
 						startMenu.formMinString += char(event.key.code - 27);
 						startMenu.formMinText.setString(startMenu.formMinString);
 					}
 					else {
+						if (startMenu.formMaxString == "Default") {
+							startMenu.formMaxString = "";
+						}
 						startMenu.formMaxString += char(event.key.code - 27);
 						startMenu.formMaxText.setString(startMenu.formMaxString);
 					}
-					break;
 				}
 				else if (event.key.code == sf::Keyboard::Backspace) {
 					if (startMenu.formMinSelected) {
-						if (!startMenu.formMinString.empty()) {
+						if (!startMenu.formMinString.empty() && startMenu.formMinString != "Default") {
 							startMenu.formMinString.pop_back();
 							if (!startMenu.formMinString.empty()) {
 								startMenu.formMinText.setString(startMenu.formMinString);
 							}
 							else {
+								startMenu.formMinString = "Default";
 								startMenu.formMinText.setString("Default");
 							}
 						}
 					}
 					else {
-						if (!startMenu.formMaxString.empty()) {
+						if (!startMenu.formMaxString.empty() && startMenu.formMaxString != "Default") {
 							startMenu.formMaxString.pop_back();
 							if (!startMenu.formMaxString.empty()) {
 								startMenu.formMaxText.setString(startMenu.formMaxString);
 							}
 							else {
 								startMenu.formMaxText.setString("Default");
+								startMenu.formMaxString = "Default";
+								startMenu.formMinText.setString("Default");
+								startMenu.formMinString = "Default";
 							}
 						}
 					}
-					break;
 				}
-				break;
 			}
-			break;
-		}
+
+				if (startMenu.formMaxString != "Default" && stoi(startMenu.formMaxString) > 22000) {
+					startMenu.formMaxString = "22000";
+					startMenu.formMaxText.setString(startMenu.formMaxString);
+				}
+				if (startMenu.formMaxString != "Default" && startMenu.formMinString != "Default") {
+					if (std::stoi(startMenu.formMinString) > std::stoi(startMenu.formMaxString)) {
+						startMenu.formMinString = startMenu.formMaxText.getString();
+						startMenu.formMinText.setString(startMenu.formMinString);
+					}
+				}
+
+				if (startMenu.formMaxString == "Default" && startMenu.formMinString != "Default") {
+					if (std::stoi(startMenu.formMinString) > 18000) {
+						startMenu.formMinString = "18000";
+						startMenu.formMinText.setString(startMenu.formMinString);
+					}
+				}
+			}
+
 		}
 								  if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 									  sf::Vector2i mousePos = sf::Mouse::getPosition(Window);
