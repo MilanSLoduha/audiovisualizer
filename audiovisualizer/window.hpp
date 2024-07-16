@@ -33,6 +33,12 @@ private:
 	int xPos;
 	int yPos;
 
+	int maxFreq;
+	int maxFreqIndex;
+
+	int minFreq;
+	int minFreqIndex;
+
 	int style;
 
 	void setSizes();
