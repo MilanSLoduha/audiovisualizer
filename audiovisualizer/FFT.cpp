@@ -44,6 +44,9 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	for (int i = 0; i < magnitudes.size(); i++)
 	{
 		magnitudes[i] = sqrt(out[i][0] * out[i][0] + out[i][1] * out[i][1]);
+		magnitudes[i] = magnitudes[i] / 10 / magnitudes.size() ;//* log10(magnitudes[i] + 1)
+
+		if (magnitudes[i] > maxMag) magnitudes[i] = maxMag;
 		//std::cout << magnitudes[i] << std::endl;
 		/*std::cout << i << ".  " << magnitudes[i] << std::endl;*/
 	}

@@ -103,9 +103,9 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
-	for (int i = minFreq; i < maxFreq; i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i] / 10 / (magnitudes.size() - 0), 1)); /// (magnitudes.size() - i)
-		dot.setPosition(sf::Vector2f((i - minFreq) * 3, startMenu.actualHeight));
+	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
+		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
+		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 3, startMenu.actualHeight));
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -148,14 +148,14 @@ void window::startInput()
 			if (startMenu.formMinSelected || startMenu.formMaxSelected) {
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
 					if (startMenu.formMinSelected) {
-						if (startMenu.formMinString == "Default") {
+						if (startMenu.formMinString == "Default" || startMenu.formMinString == "0") {
 							startMenu.formMinString = "";
 						}
 						startMenu.formMinString += char(event.key.code + 22);
 						startMenu.formMinText.setString(startMenu.formMinString);
 					}
-					else {
-						if (startMenu.formMaxString == "Default") {
+					else if (startMenu.formMaxSelected){
+						if (startMenu.formMaxString == "Default" || startMenu.formMaxString == "0") {
 							startMenu.formMaxString = "";
 						}
 						startMenu.formMaxString += char(event.key.code + 22);
@@ -164,14 +164,14 @@ void window::startInput()
 				}
 				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
 					if (startMenu.formMinSelected) {
-						if (startMenu.formMinString == "Default") {
+						if (startMenu.formMinString == "Default" || startMenu.formMinString == "0") {
 							startMenu.formMinString = "";
 						}
 						startMenu.formMinString += char(event.key.code - 27);
 						startMenu.formMinText.setString(startMenu.formMinString);
 					}
-					else {
-						if (startMenu.formMaxString == "Default") {
+					else if (startMenu.formMaxSelected) {
+						if (startMenu.formMaxString == "Default" || startMenu.formMaxString == "0") {
 							startMenu.formMaxString = "";
 						}
 						startMenu.formMaxString += char(event.key.code - 27);
@@ -191,7 +191,7 @@ void window::startInput()
 							}
 						}
 					}
-					else {
+					else if (startMenu.formMaxSelected) {
 						if (!startMenu.formMaxString.empty() && startMenu.formMaxString != "Default") {
 							startMenu.formMaxString.pop_back();
 							if (!startMenu.formMaxString.empty()) {
@@ -202,6 +202,145 @@ void window::startInput()
 								startMenu.formMaxString = "Default";
 								startMenu.formMinText.setString("Default");
 								startMenu.formMinString = "Default";
+							}
+						}
+					}
+				}
+			}
+			else if (startMenu.formXbeginSelected || startMenu.formYbeginSelected || startMenu.formXendSelected || startMenu.formYendSelected || startMenu.formMaxMagSelected) {
+				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
+					if (startMenu.formXbeginSelected) {
+						if (startMenu.xbeginString == "0") {
+							startMenu.xbeginString = "";
+						}
+						startMenu.xbeginString += char(event.key.code + 22);
+						startMenu.formXbeginText.setString(startMenu.xbeginString);
+					}
+					else if (startMenu.formYbeginSelected) {
+						if (startMenu.ybeginString == "0") {
+							startMenu.ybeginString = "";
+						}
+						startMenu.ybeginString += char(event.key.code + 22);
+						startMenu.formYbeginText.setString(startMenu.ybeginString);
+					}
+					else if (startMenu.formXendSelected) {
+						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
+							startMenu.xendString = "";
+						}
+						startMenu.xendString += char(event.key.code + 22);
+						startMenu.formXendText.setString(startMenu.xendString);
+					}
+					else if (startMenu.formYendSelected) {
+						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
+							startMenu.yendString = "";
+						}
+						startMenu.yendString += char(event.key.code + 22);
+						startMenu.formYendText.setString(startMenu.yendString);
+					}
+					else if (startMenu.formMaxMagSelected) {
+						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
+							startMenu.maxMagString = "";
+						}
+						startMenu.maxMagString += char(event.key.code + 22);
+						startMenu.formMaxMagText.setString(startMenu.maxMagString);
+					}
+
+				}
+				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
+					if (startMenu.formXbeginSelected) {
+						if (startMenu.xbeginString == "0") {
+							startMenu.xbeginString = "";
+						}
+						startMenu.xbeginString += char(event.key.code - 27);
+						startMenu.formXbeginText.setString(startMenu.xbeginString);
+					}
+					else if (startMenu.formYbeginSelected) {
+						if (startMenu.ybeginString == "0") {
+							startMenu.ybeginString = "";
+						}
+						startMenu.ybeginString += char(event.key.code - 27);
+						startMenu.formYbeginText.setString(startMenu.ybeginString);
+					}
+					else if (startMenu.formXendSelected) {
+						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
+							startMenu.xendString = "";
+						}
+						startMenu.xendString += char(event.key.code - 27);
+						startMenu.formXendText.setString(startMenu.xendString);
+					}
+					else if (startMenu.formYendSelected) {
+						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
+							startMenu.yendString = "";
+						}
+						startMenu.yendString += char(event.key.code - 27);
+						startMenu.formYendText.setString(startMenu.yendString);
+					}
+					else if (startMenu.formMaxMagSelected) {
+						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
+							startMenu.maxMagString = "";
+						}
+						startMenu.maxMagString += char(event.key.code - 27);
+						startMenu.formMaxMagText.setString(startMenu.maxMagString);
+					}
+				}
+				else if (event.key.code == sf::Keyboard::Backspace) {
+					if (startMenu.formXbeginSelected) {
+						if (!startMenu.xbeginString.empty() && startMenu.xbeginString != "0") {
+							startMenu.xbeginString.pop_back();
+							if (!startMenu.xbeginString.empty()) {
+								startMenu.formXbeginText.setString(startMenu.xbeginString);
+							}
+							else {
+								startMenu.xbeginString = "0";
+								startMenu.formXbeginText.setString("0");
+							}
+						}
+					}
+					else if (startMenu.formYbeginSelected) {
+						if (!startMenu.ybeginString.empty() && startMenu.ybeginString != "0") {
+							startMenu.ybeginString.pop_back();
+							if (!startMenu.ybeginString.empty()) {
+								startMenu.formYbeginText.setString(startMenu.ybeginString);
+							}
+							else {
+								startMenu.ybeginString = "0";
+								startMenu.formYbeginText.setString("0");
+							}
+						}
+					}
+					else if (startMenu.formXendSelected) {
+						if (!startMenu.xendString.empty() && startMenu.xendString != "Default") {
+							startMenu.xendString.pop_back();
+							if (!startMenu.xendString.empty()) {
+								startMenu.formXendText.setString(startMenu.xendString);
+							}
+							else {
+								startMenu.xendString = "Default";
+								startMenu.formXendText.setString("Default");
+							}
+						}
+					}
+					else if (startMenu.formYendSelected) {
+						if (!startMenu.yendString.empty() && startMenu.yendString != "Default") {
+							startMenu.yendString.pop_back();
+							if (!startMenu.yendString.empty()) {
+								startMenu.formYendText.setString(startMenu.yendString);
+							}
+							else {
+								startMenu.yendString = "Default";
+								startMenu.formYendText.setString("Default");
+							}
+						}
+					}
+					else if (startMenu.formMaxMagSelected) {
+						if (!startMenu.maxMagString.empty() && startMenu.maxMagString != "Off") {
+							startMenu.maxMagString.pop_back();
+							if (!startMenu.maxMagString.empty()) {
+								startMenu.formMaxMagText.setString(startMenu.maxMagString);
+							}
+							else {
+								startMenu.maxMagString = "Off";
+								startMenu.formMaxMagText.setString("Off");
 							}
 						}
 					}
@@ -225,6 +364,7 @@ void window::startInput()
 						startMenu.formMinText.setString(startMenu.formMinString);
 					}
 				}
+
 			}
 
 		}
@@ -268,13 +408,79 @@ void window::startInput()
 									  else if (startMenu.clikedFormMin(Window)) {
 										  startMenu.formMinSelected = true;
 										  startMenu.formMaxSelected = false;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMaxMagSelected = false;
 										  break;
 									  }
 									  else if (startMenu.clikedFormMax(Window)) {
 										  startMenu.formMaxSelected = true;
 										  startMenu.formMinSelected = false;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMaxMagSelected = false;
+
 										  break;
 									  }
+									  else if (startMenu.clikedFormXbegin(Window)) {
+										  startMenu.formXbeginSelected = true;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMaxMagSelected = false;
+										  startMenu.formMinSelected = false;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }
+									  else if (startMenu.clikedFormYbegin(Window)) {
+										  startMenu.formYbeginSelected = true;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMaxMagSelected = false;
+										  startMenu.formMinSelected = false;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }
+									  else if (startMenu.clikedFormXend(Window)) {
+										  startMenu.formXendSelected = true;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMaxMagSelected = false;
+										  startMenu.formMinSelected = false;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }
+									  else if (startMenu.clikedFormYend(Window)) {
+										  startMenu.formYendSelected = true;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formMaxMagSelected = false;
+										  startMenu.formMinSelected = false;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }
+									  else if (startMenu.clikedFormMaxMag(Window)) {
+										  startMenu.formMaxMagSelected = true;
+										  startMenu.formYbeginSelected = false;
+										  startMenu.formXbeginSelected = false;
+										  startMenu.formXendSelected = false;
+										  startMenu.formYendSelected = false;
+										  startMenu.formMinSelected = false;
+										  startMenu.formMaxSelected = false;
+										  break;
+									  }	
+									  startMenu.formMaxMagSelected = false;
+									  startMenu.formYbeginSelected = false;
+									  startMenu.formXbeginSelected = false;
+									  startMenu.formXendSelected = false;
+									  startMenu.formYendSelected = false;
 									  startMenu.formMinSelected = false;
 									  startMenu.formMaxSelected = false;
 								  }
@@ -375,10 +581,18 @@ void window::prepareStart() {
 	else minFreq = 0;
 	if (startMenu.formMaxString != "Default") maxFreq = std::stoi(startMenu.formMaxString);
 	else maxFreq = 22000;
+	xBegin = std::stoi(startMenu.xbeginString);
+	yBegin = std::stoi(startMenu.ybeginString);
+	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
+	else xEnd = startMenu.actualWidth;
+	if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
+	else yEnd = startMenu.actualHeight;
+	if (startMenu.maxMagString != "Off") fft.maxMag = std::stoi(startMenu.maxMagString);
+	else fft.maxMag = 32000;
 
-	maxFreqIndex = maxFreq * N / fft.sampleCount;
-	minFreqIndex = minFreq * N / fft.sampleCount;
 
+	maxFreqIndex = maxFreq * N / fft.sampleRate;
+	minFreqIndex = minFreq * N / fft.sampleRate;
 }
 
 void window::applyRes()

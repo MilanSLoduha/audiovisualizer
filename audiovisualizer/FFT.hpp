@@ -15,6 +15,7 @@ public:
 	//FFT();
 	sf::Sound song;
 	void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
+	int maxMag; //max magnitude
 	sf::SoundBuffer music;
 	
 	void loadMusic( std::string &path);

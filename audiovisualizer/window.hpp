@@ -39,6 +39,11 @@ private:
 	int minFreq;
 	int minFreqIndex;
 
+	int xBegin; //beginning of the visualization
+	int xEnd;
+	int yBegin;
+	int yEnd;
+
 	int style;
 
 	void setSizes();

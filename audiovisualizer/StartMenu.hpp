@@ -56,18 +56,43 @@ public:
 
 	sf::Sprite formMin;
 	sf::Sprite formMax;
+	sf::Sprite formXbegin;
+	sf::Sprite formYbegin;
+	sf::Sprite formXend;
+	sf::Sprite formYend;
+	sf::Sprite formMaxMag;
 
 	bool formMinSelected;
 	bool formMaxSelected;
+	bool formXbeginSelected;
+	bool formYbeginSelected;
+	bool formXendSelected;
+	bool formYendSelected;
+	bool formMaxMagSelected;
 
 	bool clikedFormMin(const sf::RenderWindow& window);
 	bool clikedFormMax(const sf::RenderWindow& window);
+	bool clikedFormXbegin(const sf::RenderWindow& window);
+	bool clikedFormYbegin(const sf::RenderWindow& window);
+	bool clikedFormXend(const sf::RenderWindow& window);
+	bool clikedFormYend(const sf::RenderWindow& window);
+	bool clikedFormMaxMag(const sf::RenderWindow& window);
 
 	sf::Text formMinText;
 	sf::Text formMaxText;
+	sf::Text formXbeginText;
+	sf::Text formYbeginText;
+	sf::Text formXendText;
+	sf::Text formYendText;
+	sf::Text formMaxMagText;
 
 	std::string formMinString;
 	std::string formMaxString;
+	std::string xbeginString;
+	std::string xendString;
+	std::string ybeginString;
+	std::string yendString;
+	std::string maxMagString;
 
 	sf::Sprite background;
 

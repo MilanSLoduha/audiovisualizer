@@ -111,6 +111,46 @@ StartMenu::StartMenu()
 	formMax.setTexture(formTexture);
 	formMin.setTexture(formTexture);
 
+	xbeginString = "0";
+	formXbeginText.setFillColor(sf::Color::Black);
+	formXbeginText.setString(xbeginString);
+	formXbeginText.setFont(font);
+
+	ybeginString = "0";
+	formYbeginText.setFillColor(sf::Color::Black);
+	formYbeginText.setString(ybeginString);
+	formYbeginText.setFont(font);
+
+	xendString = "Default";
+	formXendText.setFillColor(sf::Color::Black);
+	formXendText.setString(xendString);
+	formXendText.setFont(font);
+
+	yendString = "Default";
+	formYendText.setFillColor(sf::Color::Black);
+	formYendText.setString(yendString);
+	formYendText.setFont(font);
+
+	maxMagString = "Off";
+	formMaxMagText.setFillColor(sf::Color::Black);
+	formMaxMagText.setString(maxMagString);
+	formMaxMagText.setFont(font);
+
+	formMaxText.setFillColor(sf::Color::Black);
+	formMinText.setFillColor(sf::Color::Black);
+	formMinString = "Default";
+	formMaxString = "Default";
+	formMaxText.setFont(font);
+	formMinText.setFont(font);
+	formMaxText.setString(formMaxString);
+	formMinText.setString(formMinString);
+
+	formMaxMag.setTexture(formTexture);
+	formXbegin.setTexture(formTexture);
+	formYbegin.setTexture(formTexture);
+	formXend.setTexture(formTexture);
+	formYend.setTexture(formTexture);
+
 	resizePalette();
 	setSizes();
 }
@@ -188,73 +228,112 @@ void StartMenu::setSizes()
 	formMin.setScale(actualWidth / 12000., actualHeight / 9000.);
 
 	formMinText.setCharacterSize(actualWidth / 64);
-	formMinText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 7.3);
-	formMinText.setFillColor(sf::Color::Black);
+	formMinText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 7.3);;
 
 	formMaxText.setCharacterSize(actualWidth / 64);
 	formMaxText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 7.3);
-	formMaxText.setFillColor(sf::Color::Black);
 
-	formMinString = "Default";
-	formMaxString = "Default";
+	formXbegin.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 4);
+	formXbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
+	formXbeginText.setCharacterSize(actualWidth / 64);
+	formXbeginText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 4.3);
+	
+	formYbegin.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 4);
+	formYbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
+	formYbeginText.setCharacterSize(actualWidth / 64);
+	formYbeginText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 4.3);
+	
+	formXend.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 5);
+	formXend.setScale(actualWidth / 12000., actualHeight / 9000.);
+	formXendText.setCharacterSize(actualWidth / 64);
+	formXendText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 5.3);
+	
+	formYend.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 5);
+	formYend.setScale(actualWidth / 12000., actualHeight / 9000.);
+	formYendText.setCharacterSize(actualWidth / 64);
+	formYendText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 5.3);
 
-	formMaxText.setString(formMaxString);
-	formMaxText.setFont(font);
-
-	formMinText.setString(formMinString);
-	formMinText.setFont(font);
+	formMaxMag.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
+	formMaxMag.setScale(actualWidth / 12000., actualHeight / 9000.);
+	formMaxMagText.setCharacterSize(actualWidth / 64);
+	formMaxMagText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 6.3);
 
 }
 
-bool StartMenu::clickBrowse(const sf::RenderWindow& window)
-{
-	return BrowseButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickBrowse(const sf::RenderWindow & window)
+	{
+		return BrowseButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickStart(const sf::RenderWindow& window)
-{
-	return StartButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickStart(const sf::RenderWindow & window)
+	{
+		return StartButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickLeftResolution(const sf::RenderWindow& window)
-{
-	return leftResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickLeftResolution(const sf::RenderWindow & window)
+	{
+		return leftResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickRightResolution(const sf::RenderWindow& window)
-{
-	return rightResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickRightResolution(const sf::RenderWindow & window)
+	{
+		return rightResolution.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickApply(const sf::RenderWindow& window)
-{
-	return ApplyResolutionButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickApply(const sf::RenderWindow & window)
+	{
+		return ApplyResolutionButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickYesFull(const sf::RenderWindow& window)
-{
-	return yesFull.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickYesFull(const sf::RenderWindow & window)
+	{
+		return yesFull.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickApplyColor(const sf::RenderWindow& window)
-{
-	return ApplyColor.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickApplyColor(const sf::RenderWindow & window)
+	{
+		return ApplyColor.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clickChooseColor(const sf::RenderWindow& window)
-{
-	return ChooseColorButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
-}
+	bool StartMenu::clickChooseColor(const sf::RenderWindow & window)
+	{
+		return ChooseColorButton.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));;
+	}
 
-bool StartMenu::clikedFormMax(const sf::RenderWindow& window)
-{
-	return formMax.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-}
+	bool StartMenu::clikedFormMax(const sf::RenderWindow & window)
+	{
+		return formMax.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
 
-bool StartMenu::clikedFormMin(const sf::RenderWindow& window)
-{
-	return formMin.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-}
+	bool StartMenu::clikedFormMin(const sf::RenderWindow & window)
+	{
+		return formMin.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
+	bool StartMenu::clikedFormXbegin(const sf::RenderWindow & window)
+	{
+		return formXbegin.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
+	bool StartMenu::clikedFormYbegin(const sf::RenderWindow & window)
+	{
+		return formYbegin.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
+	bool StartMenu::clikedFormXend(const sf::RenderWindow & window)
+	{
+		return formXend.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
+	bool StartMenu::clikedFormYend(const sf::RenderWindow & window)
+	{
+		return formYend.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
+	bool StartMenu::clikedFormMaxMag(const sf::RenderWindow & window)
+	{
+		return formMaxMag.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
 
 void StartMenu::setPressed(int& button) {
 	if (button == 1) {
@@ -340,6 +419,16 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(formMin);
 	window.draw(formMaxText);
 	window.draw(formMinText);
+	window.draw(formXbegin);
+	window.draw(formYbegin);
+	window.draw(formXend);
+	window.draw(formYend);
+	window.draw(formMaxMag);
+	window.draw(formXbeginText);
+	window.draw(formYbeginText);
+	window.draw(formXendText);
+	window.draw(formYendText);
+	window.draw(formMaxMagText);
 }
 
 void StartMenu::changeResolution(int diff)
