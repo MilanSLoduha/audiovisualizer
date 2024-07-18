@@ -12,7 +12,7 @@
 class FFT
 {
 public:
-	//FFT();
+	FFT();
 	sf::Sound song;
 	void applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes);
 	int maxMag; //max magnitude
@@ -27,6 +27,11 @@ public:
 	sf::Uint64 sampleCount;
 	unsigned int channelCount;
 	unsigned int sampleRate;
+
+	std::vector <double> magnitudesVirgin;
+	std::vector <double> magnitudesOld;
+
+	bool smoothing = false;
 
 private:
 	

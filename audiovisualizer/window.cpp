@@ -8,11 +8,11 @@
 window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual") {
 	Window.setFramerateLimit(60);
 
-	magnitudes.resize(N / 2 / 1.1);
+	magnitudes.resize(N / 2);
 	//magnitudes.resize(N / 2);
 
 	//dot.setSize(sf::Vector2f(1, 1));
-	dot.setRotation(270);
+	dot.setRotation(270); //270
 	dot.setFillColor(sf::Color::White);
 	dot.setOutlineColor(sf::Color::Cyan);
 	//dot.setOutlineThickness(1);	
@@ -105,7 +105,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 3, startMenu.actualHeight));
+		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 1, Y ));
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -207,7 +207,7 @@ void window::startInput()
 					}
 				}
 			}
-			else if (startMenu.formXbeginSelected || startMenu.formYbeginSelected || startMenu.formXendSelected || startMenu.formYendSelected || startMenu.formMaxMagSelected) {
+			else if (startMenu.formXbeginSelected || startMenu.formYbeginSelected || startMenu.formXendSelected || startMenu.formMaxMagSelected) { //startMenu.formYendSelected
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
 					if (startMenu.formXbeginSelected) {
 						if (startMenu.xbeginString == "0") {
@@ -230,13 +230,13 @@ void window::startInput()
 						startMenu.xendString += char(event.key.code + 22);
 						startMenu.formXendText.setString(startMenu.xendString);
 					}
-					else if (startMenu.formYendSelected) {
+				/*	else if (startMenu.formYendSelected) {
 						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
 							startMenu.yendString = "";
 						}
 						startMenu.yendString += char(event.key.code + 22);
 						startMenu.formYendText.setString(startMenu.yendString);
-					}
+					}*/
 					else if (startMenu.formMaxMagSelected) {
 						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
 							startMenu.maxMagString = "";
@@ -268,13 +268,13 @@ void window::startInput()
 						startMenu.xendString += char(event.key.code - 27);
 						startMenu.formXendText.setString(startMenu.xendString);
 					}
-					else if (startMenu.formYendSelected) {
+					/*else if (startMenu.formYendSelected) {
 						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
 							startMenu.yendString = "";
 						}
 						startMenu.yendString += char(event.key.code - 27);
 						startMenu.formYendText.setString(startMenu.yendString);
-					}
+					}*/
 					else if (startMenu.formMaxMagSelected) {
 						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
 							startMenu.maxMagString = "";
@@ -320,7 +320,7 @@ void window::startInput()
 							}
 						}
 					}
-					else if (startMenu.formYendSelected) {
+					/*else if (startMenu.formYendSelected) {
 						if (!startMenu.yendString.empty() && startMenu.yendString != "Default") {
 							startMenu.yendString.pop_back();
 							if (!startMenu.yendString.empty()) {
@@ -331,7 +331,7 @@ void window::startInput()
 								startMenu.formYendText.setString("Default");
 							}
 						}
-					}
+					}*/
 					else if (startMenu.formMaxMagSelected) {
 						if (!startMenu.maxMagString.empty() && startMenu.maxMagString != "Off") {
 							startMenu.maxMagString.pop_back();
@@ -411,7 +411,7 @@ void window::startInput()
 										  startMenu.formXbeginSelected = false;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXendSelected = false;
-										  startMenu.formYendSelected = false;
+										  //startMenu.formYendSelected = false;
 										  startMenu.formMaxMagSelected = false;
 										  break;
 									  }
@@ -421,7 +421,7 @@ void window::startInput()
 										  startMenu.formXbeginSelected = false;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXendSelected = false;
-										  startMenu.formYendSelected = false;
+										 //startMenu.formYendSelected = false;
 										  startMenu.formMaxMagSelected = false;
 
 										  break;
@@ -430,7 +430,7 @@ void window::startInput()
 										  startMenu.formXbeginSelected = true;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXendSelected = false;
-										  startMenu.formYendSelected = false;
+										  //startMenu.formYendSelected = false;
 										  startMenu.formMaxMagSelected = false;
 										  startMenu.formMinSelected = false;
 										  startMenu.formMaxSelected = false;
@@ -440,7 +440,7 @@ void window::startInput()
 										  startMenu.formYbeginSelected = true;
 										  startMenu.formXbeginSelected = false;
 										  startMenu.formXendSelected = false;
-										  startMenu.formYendSelected = false;
+										  //startMenu.formYendSelected = false;
 										  startMenu.formMaxMagSelected = false;
 										  startMenu.formMinSelected = false;
 										  startMenu.formMaxSelected = false;
@@ -450,13 +450,13 @@ void window::startInput()
 										  startMenu.formXendSelected = true;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXbeginSelected = false;
-										  startMenu.formYendSelected = false;
+										  //startMenu.formYendSelected = false;
 										  startMenu.formMaxMagSelected = false;
 										  startMenu.formMinSelected = false;
 										  startMenu.formMaxSelected = false;
 										  break;
 									  }
-									  else if (startMenu.clikedFormYend(Window)) {
+									 /* else if (startMenu.clikedFormYend(Window)) {
 										  startMenu.formYendSelected = true;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXbeginSelected = false;
@@ -465,13 +465,13 @@ void window::startInput()
 										  startMenu.formMinSelected = false;
 										  startMenu.formMaxSelected = false;
 										  break;
-									  }
+									  }*/
 									  else if (startMenu.clikedFormMaxMag(Window)) {
 										  startMenu.formMaxMagSelected = true;
 										  startMenu.formYbeginSelected = false;
 										  startMenu.formXbeginSelected = false;
 										  startMenu.formXendSelected = false;
-										  startMenu.formYendSelected = false;
+										  //startMenu.formYendSelected = false;
 										  startMenu.formMinSelected = false;
 										  startMenu.formMaxSelected = false;
 										  break;
@@ -480,7 +480,7 @@ void window::startInput()
 									  startMenu.formYbeginSelected = false;
 									  startMenu.formXbeginSelected = false;
 									  startMenu.formXendSelected = false;
-									  startMenu.formYendSelected = false;
+									  //startMenu.formYendSelected = false;
 									  startMenu.formMinSelected = false;
 									  startMenu.formMaxSelected = false;
 								  }
@@ -577,19 +577,26 @@ void window::prepareStart() {
 	if (!startMenu.BackgroundPath.empty()) {
 		loadBackground();
 	}
+
 	if (startMenu.formMinString != "Default") minFreq = std::stoi(startMenu.formMinString);
 	else minFreq = 0;
+
 	if (startMenu.formMaxString != "Default") maxFreq = std::stoi(startMenu.formMaxString);
 	else maxFreq = 22000;
+
 	xBegin = std::stoi(startMenu.xbeginString);
 	yBegin = std::stoi(startMenu.ybeginString);
+	Y = startMenu.actualHeight - yBegin;
+
 	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
 	else xEnd = startMenu.actualWidth;
-	if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
-	else yEnd = startMenu.actualHeight;
+	//if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
+	//else yEnd = startMenu.actualHeight;
 	if (startMenu.maxMagString != "Off") fft.maxMag = std::stoi(startMenu.maxMagString);
 	else fft.maxMag = 32000;
 
+	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
+	else xEnd = startMenu.actualWidth;
 
 	maxFreqIndex = maxFreq * N / fft.sampleRate;
 	minFreqIndex = minFreq * N / fft.sampleRate;
@@ -628,6 +635,7 @@ void window::setSizes()
 	time.setCharacterSize(startMenu.actualWidth / 64);
 	widthOfDot = std::round(startMenu.actualWidth / magnitudes.size());
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
+	Y = startMenu.actualHeight - yBegin;
 }
 
 

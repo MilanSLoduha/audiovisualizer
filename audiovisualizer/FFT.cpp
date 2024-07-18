@@ -1,8 +1,8 @@
 #include "FFT.hpp"
 #include <iostream>
 
-//FFT::FFT()
-//{
+FFT::FFT()
+{
 //	if (!music.loadFromFile("caba neblazni.wav"))
 //	{
 //		std::cout << "Error loading music file" << std::endl;
@@ -13,7 +13,9 @@
 //	sampleCount = music.getSampleCount();
 //	channelCount = music.getChannelCount();
 //	sampleRate = music.getSampleRate();
-//}
+	magnitudesVirgin = std::vector<double>(N / 2, 0);
+	magnitudesOld = std::vector<double>(N / 2, 0);
+}
 
 void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 {
@@ -21,7 +23,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	fftw_complex* out = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * N);
 
 	done = static_cast<long long>(song.getPlayingOffset().asSeconds() * sampleRate); //chats upgrade
-	done += channelCount * static_cast<long long>(N);
+	//done += channelCount * static_cast<long long>(N);
 	if ((done + N) * channelCount > sampleCount) return;
 
 	for (int i = 0; i < N; i++)
@@ -44,11 +46,27 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	for (int i = 0; i < magnitudes.size(); i++)
 	{
 		magnitudes[i] = sqrt(out[i][0] * out[i][0] + out[i][1] * out[i][1]);
-		magnitudes[i] = magnitudes[i] / 10 / magnitudes.size() ;//* log10(magnitudes[i] + 1)
+		magnitudes[i] = magnitudes[i] / 5 / magnitudes.size();//* log10(magnitudes[i] + 1)
+		magnitudesVirgin[i] = magnitudes[i];
 
+		if (!smoothing) {//smoothing with other new walue
+
+			long double temp = 0;
+			int j = i;
+
+			for (j;j < i + 5; j++)
+			{
+				if (j >= magnitudes.size()) break;
+				temp += magnitudesVirgin[j];
+			}
+
+			magnitudes[i] = temp / (j - i);
+		}
+		if (!smoothing) { //past smoothing
+			magnitudes[i] = (magnitudesOld[i] + magnitudes[i]) / 2;
+			magnitudesOld[i] = magnitudes[i];
+		}
 		if (magnitudes[i] > maxMag) magnitudes[i] = maxMag;
-		//std::cout << magnitudes[i] << std::endl;
-		/*std::cout << i << ".  " << magnitudes[i] << std::endl;*/
 	}
 	//std::cout << magnitudes.size() << std::endl;
 

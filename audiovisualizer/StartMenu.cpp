@@ -112,27 +112,27 @@ StartMenu::StartMenu()
 	formMin.setTexture(formTexture);
 
 	xbeginString = "0";
-	formXbeginText.setFillColor(sf::Color::Black);
+	formXbeginText.setFillColor(sf::Color::Blue);
 	formXbeginText.setString(xbeginString);
 	formXbeginText.setFont(font);
 
 	ybeginString = "0";
-	formYbeginText.setFillColor(sf::Color::Black);
+	formYbeginText.setFillColor(sf::Color::Cyan);
 	formYbeginText.setString(ybeginString);
 	formYbeginText.setFont(font);
 
 	xendString = "Default";
-	formXendText.setFillColor(sf::Color::Black);
+	formXendText.setFillColor(sf::Color::Green);
 	formXendText.setString(xendString);
 	formXendText.setFont(font);
 
-	yendString = "Default";
+	/*yendString = "Default";
 	formYendText.setFillColor(sf::Color::Black);
 	formYendText.setString(yendString);
-	formYendText.setFont(font);
+	formYendText.setFont(font);*/
 
 	maxMagString = "Off";
-	formMaxMagText.setFillColor(sf::Color::Black);
+	formMaxMagText.setFillColor(sf::Color::Magenta);
 	formMaxMagText.setString(maxMagString);
 	formMaxMagText.setFont(font);
 
@@ -149,7 +149,7 @@ StartMenu::StartMenu()
 	formXbegin.setTexture(formTexture);
 	formYbegin.setTexture(formTexture);
 	formXend.setTexture(formTexture);
-	formYend.setTexture(formTexture);
+	//formYend.setTexture(formTexture);
 
 	resizePalette();
 	setSizes();
@@ -233,30 +233,30 @@ void StartMenu::setSizes()
 	formMaxText.setCharacterSize(actualWidth / 64);
 	formMaxText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 7.3);
 
-	formXbegin.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 4);
+	formXbegin.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 4);
 	formXbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
 	formXbeginText.setCharacterSize(actualWidth / 64);
-	formXbeginText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 4.3);
+	formXbeginText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 4.3);
 	
-	formYbegin.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 4);
+	formYbegin.setPosition(actualWidth / 10 * 5.6, actualHeight / 10 * 4);
 	formYbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
 	formYbeginText.setCharacterSize(actualWidth / 64);
-	formYbeginText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 4.3);
+	formYbeginText.setPosition(actualWidth / 10 * 5.7, actualHeight / 10 * 4.3);
 	
-	formXend.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 5);
+	formXend.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 5);
 	formXend.setScale(actualWidth / 12000., actualHeight / 9000.);
 	formXendText.setCharacterSize(actualWidth / 64);
-	formXendText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 5.3);
-	
+	formXendText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 5.3);
+	/*
 	formYend.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 5);
 	formYend.setScale(actualWidth / 12000., actualHeight / 9000.);
 	formYendText.setCharacterSize(actualWidth / 64);
-	formYendText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 5.3);
+	formYendText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 5.3);*/
 
-	formMaxMag.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
+	formMaxMag.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 6);
 	formMaxMag.setScale(actualWidth / 12000., actualHeight / 9000.);
 	formMaxMagText.setCharacterSize(actualWidth / 64);
-	formMaxMagText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 6.3);
+	formMaxMagText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 6.3);
 
 }
 
@@ -325,10 +325,10 @@ void StartMenu::setSizes()
 		return formXend.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 	}
 
-	bool StartMenu::clikedFormYend(const sf::RenderWindow & window)
-	{
-		return formYend.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
-	}
+	//bool StartMenu::clikedFormYend(const sf::RenderWindow & window)
+	//{
+	//	return formYend.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	//}
 
 	bool StartMenu::clikedFormMaxMag(const sf::RenderWindow & window)
 	{
@@ -422,12 +422,12 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(formXbegin);
 	window.draw(formYbegin);
 	window.draw(formXend);
-	window.draw(formYend);
+	//window.draw(formYend);
 	window.draw(formMaxMag);
 	window.draw(formXbeginText);
 	window.draw(formYbeginText);
 	window.draw(formXendText);
-	window.draw(formYendText);
+	//window.draw(formYendText);
 	window.draw(formMaxMagText);
 }
 
