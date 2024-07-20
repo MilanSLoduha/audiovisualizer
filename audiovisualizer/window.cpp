@@ -571,6 +571,7 @@ void window::startInput()
 	
 
 }
+
 void window::prepareStart() {
 	fft.loadMusic(startMenu.MusicPath);
 	setSizes();
