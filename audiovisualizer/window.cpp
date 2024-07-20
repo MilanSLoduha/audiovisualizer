@@ -100,6 +100,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		startMenu.setSizes();
 		setSizes();
 		startMenu.resizePalette();
+		std::cout << startMenu.actualHeight << "  " << startMenu.actualWidth << std::endl;
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
