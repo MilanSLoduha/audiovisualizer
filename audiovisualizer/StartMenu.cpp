@@ -393,7 +393,6 @@ std::string StartMenu::getName(std::string& path)
 {
 	size_t pos = path.find_last_of("/\\");
 	std::string result = path.substr(pos == std::string::npos ? 0 : pos + 1);
-	std::cout << result << std::endl;
 	return result;
 }
 

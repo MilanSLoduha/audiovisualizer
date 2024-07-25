@@ -53,14 +53,19 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 
 			long double temp = 0;
 			int j = i;
+			short rep = 0;
 
-			for (j;j < i + 5; j++)
+			if (i >= 2) j = i - 2; // i = 3 -> j = 1 or i = 2 -> j = 0
+			else j = 0;
+
+			for (j;j < i + 2; j++)
 			{
 				if (j >= magnitudes.size()) break;
 				temp += magnitudesVirgin[j];
+				rep++;
 			}
 
-			magnitudes[i] = temp / (j - i);
+			magnitudes[i] = temp / rep;
 		}
 		if (!smoothing) { //past smoothing
 			magnitudes[i] = (magnitudesOld[i] + magnitudes[i]) / 2;

@@ -85,7 +85,6 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		if (event.key.code == sf::Keyboard::Right) fft.song.setPlayingOffset(fft.song.getPlayingOffset() + sf::seconds(10));
 		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
 		if (event.key.code == sf::Keyboard::T) timeVisible = !timeVisible;
-		if (event.key.code == sf::Keyboard::Up) std::cout << window.getSize().x << "  " << window.getSize().y << std::endl;
 	}
 	if (event.type == sf::Event::MouseWheelScrolled) {
 		if (event.mouseWheelScroll.delta > 0 && fft.song.getVolume() < 100) fft.song.setVolume(fft.song.getVolume() + 10);
@@ -100,13 +99,12 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		startMenu.setSizes();
 		setSizes();
 		startMenu.resizePalette();
-		std::cout << startMenu.actualHeight << "  " << startMenu.actualWidth << std::endl;
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 1, Y ));
+		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 1, YofViz));
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -573,6 +571,10 @@ void window::startInput()
 }
 void window::prepareStart() {
 	fft.loadMusic(startMenu.MusicPath);
+
+	xBegin = std::stoi(startMenu.xbeginString);
+	yBegin = std::stoi(startMenu.ybeginString);
+
 	setSizes();
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
 	if (!startMenu.BackgroundPath.empty()) {
@@ -584,10 +586,6 @@ void window::prepareStart() {
 
 	if (startMenu.formMaxString != "Default") maxFreq = std::stoi(startMenu.formMaxString);
 	else maxFreq = 22000;
-
-	xBegin = std::stoi(startMenu.xbeginString);
-	yBegin = std::stoi(startMenu.ybeginString);
-	Y = startMenu.actualHeight - yBegin;
 
 	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
 	else xEnd = startMenu.actualWidth;
@@ -636,7 +634,7 @@ void window::setSizes()
 	time.setCharacterSize(startMenu.actualWidth / 64);
 	widthOfDot = std::round(startMenu.actualWidth / magnitudes.size());
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
-	Y = startMenu.actualHeight - yBegin;
+	YofViz = startMenu.actualHeight - yBegin;
 }
 
 

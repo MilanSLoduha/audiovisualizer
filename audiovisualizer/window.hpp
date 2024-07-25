@@ -42,7 +42,7 @@ private:
 	int xBegin; //beginning of the visualization
 	int xEnd;
 	int yBegin;
-	int Y;
+	int YofViz;
 	/*int yEnd;*/
 
 	int style;
