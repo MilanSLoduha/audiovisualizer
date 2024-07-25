@@ -90,7 +90,7 @@ void FFT::loadMusic(std::string& path)
 	//std::string utf8Path = converter.to_bytes(path);*/
 	//while (path.find("\\") != std::string::npos) path.replace(path.find("\\"), 1, "/");
 
-	if (path.empty()) {
+	if (path == "NULL") {
 		if (!music.loadFromFile("caba neblazni.wav")) {
 			std::cout << "error loading music file" << std::endl;
 		}

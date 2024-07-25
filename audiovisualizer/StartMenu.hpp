@@ -131,7 +131,7 @@ public:
 
 	std::string TexturePath;
 
-	std::string MusicPath;
+	std::string MusicPath = "NULL";
 	std::string BackgroundPath;
 	std::string backgroundName;
 	std::string musicName;

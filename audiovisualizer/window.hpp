@@ -22,7 +22,10 @@ private:
 	sf::Text time;
 	std::string timeString;
 	void drawTime();
+
 	int widthOfDot;
+	int dotCount;
+
 	sf::Clock clock;
 	StartMenu startMenu;
 	sf::Image icon;

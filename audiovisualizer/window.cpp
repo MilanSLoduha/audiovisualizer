@@ -43,7 +43,6 @@ void window::runStartMenu() {
 
 void window::windowRun()
 {
-	setSizes();
 	runStartMenu();
 
     fft.song.play();
@@ -80,7 +79,14 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		}
 		if (event.key.code == sf::Keyboard::Escape) {
 			startMenu.startMenu = true;
+			fft.song.pause();
+			sf::Time old = fft.song.getPlayingOffset();
+			std::string oldPath = startMenu.MusicPath;
 			runStartMenu();
+			if (oldPath == startMenu.MusicPath) {
+				fft.song.setPlayingOffset(old);
+			}
+			fft.song.play();
 		}
 		if (event.key.code == sf::Keyboard::Right) fft.song.setPlayingOffset(fft.song.getPlayingOffset() + sf::seconds(10));
 		if (event.key.code == sf::Keyboard::Left) fft.song.setPlayingOffset(fft.song.getPlayingOffset() - sf::seconds(10));
@@ -103,8 +109,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex) * 1, YofViz));
+		dot.setSize(sf::Vector2f(magnitudes[i], widthOfDot)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
+		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (widthOfDot + 3), YofViz));
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -208,14 +214,14 @@ void window::startInput()
 			}
 			else if (startMenu.formXbeginSelected || startMenu.formYbeginSelected || startMenu.formXendSelected || startMenu.formMaxMagSelected) { //startMenu.formYendSelected
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
-					if (startMenu.formXbeginSelected) {
+					if (startMenu.formXbeginSelected && startMenu.xbeginString.length() < 5) {
 						if (startMenu.xbeginString == "0") {
 							startMenu.xbeginString = "";
 						}
 						startMenu.xbeginString += char(event.key.code + 22);
 						startMenu.formXbeginText.setString(startMenu.xbeginString);
 					}
-					else if (startMenu.formYbeginSelected) {
+					else if (startMenu.formYbeginSelected && startMenu.ybeginString.length() < 5) {
 						if (startMenu.ybeginString == "0") {
 							startMenu.ybeginString = "";
 						}
@@ -226,8 +232,10 @@ void window::startInput()
 						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
 							startMenu.xendString = "";
 						}
-						startMenu.xendString += char(event.key.code + 22);
-						startMenu.formXendText.setString(startMenu.xendString);
+						if (startMenu.xendString.length() < 5) {
+							startMenu.xendString += char(event.key.code + 22);
+							startMenu.formXendText.setString(startMenu.xendString);
+						}
 					}
 				/*	else if (startMenu.formYendSelected) {
 						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
@@ -240,20 +248,22 @@ void window::startInput()
 						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
 							startMenu.maxMagString = "";
 						}
-						startMenu.maxMagString += char(event.key.code + 22);
-						startMenu.formMaxMagText.setString(startMenu.maxMagString);
+						if (startMenu.maxMagString.length() < 5) {
+							startMenu.maxMagString += char(event.key.code + 22);
+							startMenu.formMaxMagText.setString(startMenu.maxMagString);
+						}
 					}
 
 				}
 				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
-					if (startMenu.formXbeginSelected) {
+					if (startMenu.formXbeginSelected && startMenu.xbeginString.length() < 5) {
 						if (startMenu.xbeginString == "0") {
 							startMenu.xbeginString = "";
 						}
 						startMenu.xbeginString += char(event.key.code - 27);
 						startMenu.formXbeginText.setString(startMenu.xbeginString);
 					}
-					else if (startMenu.formYbeginSelected) {
+					else if (startMenu.formYbeginSelected && startMenu.ybeginString.length() < 5) {
 						if (startMenu.ybeginString == "0") {
 							startMenu.ybeginString = "";
 						}
@@ -264,8 +274,10 @@ void window::startInput()
 						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
 							startMenu.xendString = "";
 						}
-						startMenu.xendString += char(event.key.code - 27);
-						startMenu.formXendText.setString(startMenu.xendString);
+						if (startMenu.xendString.length() < 5) {
+							startMenu.xendString += char(event.key.code - 27);
+							startMenu.formXendText.setString(startMenu.xendString);
+						}
 					}
 					/*else if (startMenu.formYendSelected) {
 						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
@@ -278,8 +290,10 @@ void window::startInput()
 						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
 							startMenu.maxMagString = "";
 						}
-						startMenu.maxMagString += char(event.key.code - 27);
-						startMenu.formMaxMagText.setString(startMenu.maxMagString);
+						if (startMenu.maxMagString.length() < 5) {
+							startMenu.maxMagString += char(event.key.code - 27);
+							startMenu.formMaxMagText.setString(startMenu.maxMagString);
+						}
 					}
 				}
 				else if (event.key.code == sf::Keyboard::Backspace) {
@@ -576,7 +590,6 @@ void window::prepareStart() {
 	xBegin = std::stoi(startMenu.xbeginString);
 	yBegin = std::stoi(startMenu.ybeginString);
 
-	setSizes();
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
 	if (!startMenu.BackgroundPath.empty()) {
 		loadBackground();
@@ -600,6 +613,7 @@ void window::prepareStart() {
 
 	maxFreqIndex = maxFreq * N / fft.sampleRate;
 	minFreqIndex = minFreq * N / fft.sampleRate;
+	setSizes();
 }
 
 void window::applyRes()
@@ -633,9 +647,10 @@ void window::applyRes()
 void window::setSizes()
 {
 	time.setCharacterSize(startMenu.actualWidth / 64);
-	widthOfDot = std::round(startMenu.actualWidth / magnitudes.size());
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 	YofViz = startMenu.actualHeight - yBegin;
+	dotCount = maxFreqIndex - minFreqIndex;
+	widthOfDot = startMenu.actualWidth / dotCount;
 }
 
 
