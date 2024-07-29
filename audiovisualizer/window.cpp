@@ -109,8 +109,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
-		dot.setSize(sf::Vector2f(magnitudes[i], widthOfDot)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (widthOfDot + 3), YofViz));
+		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
+		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 2), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -145,7 +145,6 @@ void window::startInput()
 			Window.setPosition(sf::Vector2i(xPos, yPos));
 			Window.setFramerateLimit(60);
 			startMenu.setSizes();
-			setSizes();
 			startMenu.resizePalette();
 			break;
 		}
@@ -651,6 +650,7 @@ void window::setSizes()
 	YofViz = startMenu.actualHeight - yBegin;
 	dotCount = maxFreqIndex - minFreqIndex;
 	widthOfDot = startMenu.actualWidth / dotCount;
+	if (widthOfDot < 1) widthOfDot = 1;
 }
 
 
