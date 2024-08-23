@@ -52,6 +52,24 @@ StartMenu::StartMenu()
 		if (!formTexture.loadFromFile(TexturePath + "text.png")) {
 			std::cout << "Error loading palette texture" << std::endl;
 		}
+		if (!offTexture.loadFromFile(TexturePath + "off.png")) {
+			std::cout << "Error loading off texture" << std::endl;
+		}
+		if (!midTexture.loadFromFile(TexturePath + "mid.png")) {
+			std::cout << "Error loading mid texture" << std::endl;
+		}
+		if (!highTexture.loadFromFile(TexturePath + "high.png")) {
+			std::cout << "Error loading high texture" << std::endl;
+		}
+		if (!upTexture.loadFromFile(TexturePath + "up.png")) {
+			std::cout << "Error loading up texture" << std::endl;
+		}
+		if (!downTexture.loadFromFile(TexturePath + "down.png")) {
+			std::cout << "Error loading down texture" << std::endl;
+		}
+		if (!upDownTexture.loadFromFile(TexturePath + "upDown.png")) {
+			std::cout << "Error loading upDown texture" << std::endl;
+		}
 
 		if (!font.loadFromFile("Roboto-Regular.ttf")) {
 			std::cout << "Error loading font" << std::endl;
@@ -59,6 +77,8 @@ StartMenu::StartMenu()
 	}
 
 	sf::Texture texture[3] = { formTexture, yesFullTexture, noFullTexture };
+	smoothingTextures = { offTexture, midTexture, highTexture };
+	sideTextures = { upTexture, downTexture, upDownTexture };
 
 	BrowseButton.setTexture(buttonTexture);
 
@@ -349,6 +369,11 @@ void StartMenu::setSizes()
 		return formMaxMag.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
 	}
 
+	bool StartMenu::clikedForm(const sf::RenderWindow& window)
+	{
+		return Form.getGlobalBounds().contains(window.mapPixelToCoords(sf::Mouse::getPosition(window)));
+	}
+
 void StartMenu::setPressed(int& button) {
 	if (button == 1) {
 		BrowseButton.setTexture(pressedButtonTexture);
@@ -439,7 +464,15 @@ void StartMenu::changeForm(int diff)
 	}
 	formName.setString(forms[wantedForm]);
 	FormText.setString(formStrings[wantedForm]);
-
+	if (wantedForm == 8) {
+		Form.setTexture(smoothingTextures[selectedSmoothing]);
+	}
+	else if (wantedForm == 9) {
+		Form.setTexture(sideTextures[selectedSide]);
+	}
+	else {
+		Form.setTexture(formTexture);
+	}
 }
 
 

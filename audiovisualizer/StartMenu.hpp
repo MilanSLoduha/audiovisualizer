@@ -82,7 +82,9 @@ public:
 	bool formXendSelected;
 	/*bool formYendSelected;*/
 	bool formMaxMagSelected;
+	bool formSelected;
 
+	bool clikedForm(const sf::RenderWindow& window);
 	bool clikedFormMin(const sf::RenderWindow& window);
 	bool clikedFormMax(const sf::RenderWindow& window);
 	bool clikedFormXbegin(const sf::RenderWindow& window);
@@ -112,9 +114,10 @@ public:
 
 	int formsSize = 10;
 	std::string forms[10] = { "Min Hz", "Max Hz", "Xbegin", "Y", "Xend", "MaxMag", "Space", "Dot size","Smoothing level","Side"};
-	std::string smoothingStrings[3] = { "Mid", "High", "Off"};
+	std::string smoothingStrings[3] = { "Off", "Mid", "Heigh"};
 	std::string sideStrings[3] = { "A", "B", "AB" };
 	std::string formStrings[10] = { "Default", "Default", "0", "0", "Default", "Off", "1", "Auto", "Mid", "A"};
+	std::string defaultStrings[10] = { "Default", "Default", "0", "0", "Default", "Off", "1", "Auto", "Mid", "A" };	
 
 	sf::Image paletteImage;
 	sf::RectangleShape color;
@@ -149,6 +152,18 @@ public:
 	sf::Texture noFullTexture;
 	sf::Texture paletteTexture;
 	sf::Texture formTexture;
+	sf::Texture offTexture;
+	sf::Texture midTexture;
+	sf::Texture highTexture;
+	sf::Texture upTexture;
+	sf::Texture downTexture;
+	sf::Texture upDownTexture;
+
+
+	int selectedSmoothing = 1;
+	std::vector<sf::Texture> smoothingTextures;
+	int selectedSide = 0;
+	std::vector<sf::Texture> sideTextures;
 
 
 	std::string TexturePath;

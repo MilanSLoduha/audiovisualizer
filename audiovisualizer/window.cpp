@@ -110,7 +110,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
 		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 2), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
+		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 10), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -149,235 +149,82 @@ void window::startInput()
 			break;
 		}
 		case sf::Event::KeyPressed: {
-			if (startMenu.formMinSelected || startMenu.formMaxSelected) {
+			if (startMenu.formSelected) { //startMenu.formYendSelected
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
-					if (startMenu.formMinSelected) {
-						if (startMenu.formMinString == "Default" || startMenu.formMinString == "0") {
-							startMenu.formMinString = "";
+					if (startMenu.formStrings[startMenu.wantedForm] == startMenu.defaultStrings[startMenu.wantedForm]) {
+						if (startMenu.defaultStrings[startMenu.wantedForm] != "1") {
+							startMenu.formStrings[startMenu.wantedForm] = "";
 						}
-						startMenu.formMinString += char(event.key.code + 22);
-						startMenu.formMinText.setString(startMenu.formMinString);
+
+						startMenu.formStrings[startMenu.wantedForm] += char(event.key.code + 22);
+						startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 					}
-					else if (startMenu.formMaxSelected){
-						if (startMenu.formMaxString == "Default" || startMenu.formMaxString == "0") {
-							startMenu.formMaxString = "";
+					else if (startMenu.formStrings[startMenu.wantedForm].length() < 5) {
+						if (startMenu.formStrings[startMenu.wantedForm] == "0") {
+							startMenu.formStrings[startMenu.wantedForm] = "";
 						}
-						startMenu.formMaxString += char(event.key.code + 22);
-						startMenu.formMaxText.setString(startMenu.formMaxString);
+						startMenu.formStrings[startMenu.wantedForm] += char(event.key.code + 22);
+						startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 					}
 				}
 				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
-					if (startMenu.formMinSelected) {
-						if (startMenu.formMinString == "Default" || startMenu.formMinString == "0") {
-							startMenu.formMinString = "";
+					if (startMenu.formStrings[startMenu.wantedForm] == startMenu.defaultStrings[startMenu.wantedForm]) {
+						if (startMenu.defaultStrings[startMenu.wantedForm] != "1") {
+							startMenu.formStrings[startMenu.wantedForm] = "";
 						}
-						startMenu.formMinString += char(event.key.code - 27);
-						startMenu.formMinText.setString(startMenu.formMinString);
+
+						startMenu.formStrings[startMenu.wantedForm] += char(event.key.code - 27);
+						startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 					}
-					else if (startMenu.formMaxSelected) {
-						if (startMenu.formMaxString == "Default" || startMenu.formMaxString == "0") {
-							startMenu.formMaxString = "";
+					else if (startMenu.formStrings[startMenu.wantedForm].length() < 5) {
+						if (startMenu.formStrings[startMenu.wantedForm] == "0") {
+							startMenu.formStrings[startMenu.wantedForm] = "";
 						}
-						startMenu.formMaxString += char(event.key.code - 27);
-						startMenu.formMaxText.setString(startMenu.formMaxString);
+						startMenu.formStrings[startMenu.wantedForm] += char(event.key.code - 27);
+						startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 					}
 				}
+
 				else if (event.key.code == sf::Keyboard::Backspace) {
-					if (startMenu.formMinSelected) {
-						if (!startMenu.formMinString.empty() && startMenu.formMinString != "Default") {
-							startMenu.formMinString.pop_back();
-							if (!startMenu.formMinString.empty()) {
-								startMenu.formMinText.setString(startMenu.formMinString);
+					if (startMenu.formSelected) {
+						if (!startMenu.formStrings[startMenu.wantedForm].empty() && startMenu.formStrings[startMenu.wantedForm] != "0" && startMenu.formStrings[startMenu.wantedForm] != startMenu.defaultStrings[startMenu.wantedForm]) {
+							startMenu.formStrings[startMenu.wantedForm].pop_back();
+							if (!startMenu.formStrings[startMenu.wantedForm].empty()) {
+								startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 							}
 							else {
-								startMenu.formMinString = "Default";
-								startMenu.formMinText.setString("Default");
+								startMenu.formStrings[startMenu.wantedForm] = startMenu.defaultStrings[startMenu.wantedForm];
+								startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 							}
 						}
-					}
-					else if (startMenu.formMaxSelected) {
-						if (!startMenu.formMaxString.empty() && startMenu.formMaxString != "Default") {
-							startMenu.formMaxString.pop_back();
-							if (!startMenu.formMaxString.empty()) {
-								startMenu.formMaxText.setString(startMenu.formMaxString);
-							}
-							else {
-								startMenu.formMaxText.setString("Default");
-								startMenu.formMaxString = "Default";
-								startMenu.formMinText.setString("Default");
-								startMenu.formMinString = "Default";
-							}
-						}
-					}
-				}
-			}
-			else if (startMenu.formXbeginSelected || startMenu.formYbeginSelected || startMenu.formXendSelected || startMenu.formMaxMagSelected) { //startMenu.formYendSelected
-				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
-					if (startMenu.formXbeginSelected && startMenu.xbeginString.length() < 5) {
-						if (startMenu.xbeginString == "0") {
-							startMenu.xbeginString = "";
-						}
-						startMenu.xbeginString += char(event.key.code + 22);
-						startMenu.formXbeginText.setString(startMenu.xbeginString);
-					}
-					else if (startMenu.formYbeginSelected && startMenu.ybeginString.length() < 5) {
-						if (startMenu.ybeginString == "0") {
-							startMenu.ybeginString = "";
-						}
-						startMenu.ybeginString += char(event.key.code + 22);
-						startMenu.formYbeginText.setString(startMenu.ybeginString);
-					}
-					else if (startMenu.formXendSelected) {
-						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
-							startMenu.xendString = "";
-						}
-						if (startMenu.xendString.length() < 5) {
-							startMenu.xendString += char(event.key.code + 22);
-							startMenu.formXendText.setString(startMenu.xendString);
-						}
-					}
-				/*	else if (startMenu.formYendSelected) {
-						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
-							startMenu.yendString = "";
-						}
-						startMenu.yendString += char(event.key.code + 22);
-						startMenu.formYendText.setString(startMenu.yendString);
-					}*/
-					else if (startMenu.formMaxMagSelected) {
-						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
-							startMenu.maxMagString = "";
-						}
-						if (startMenu.maxMagString.length() < 5) {
-							startMenu.maxMagString += char(event.key.code + 22);
-							startMenu.formMaxMagText.setString(startMenu.maxMagString);
-						}
-					}
-
-				}
-				else if (event.key.code >= sf::Keyboard::Numpad0 && event.key.code <= sf::Keyboard::Numpad9) {
-					if (startMenu.formXbeginSelected && startMenu.xbeginString.length() < 5) {
-						if (startMenu.xbeginString == "0") {
-							startMenu.xbeginString = "";
-						}
-						startMenu.xbeginString += char(event.key.code - 27);
-						startMenu.formXbeginText.setString(startMenu.xbeginString);
-					}
-					else if (startMenu.formYbeginSelected && startMenu.ybeginString.length() < 5) {
-						if (startMenu.ybeginString == "0") {
-							startMenu.ybeginString = "";
-						}
-						startMenu.ybeginString += char(event.key.code - 27);
-						startMenu.formYbeginText.setString(startMenu.ybeginString);
-					}
-					else if (startMenu.formXendSelected) {
-						if (startMenu.xendString == "Default" || startMenu.xendString == "0") {
-							startMenu.xendString = "";
-						}
-						if (startMenu.xendString.length() < 5) {
-							startMenu.xendString += char(event.key.code - 27);
-							startMenu.formXendText.setString(startMenu.xendString);
-						}
-					}
-					/*else if (startMenu.formYendSelected) {
-						if (startMenu.yendString == "Default" || startMenu.yendString == "0") {
-							startMenu.yendString = "";
-						}
-						startMenu.yendString += char(event.key.code - 27);
-						startMenu.formYendText.setString(startMenu.yendString);
-					}*/
-					else if (startMenu.formMaxMagSelected) {
-						if (startMenu.maxMagString == "Off" || startMenu.maxMagString == "0") {
-							startMenu.maxMagString = "";
-						}
-						if (startMenu.maxMagString.length() < 5) {
-							startMenu.maxMagString += char(event.key.code - 27);
-							startMenu.formMaxMagText.setString(startMenu.maxMagString);
-						}
-					}
-				}
-				else if (event.key.code == sf::Keyboard::Backspace) {
-					if (startMenu.formXbeginSelected) {
-						if (!startMenu.xbeginString.empty() && startMenu.xbeginString != "0") {
-							startMenu.xbeginString.pop_back();
-							if (!startMenu.xbeginString.empty()) {
-								startMenu.formXbeginText.setString(startMenu.xbeginString);
-							}
-							else {
-								startMenu.xbeginString = "0";
-								startMenu.formXbeginText.setString("0");
-							}
-						}
-					}
-					else if (startMenu.formYbeginSelected) {
-						if (!startMenu.ybeginString.empty() && startMenu.ybeginString != "0") {
-							startMenu.ybeginString.pop_back();
-							if (!startMenu.ybeginString.empty()) {
-								startMenu.formYbeginText.setString(startMenu.ybeginString);
-							}
-							else {
-								startMenu.ybeginString = "0";
-								startMenu.formYbeginText.setString("0");
-							}
-						}
-					}
-					else if (startMenu.formXendSelected) {
-						if (!startMenu.xendString.empty() && startMenu.xendString != "Default") {
-							startMenu.xendString.pop_back();
-							if (!startMenu.xendString.empty()) {
-								startMenu.formXendText.setString(startMenu.xendString);
-							}
-							else {
-								startMenu.xendString = "Default";
-								startMenu.formXendText.setString("Default");
-							}
-						}
-					}
-					/*else if (startMenu.formYendSelected) {
-						if (!startMenu.yendString.empty() && startMenu.yendString != "Default") {
-							startMenu.yendString.pop_back();
-							if (!startMenu.yendString.empty()) {
-								startMenu.formYendText.setString(startMenu.yendString);
-							}
-							else {
-								startMenu.yendString = "Default";
-								startMenu.formYendText.setString("Default");
-							}
-						}
-					}*/
-					else if (startMenu.formMaxMagSelected) {
-						if (!startMenu.maxMagString.empty() && startMenu.maxMagString != "Off") {
-							startMenu.maxMagString.pop_back();
-							if (!startMenu.maxMagString.empty()) {
-								startMenu.formMaxMagText.setString(startMenu.maxMagString);
-							}
-							else {
-								startMenu.maxMagString = "Off";
-								startMenu.formMaxMagText.setString("Off");
-							}
+						else if (startMenu.defaultStrings[startMenu.wantedForm] == "1" && startMenu.formStrings[startMenu.wantedForm] == "1") {
+							startMenu.formStrings[startMenu.wantedForm] = "0";
+							startMenu.FormText.setString(startMenu.formStrings[startMenu.wantedForm]);
 						}
 					}
 				}
 			}
 
-				if (startMenu.formMaxString != "Default" && stoi(startMenu.formMaxString) > 22000) {
-					startMenu.formMaxString = "22000";
-					startMenu.formMaxText.setString(startMenu.formMaxString);
-				}
-				if (startMenu.formMaxString != "Default" && startMenu.formMinString != "Default") {
-					if (std::stoi(startMenu.formMinString) > std::stoi(startMenu.formMaxString)) {
-						startMenu.formMinString = startMenu.formMaxText.getString();
-						startMenu.formMinText.setString(startMenu.formMinString);
-					}
-				}
-
-				if (startMenu.formMaxString == "Default" && startMenu.formMinString != "Default") {
-					if (std::stoi(startMenu.formMinString) > 18000) {
-						startMenu.formMinString = "18000";
-						startMenu.formMinText.setString(startMenu.formMinString);
-					}
-				}
-
+			if (startMenu.formMaxString != "Default" && stoi(startMenu.formMaxString) > 22000) {
+				startMenu.formMaxString = "22000";
+				startMenu.formMaxText.setString(startMenu.formMaxString);
 			}
+			if (startMenu.formMaxString != "Default" && startMenu.formMinString != "Default") {
+				if (std::stoi(startMenu.formMinString) > std::stoi(startMenu.formMaxString)) {
+					startMenu.formMinString = startMenu.formMaxText.getString();
+					startMenu.formMinText.setString(startMenu.formMinString);
+				}
+			}
+
+			if (startMenu.formMaxString == "Default" && startMenu.formMinString != "Default") {
+				if (std::stoi(startMenu.formMinString) > 18000) {
+					startMenu.formMinString = "18000";
+					startMenu.formMinText.setString(startMenu.formMinString);
+				}
+			}
+
+
+		}
 
 		}
 								  if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
@@ -405,96 +252,16 @@ void window::startInput()
 										  startMenu.button = 4;
 										  startMenu.setPressed(startMenu.button);
 									  }
-									  else if (startMenu.clickApply(Window)) {
-										  startMenu.button = 5;
-										  startMenu.setPressed(startMenu.button);
+									  else if (startMenu.clikedForm(Window)) {
+										  if (startMenu.wantedForm < 8) {
+											startMenu.formSelected = true;
+										  }
+										  else {
+											  buttonFunction(startMenu.wantedForm);
+										  }
+											break;
 									  }
-									  else if (startMenu.clickChooseColor(Window)) {
-										  startMenu.button = 7;
-										  startMenu.setPressed(startMenu.button);
-									  }
-									  else if (startMenu.clickApplyColor(Window)) {
-										  startMenu.button = 8;
-										  startMenu.setPressed(startMenu.button);
-									  }
-									  else if (startMenu.clikedFormMin(Window)) {
-										  startMenu.formMinSelected = true;
-										  startMenu.formMaxSelected = false;
-										  startMenu.formXbeginSelected = false;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										  //startMenu.formYendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-										  break;
-									  }
-									  else if (startMenu.clikedFormMax(Window)) {
-										  startMenu.formMaxSelected = true;
-										  startMenu.formMinSelected = false;
-										  startMenu.formXbeginSelected = false;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										 //startMenu.formYendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-
-										  break;
-									  }
-									  else if (startMenu.clikedFormXbegin(Window)) {
-										  startMenu.formXbeginSelected = true;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										  //startMenu.formYendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-										  startMenu.formMinSelected = false;
-										  startMenu.formMaxSelected = false;
-										  break;
-									  }
-									  else if (startMenu.clikedFormYbegin(Window)) {
-										  startMenu.formYbeginSelected = true;
-										  startMenu.formXbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										  //startMenu.formYendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-										  startMenu.formMinSelected = false;
-										  startMenu.formMaxSelected = false;
-										  break;
-									  }
-									  else if (startMenu.clikedFormXend(Window)) {
-										  startMenu.formXendSelected = true;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXbeginSelected = false;
-										  //startMenu.formYendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-										  startMenu.formMinSelected = false;
-										  startMenu.formMaxSelected = false;
-										  break;
-									  }
-									 /* else if (startMenu.clikedFormYend(Window)) {
-										  startMenu.formYendSelected = true;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										  startMenu.formMaxMagSelected = false;
-										  startMenu.formMinSelected = false;
-										  startMenu.formMaxSelected = false;
-										  break;
-									  }*/
-									  else if (startMenu.clikedFormMaxMag(Window)) {
-										  startMenu.formMaxMagSelected = true;
-										  startMenu.formYbeginSelected = false;
-										  startMenu.formXbeginSelected = false;
-										  startMenu.formXendSelected = false;
-										  //startMenu.formYendSelected = false;
-										  startMenu.formMinSelected = false;
-										  startMenu.formMaxSelected = false;
-										  break;
-									  }	
-									  startMenu.formMaxMagSelected = false;
-									  startMenu.formYbeginSelected = false;
-									  startMenu.formXbeginSelected = false;
-									  startMenu.formXendSelected = false;
-									  //startMenu.formYendSelected = false;
-									  startMenu.formMinSelected = false;
-									  startMenu.formMaxSelected = false;
+									  startMenu.formSelected = false;
 								  }
 								  if (!startMenu.clickBrowse(Window) && startMenu.button == 1) { //if mouse is not on button but mouse button is pressed
 									  startMenu.setUnpressed(startMenu.button);
@@ -513,14 +280,6 @@ void window::startInput()
 									  startMenu.button = 0;
 								  }
 								  else if (!startMenu.clickApply(Window) && startMenu.button == 5) {
-									  startMenu.setUnpressed(startMenu.button);
-									  startMenu.button = 0;
-								  }
-								  else if (!startMenu.clickChooseColor(Window) && startMenu.button == 7) {
-									  startMenu.setUnpressed(startMenu.button);
-									  startMenu.button = 0;
-								  }
-								  else if (!startMenu.clickApplyColor(Window) && startMenu.button == 8) {
 									  startMenu.setUnpressed(startMenu.button);
 									  startMenu.button = 0;
 								  }
@@ -554,11 +313,6 @@ void window::startInput()
 										  startMenu.setUnpressed(startMenu.button);
 										  pressed = false;
 										  startMenu.changeForm(1);
-									  }
-									  else if (startMenu.clickApply(Window)) { //if apply button is clicked
-										  startMenu.button = 5;
-										  startMenu.setUnpressed(startMenu.button);
-										  pressed = false;
 									  }
 									  else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
 										  startMenu.button = 6;
@@ -604,16 +358,6 @@ void window::prepareStart() {
 	setSizes();
 }
 
-//void window::applyRes()
-//{
-//	Window.setFramerateLimit(60);
-//	//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-//
-//	startMenu.setSizes();
-//	setSizes();
-//	startMenu.resizePalette();
-//}
-
 void window::setSizes()
 {
 	time.setCharacterSize(startMenu.actualWidth / 64);
@@ -622,6 +366,22 @@ void window::setSizes()
 	dotCount = maxFreqIndex - minFreqIndex;
 	widthOfDot = startMenu.actualWidth / dotCount;
 	if (widthOfDot < 1) widthOfDot = 1;
+}
+
+void window::buttonFunction(int& button) {
+	if (button == 8) {
+		startMenu.selectedSmoothing++;
+		startMenu.selectedSmoothing %= 3;
+		startMenu.formStrings[button] = startMenu.smoothingStrings[startMenu.selectedSmoothing];
+		startMenu.FormText.setString(startMenu.formStrings[button]);
+		startMenu.Form.setTexture(startMenu.smoothingTextures[startMenu.selectedSmoothing]);
+	}
+	else if (button == 9) {
+		startMenu.selectedSide++;
+		startMenu.selectedSide %= 3;
+		startMenu.formStrings[button] = startMenu.sideStrings[startMenu.selectedSide];
+		startMenu.Form.setTexture(startMenu.sideTextures[startMenu.selectedSide]);
+	}
 }
 
 

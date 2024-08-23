@@ -26,6 +26,8 @@ private:
 	int widthOfDot;
 	int dotCount;
 
+	void buttonFunction(int& button);
+
 	sf::Clock clock;
 	StartMenu startMenu;
 	sf::Image icon;
