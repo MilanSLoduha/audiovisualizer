@@ -52,7 +52,7 @@ private:
 
 	void setSizes();
 
-	void applyRes();
+	//void applyRes();
 	void loadBackground();
 
 	void runStartMenu();

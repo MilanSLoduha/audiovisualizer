@@ -547,35 +547,24 @@ void window::startInput()
 										  startMenu.button = 3;
 										  startMenu.setUnpressed(startMenu.button);
 										  pressed = false;
-										  startMenu.changeResolution(-1);
+										  startMenu.changeForm(-1);
 									  }
 									  else if (startMenu.clickRightResolution(Window)) { //if right resolution button is clicked
 										  startMenu.button = 4;
 										  startMenu.setUnpressed(startMenu.button);
 										  pressed = false;
-										  startMenu.changeResolution(1);
+										  startMenu.changeForm(1);
 									  }
 									  else if (startMenu.clickApply(Window)) { //if apply button is clicked
 										  startMenu.button = 5;
 										  startMenu.setUnpressed(startMenu.button);
 										  pressed = false;
-										  applyRes();
 									  }
 									  else if (startMenu.clickYesFull(Window)) { //if fullscreen button is clicked
 										  startMenu.button = 6;
 										  if (startMenu.fullScreen) startMenu.setUnpressed(startMenu.button);
 										  else startMenu.setPressed(startMenu.button);
 										  startMenu.fullScreen = !startMenu.fullScreen;
-									  }
-									  else if (startMenu.clickChooseColor(Window)) { //if choose color button is clicked
-										  startMenu.button = 7;
-										  startMenu.setUnpressed(startMenu.button);
-										  pressed = false;
-									  }
-									  else if (startMenu.clickApplyColor(Window)) { //if apply color button is clicked
-										  startMenu.button = 8;
-										  startMenu.setUnpressed(startMenu.button);
-										  pressed = false;
 									  }
 								  }
 		}
@@ -615,33 +604,15 @@ void window::prepareStart() {
 	setSizes();
 }
 
-void window::applyRes()
-{
-	if (startMenu.fullScreen && !startMenu.setFullScreen) {
-		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::None);
-
-		style = sf::Style::None;
-		startMenu.setFullScreen = true;
-	}
-	else if (!startMenu.fullScreen && startMenu.setFullScreen) {
-		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", sf::Style::Default);
-
-		style = sf::Style::Default;
-		startMenu.setFullScreen = false;
-	}
-	else {
-		Window.create(sf::VideoMode(width[startMenu.wantedRes], height[startMenu.wantedRes]), "Krilo - visual", style);
-	}
-	startMenu.actualHeight = height[startMenu.wantedRes];
-	startMenu.actualWidth = width[startMenu.wantedRes];
-	Window.setFramerateLimit(60);
-	//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-	startMenu.curRes = startMenu.wantedRes;
-	startMenu.setSizes();
-	setSizes();
-	startMenu.resizePalette();
-}
+//void window::applyRes()
+//{
+//	Window.setFramerateLimit(60);
+//	//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+//
+//	startMenu.setSizes();
+//	setSizes();
+//	startMenu.resizePalette();
+//}
 
 void window::setSizes()
 {

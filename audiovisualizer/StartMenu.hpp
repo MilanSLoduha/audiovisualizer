@@ -16,6 +16,17 @@ private:
 	int max;
 	sf::RenderWindow colorPicker;
 
+	enum FormNames {
+		MinHz = 0, 
+		MaxHz = 1, 
+		Xbegin = 2, 
+		Y = 3, 
+		Xend = 4, 
+		MaxMag = 5, 
+		Space = 6, 
+		DotSize = 7
+	};
+
 public:
 	int actualWidth = width[0];
 	int actualHeight = height[0];
@@ -23,7 +34,7 @@ public:
 	void setSizes();
 
 	int curRes = 0;
-	int wantedRes = 0;
+	int wantedForm = 0;
 	bool fullScreen = false;
 	bool setFullScreen = false;
 	
@@ -59,6 +70,9 @@ public:
 	sf::Sprite formYbegin;
 	sf::Sprite formXend;
 	sf::Sprite formMaxMag;
+	//sf::Sprite Form[6] = { formMin, formMax, formXbegin, formYbegin, formXend, formMaxMag };
+	sf::Sprite Form;
+
 	/*sf::Sprite formYend;*/
 
 	bool formMinSelected;
@@ -84,6 +98,7 @@ public:
 	sf::Text formXendText;
 	//sf::Text formYendText;
 	sf::Text formMaxMagText;
+	sf::Text FormText;
 
 	std::string formMinString;
 	std::string formMaxString;
@@ -95,19 +110,25 @@ public:
 
 	sf::Sprite background;
 
+	int formsSize = 10;
+	std::string forms[10] = { "Min Hz", "Max Hz", "Xbegin", "Y", "Xend", "MaxMag", "Space", "Dot size","Smoothing level","Side"};
+	std::string smoothingStrings[3] = { "Mid", "High", "Off"};
+	std::string sideStrings[3] = { "A", "B", "AB" };
+	std::string formStrings[10] = { "Default", "Default", "0", "0", "Default", "Off", "1", "Auto", "Mid", "A"};
+
 	sf::Image paletteImage;
 	sf::RectangleShape color;
 
 	sf::Text browseText;
 	sf::Text startText;
-	sf::Text resolutionText;
+	sf::Text formName;
 
 	sf::Font font;
 
 	void setPressed(int&);
 	void setUnpressed(int&);
 	void draw(sf::RenderWindow&);
-	void changeResolution(int);
+	void changeForm(int);
 
 	std::string getName(std::string&);
 
@@ -128,6 +149,7 @@ public:
 	sf::Texture noFullTexture;
 	sf::Texture paletteTexture;
 	sf::Texture formTexture;
+
 
 	std::string TexturePath;
 

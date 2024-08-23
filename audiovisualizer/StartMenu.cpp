@@ -58,6 +58,8 @@ StartMenu::StartMenu()
 		}
 	}
 
+	sf::Texture texture[3] = { formTexture, yesFullTexture, noFullTexture };
+
 	BrowseButton.setTexture(buttonTexture);
 
 	StartButton.setTexture(buttonTexture);
@@ -78,11 +80,11 @@ StartMenu::StartMenu()
 
 	background.setTexture(backgroundTexture);
 
-	resolutionText.setFillColor(sf::Color::Cyan);
-	resolutionText.setOutlineColor(sf::Color::Black);
-	resolutionText.setOutlineThickness(2);
-	resolutionText.setFont(font);
-	resolutionText.setString(std::to_string(width[curRes]) + "x" + std::to_string(height[curRes]));
+	formName.setFillColor(sf::Color::Cyan);
+	formName.setOutlineColor(sf::Color::Black);
+	formName.setOutlineThickness(2);
+	formName.setFont(font);
+	formName.setString(forms[wantedForm]);
 
 	yesFull.setTexture(noFullTexture);
 
@@ -151,6 +153,12 @@ StartMenu::StartMenu()
 	formXend.setTexture(formTexture);
 	//formYend.setTexture(formTexture);
 
+	Form.setTexture(formTexture);
+
+	FormText.setFillColor(sf::Color::Black);
+	FormText.setFont(font);
+	FormText.setString(formStrings[wantedForm]);
+
 	resizePalette();
 	setSizes();
 }
@@ -209,8 +217,14 @@ void StartMenu::setSizes()
 
 	background.setScale(actualWidth / 1920., actualHeight / 1080.);
 
-	resolutionText.setCharacterSize(actualWidth / 64);
-	resolutionText.setPosition(actualWidth / 10 * 8.2, actualHeight / 10 * 3.3);
+	formName.setCharacterSize(actualWidth / 64);
+	formName.setPosition(actualWidth / 10 * 8.2, actualHeight / 10 * 2.7); //3.3
+
+	Form.setPosition(actualWidth / 10 * 8.16, actualHeight / 10 * 3.15);
+	Form.setScale(actualWidth / 12000., actualHeight / 9000.);
+
+	FormText.setCharacterSize(actualWidth / 64);
+	FormText.setPosition(actualWidth / 10 * 8.3, actualHeight / 10 * 3.3);
 
 	yesFull.setPosition(actualWidth / 10 * 7, actualHeight / 10 * 3);
 	yesFull.setScale(actualWidth / 4800., actualHeight / 2700.);
@@ -351,15 +365,6 @@ void StartMenu::setPressed(int& button) {
 	else if (button == 5) {
 		ApplyResolutionButton.setTexture(pressedApplyButtonTexture);
 	}
-	else if (button == 6) {
-		yesFull.setTexture(yesFullTexture);
-	}
-	else if (button == 7) {
-		ChooseColorButton.setTexture(pressedApplyButtonTexture);
-	}
-	else if (button == 8) {
-		ApplyColor.setTexture(pressedApplyButtonTexture);
-	}
 }
 
 void StartMenu::setUnpressed(int& button) {
@@ -377,15 +382,6 @@ void StartMenu::setUnpressed(int& button) {
 	}
 	else if (button == 5) {
 		ApplyResolutionButton.setTexture(ApplyButtonTexture);
-	}
-	else if (button == 6) {
-		yesFull.setTexture(noFullTexture);
-	}
-	else if (button == 7) {
-		ChooseColorButton.setTexture(ApplyButtonTexture);
-	}
-	else if (button == 8) {
-		ApplyColor.setTexture(ApplyButtonTexture);
 	}
 }
 
@@ -405,15 +401,16 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(startText);
 	window.draw(leftResolution);
 	window.draw(rightResolution);
-	window.draw(ApplyResolutionButton);
-	window.draw(resolutionText);
+	window.draw(formName);
+	window.draw(Form);
+	window.draw(FormText);
+	
 	window.draw(yesFull);
-	window.draw(ChooseColorButton);
-	window.draw(ApplyColor);
 	window.draw(palette);
 	window.draw(color);
 	window.draw(backgroundText);
 	window.draw(musicText);
+
 	window.draw(formMax);	
 	window.draw(formMin);
 	window.draw(formMaxText);
@@ -430,17 +427,18 @@ void StartMenu::draw(sf::RenderWindow& window)
 	window.draw(formMaxMagText);
 }
 
-void StartMenu::changeResolution(int diff)
+void StartMenu::changeForm(int diff)
 {
 	if (diff == 1) {
-		wantedRes++;
-		if (wantedRes >= width.size()) wantedRes = 0;
+		wantedForm++;
+		if (wantedForm >= formsSize) wantedForm = 0;
 	}
 	else if (diff == -1) {
-		wantedRes--;
-		if (wantedRes < 0) wantedRes = width.size() - 1;
+		wantedForm--;
+		if (wantedForm < 0) wantedForm = formsSize - 1;
 	}
-	resolutionText.setString(std::to_string(width[wantedRes]) + "x" + std::to_string(height[wantedRes]));
+	formName.setString(forms[wantedForm]);
+	FormText.setString(formStrings[wantedForm]);
 
 }
 
