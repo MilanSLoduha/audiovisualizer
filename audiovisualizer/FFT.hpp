@@ -30,8 +30,9 @@ public:
 
 	std::vector <double> magnitudesVirgin;
 	std::vector <double> magnitudesOld;
+	std::vector<double> new_values;
 
-	bool smoothing = false;
+	int smoothing;
 
 private:
 	

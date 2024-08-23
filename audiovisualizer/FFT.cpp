@@ -42,6 +42,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 
 	fftw_plan p = fftw_plan_dft_1d(N, in, out, FFTW_FORWARD, FFTW_ESTIMATE);
 	fftw_execute(p);
+	magnitudes.resize(N / 2);
 
 	for (int i = 0; i < magnitudes.size(); i++)
 	{
@@ -49,8 +50,7 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 		magnitudes[i] = magnitudes[i] / 5 / magnitudes.size();//* log10(magnitudes[i] + 1)
 		magnitudesVirgin[i] = magnitudes[i];
 
-		if (!smoothing) {//smoothing with other new walue
-
+		if (smoothing >= 0) {//smoothing with other new walue
 			long double temp = 0;
 			int j = i;
 			short rep = 0;
@@ -67,13 +67,24 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 
 			magnitudes[i] = temp / rep;
 		}
-		if (!smoothing) { //past smoothing
+		if (smoothing >= 1) { //past smoothing
 			magnitudes[i] = (magnitudesOld[i] + magnitudes[i]) / 2;
 			magnitudesOld[i] = magnitudes[i];
 		}
+
 		if (magnitudes[i] > maxMag) magnitudes[i] = maxMag;
 	}
-	//std::cout << magnitudes.size() << std::endl;
+	if (smoothing == 2) {
+		for (int i = 0; i < magnitudes.size(); i++) {
+			int jump = static_cast<int>((magnitudes[i] - magnitudes[i + 1]) / 3);
+			new_values.push_back(magnitudes[i] + jump);
+			new_values.push_back(magnitudes[i] + jump * 2);
+		}
+		for (int i = 0; i < new_values.size() / 2; i += 1) {
+			magnitudes.insert(magnitudes.begin() + 3 * i + 1, { new_values[2 * i], new_values[2 * i + 1] });
+		}
+		new_values.clear();
+	}
 
 
 

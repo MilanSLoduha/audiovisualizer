@@ -23,7 +23,7 @@ private:
 	std::string timeString;
 	void drawTime();
 
-	int widthOfDot;
+	int widthOfDot = -1;
 	int dotCount;
 
 	void buttonFunction(int& button);

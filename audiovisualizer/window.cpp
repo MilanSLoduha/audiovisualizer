@@ -8,8 +8,6 @@
 window::window() : Window(sf::VideoMode(width[startMenu.curRes], height[startMenu.curRes]), "Krilo - visual") {
 	Window.setFramerateLimit(60);
 
-	magnitudes.resize(N / 2);
-	//magnitudes.resize(N / 2);
 
 	//dot.setSize(sf::Vector2f(1, 1));
 	dot.setRotation(270); //270
@@ -109,8 +107,12 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
+		if (i % 3 == 0) {
+			dot.setFillColor(sf::Color::Magenta);
+		}
+		else dot.setFillColor(sf::Color::White);
 		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 10), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
+		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 3), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -337,21 +339,42 @@ void window::prepareStart() {
 		loadBackground();
 	}
 
-	if (startMenu.formMinString != "Default") minFreq = std::stoi(startMenu.formMinString);
-	else minFreq = 0;
+	for (int i = 0; i < startMenu.formsSize; i++) {
+		if (startMenu.formStrings[i] != startMenu.defaultStrings[i]) {
+			if (i == startMenu.MinHz) minFreq = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.MaxHz) maxFreq = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Xbegin) xBegin = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Y) yBegin = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Xend) xEnd = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.MaxMag) fft.maxMag = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Space) fft.smoothing = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.DotSize) widthOfDot = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Smoothinglevel) {
+				if (startMenu.FormText.getString() == "Off") fft.smoothing = 0;
+				else if (startMenu.FormText.getString() == "Mid") fft.smoothing = 1;
+				else if (startMenu.FormText.getString() == "High") fft.smoothing = 2;
+			}
+			//else if (i == startMenu.Side) style = std::stoi(startMenu.formStrings[i]);
+		}
+		else {
+			if (i == startMenu.MinHz) minFreq = 0;
+			else if (i == startMenu.MaxHz) maxFreq = 22000;
+			else if (i == startMenu.Xbegin) xBegin = 0;
+			else if (i == startMenu.Y) yBegin = 0;
+			else if (i == startMenu.Xend) xEnd = startMenu.actualWidth;
+			else if (i == startMenu.MaxMag) fft.maxMag = 32000;
+			//else if (i == startMenu.Space)  = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Smoothinglevel) {
+				if (startMenu.formStrings[8] == "Off") fft.smoothing = 0;
+				else if (startMenu.formStrings[8] == "Mid") fft.smoothing = 1;
+				else if (startMenu.formStrings[8] == "High") fft.smoothing = 2;
+			}
+			//else if (i == startMenu.Side) style = std::stoi(startMenu.formStrings[i]);
+		}
+	}
 
-	if (startMenu.formMaxString != "Default") maxFreq = std::stoi(startMenu.formMaxString);
-	else maxFreq = 22000;
-
-	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
-	else xEnd = startMenu.actualWidth;
 	//if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
 	//else yEnd = startMenu.actualHeight;
-	if (startMenu.maxMagString != "Off") fft.maxMag = std::stoi(startMenu.maxMagString);
-	else fft.maxMag = 32000;
-
-	if (startMenu.xendString != "Default") xEnd = std::stoi(startMenu.xendString);
-	else xEnd = startMenu.actualWidth;
 
 	maxFreqIndex = maxFreq * N / fft.sampleRate;
 	minFreqIndex = minFreq * N / fft.sampleRate;
@@ -364,7 +387,9 @@ void window::setSizes()
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 	YofViz = startMenu.actualHeight - yBegin;
 	dotCount = maxFreqIndex - minFreqIndex;
-	widthOfDot = startMenu.actualWidth / dotCount;
+	if (widthOfDot == -1) {
+		widthOfDot = startMenu.actualWidth / dotCount;
+	}
 	if (widthOfDot < 1) widthOfDot = 1;
 }
 

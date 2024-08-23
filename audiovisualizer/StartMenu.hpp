@@ -16,6 +16,8 @@ private:
 	int max;
 	sf::RenderWindow colorPicker;
 
+
+public:
 	enum FormNames {
 		MinHz = 0, 
 		MaxHz = 1, 
@@ -24,10 +26,11 @@ private:
 		Xend = 4, 
 		MaxMag = 5, 
 		Space = 6, 
-		DotSize = 7
+		DotSize = 7,
+		Smoothinglevel = 8, 
+		Side = 9
 	};
 
-public:
 	int actualWidth = width[0];
 	int actualHeight = height[0];
 
@@ -114,7 +117,7 @@ public:
 
 	int formsSize = 10;
 	std::string forms[10] = { "Min Hz", "Max Hz", "Xbegin", "Y", "Xend", "MaxMag", "Space", "Dot size","Smoothing level","Side"};
-	std::string smoothingStrings[3] = { "Off", "Mid", "Heigh"};
+	std::string smoothingStrings[3] = { "Off", "Mid", "High"};
 	std::string sideStrings[3] = { "A", "B", "AB" };
 	std::string formStrings[10] = { "Default", "Default", "0", "0", "Default", "Off", "1", "Auto", "Mid", "A"};
 	std::string defaultStrings[10] = { "Default", "Default", "0", "0", "Default", "Off", "1", "Auto", "Mid", "A" };	

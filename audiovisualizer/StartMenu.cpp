@@ -112,7 +112,6 @@ StartMenu::StartMenu()
 
 	ApplyColor.setTexture(ApplyButtonTexture);
 
-
 	palette.setTexture(paletteTexture);
 	//palette.setScale(0.63,0.63);
 	//palette.setSize(sf::Vector2f(width[curRes] / 6.5, width[curRes] / 6.5));
@@ -137,6 +136,7 @@ StartMenu::StartMenu()
 	formXbeginText.setFillColor(sf::Color::Blue);
 	formXbeginText.setString(xbeginString);
 	formXbeginText.setFont(font);
+	formXbeginText.setOrigin(formXbeginText.getGlobalBounds().width / 2, formXbeginText.getGlobalBounds().height / 2);
 
 	ybeginString = "0";
 	formYbeginText.setFillColor(sf::Color::Cyan);
