@@ -28,6 +28,9 @@ private:
 	bool enderedWidth = false;
 	int dotCount;
 	int space;
+	int shift;
+
+	int visSide = 0;
 
 	void buttonFunction(int& button);
 

@@ -98,6 +98,7 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 	if (event.type == sf::Event::Resized) {
 		startMenu.actualWidth = event.size.width;
 		startMenu.actualHeight = event.size.height;
+		xEnd = startMenu.actualWidth;
 		Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
 		//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		startMenu.setSizes();
@@ -111,8 +112,21 @@ void window::drawVisualization(std::vector<double> magnitudes){
 		if(i % 3 == 0) dot.setFillColor(sf::Color::Cyan);
 		else dot.setFillColor(sf::Color::White);
 		dot.setSize(sf::Vector2f(magnitudes[i], widthOfDot)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (widthOfDot + space), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
+		dot.setPosition(sf::Vector2f((i - minFreqIndex) * shift + xBegin, YofViz));
+		//dot.setPosition(sf::Vector2f(20,20));
+		//dot.setSize(sf::Vector2f(20, 20));
+		//dot.setPosition(sf::Vector2f((i - shift2) * shift, YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
 		Window.draw(dot);
+		if (visSide == 1 || visSide == 2) {
+			dot.setRotation(90);
+			dot.setPosition(sf::Vector2f((i - minFreqIndex) * shift + xBegin + widthOfDot, startMenu.actualHeight - yBegin));
+			Window.draw(dot);
+			dot.setRotation(270);
+		}
+		if ((i - minFreqIndex) * shift + xBegin >= xEnd) {
+			//std::cout << i << " " << shift2 << " " << shift << " " << xEnd << std::endl;
+			break;
+		}
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
 }
@@ -356,6 +370,11 @@ void window::prepareStart() {
 				else if (startMenu.FormText.getString() == "Mid") fft.smoothing = 1;
 				else if (startMenu.FormText.getString() == "High") fft.smoothing = 2;
 			}
+			else if (i == startMenu.Side) {
+				if (startMenu.formStrings[9] == "A") visSide = 0;
+				else if (startMenu.formStrings[9] == "B") visSide = 1;
+				else if (startMenu.formStrings[9] == "AB") visSide = 2;
+			}
 			//else if (i == startMenu.Side) style = std::stoi(startMenu.formStrings[i]);
 		}
 		else {
@@ -374,6 +393,11 @@ void window::prepareStart() {
 				if (startMenu.formStrings[8] == "Off") fft.smoothing = 0;
 				else if (startMenu.formStrings[8] == "Mid") fft.smoothing = 1;
 				else if (startMenu.formStrings[8] == "High") fft.smoothing = 2;
+			}
+			else if (i == startMenu.Side) {
+				if (startMenu.formStrings[9] == "A") visSide = 0;
+				else if (startMenu.formStrings[9] == "B") visSide = 1;
+				else if (startMenu.formStrings[9] == "AB") visSide = 2;
 			}
 			//else if (i == startMenu.Side) style = std::stoi(startMenu.formStrings[i]);
 		}
@@ -405,6 +429,8 @@ void window::setSizes()
 		needToRecalculateWidth = false;
 	}
 	if (widthOfDot < 1) widthOfDot = 1;
+
+	shift = widthOfDot + space;
 }
 
 void window::buttonFunction(int& button) {
