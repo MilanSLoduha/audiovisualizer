@@ -33,6 +33,7 @@ public:
 	std::vector<double> new_values;
 
 	int smoothing;
+	int smoothingDots = 3; //how many dots will be added between two dots (count + 1)
 
 private:
 	

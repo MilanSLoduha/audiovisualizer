@@ -76,9 +76,11 @@ void FFT::applyFFT(const sf::Int16* samples, std::vector<double>& magnitudes)
 	}
 	if (smoothing == 2) {
 		for (int i = 0; i < magnitudes.size(); i++) {
-			int jump = static_cast<int>((magnitudes[i] - magnitudes[i + 1]) / 3);
-			new_values.push_back(magnitudes[i] + jump);
-			new_values.push_back(magnitudes[i] + jump * 2);
+			int jump = (magnitudes[i] - magnitudes[i + 1]) / smoothingDots;
+			jump = -jump;
+			for (int j = 1; j < smoothingDots; j++) {
+				new_values.push_back(magnitudes[i] + jump * j);
+			}
 		}
 		for (int i = 0; i < new_values.size() / 2; i += 1) {
 			magnitudes.insert(magnitudes.begin() + 3 * i + 1, { new_values[2 * i], new_values[2 * i + 1] });

@@ -24,7 +24,10 @@ private:
 	void drawTime();
 
 	int widthOfDot = -1;
+	bool needToRecalculateWidth = false;
+	bool enderedWidth = false;
 	int dotCount;
+	int space;
 
 	void buttonFunction(int& button);
 

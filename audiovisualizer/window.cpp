@@ -101,18 +101,17 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 		Window.create(sf::VideoMode(startMenu.actualWidth, startMenu.actualHeight), "Krilo - visual", style);
 		//Window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 		startMenu.setSizes();
+		needToRecalculateWidth = true;
 		setSizes();
 		startMenu.resizePalette();
 	}
 }
 void window::drawVisualization(std::vector<double> magnitudes){
-	for (int i = minFreqIndex; i < maxFreqIndex; i++) {
-		if (i % 3 == 0) {
-			dot.setFillColor(sf::Color::Magenta);
-		}
+	for (int i = minFreqIndex; i <= maxFreqIndex; i++) {
+		if(i % 3 == 0) dot.setFillColor(sf::Color::Cyan);
 		else dot.setFillColor(sf::Color::White);
-		dot.setSize(sf::Vector2f(magnitudes[i], 1)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
-		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (1 + 3), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
+		dot.setSize(sf::Vector2f(magnitudes[i], widthOfDot)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
+		dot.setPosition(sf::Vector2f((i - minFreqIndex + xBegin) * (widthOfDot + space), YofViz)); // (i - minFreqIndex + xBegin) * (widthOfDot + Space), YofViz
 		Window.draw(dot);
 	}
 	//std::this_thread::sleep_for(std::chrono::milliseconds(23));
@@ -340,15 +339,18 @@ void window::prepareStart() {
 	}
 
 	for (int i = 0; i < startMenu.formsSize; i++) {
-		if (startMenu.formStrings[i] != startMenu.defaultStrings[i]) {
+		if (startMenu.formStrings[i] != startMenu.defaultStrings[i]) { //if they are entered
 			if (i == startMenu.MinHz) minFreq = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.MaxHz) maxFreq = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.Xbegin) xBegin = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.Y) yBegin = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.Xend) xEnd = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.MaxMag) fft.maxMag = std::stoi(startMenu.formStrings[i]);
-			else if (i == startMenu.Space) fft.smoothing = std::stoi(startMenu.formStrings[i]);
-			else if (i == startMenu.DotSize) widthOfDot = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.Space) space = std::stoi(startMenu.formStrings[i]);
+			else if (i == startMenu.DotSize) { 
+				widthOfDot = std::stoi(startMenu.formStrings[i]); 
+				enderedWidth = true;
+			}
 			else if (i == startMenu.Smoothinglevel) {
 				if (startMenu.FormText.getString() == "Off") fft.smoothing = 0;
 				else if (startMenu.FormText.getString() == "Mid") fft.smoothing = 1;
@@ -357,12 +359,16 @@ void window::prepareStart() {
 			//else if (i == startMenu.Side) style = std::stoi(startMenu.formStrings[i]);
 		}
 		else {
-			if (i == startMenu.MinHz) minFreq = 0;
+			if (i == startMenu.MinHz) minFreq = 0; //if not
 			else if (i == startMenu.MaxHz) maxFreq = 22000;
 			else if (i == startMenu.Xbegin) xBegin = 0;
 			else if (i == startMenu.Y) yBegin = 0;
 			else if (i == startMenu.Xend) xEnd = startMenu.actualWidth;
 			else if (i == startMenu.MaxMag) fft.maxMag = 32000;
+			else if (i == startMenu.Space) space = 1;
+			else if (i == startMenu.DotSize) {
+				enderedWidth = false;
+			}
 			//else if (i == startMenu.Space)  = std::stoi(startMenu.formStrings[i]);
 			else if (i == startMenu.Smoothinglevel) {
 				if (startMenu.formStrings[8] == "Off") fft.smoothing = 0;
@@ -375,9 +381,15 @@ void window::prepareStart() {
 
 	//if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
 	//else yEnd = startMenu.actualHeight;
-
-	maxFreqIndex = maxFreq * N / fft.sampleRate;
-	minFreqIndex = minFreq * N / fft.sampleRate;
+	if (fft.smoothing == 2) {
+		maxFreqIndex = static_cast<float>(maxFreq) * static_cast<float>(N) / static_cast<float>(fft.sampleRate) * static_cast<float>(fft.smoothingDots) - 2;
+		minFreqIndex = minFreq * N / fft.sampleRate * fft.smoothingDots;
+	}
+	else {
+		maxFreqIndex = maxFreq * N / fft.sampleRate;
+		minFreqIndex = minFreq * N / fft.sampleRate;
+	}
+	needToRecalculateWidth = true;
 	setSizes();
 }
 
@@ -387,8 +399,10 @@ void window::setSizes()
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 	YofViz = startMenu.actualHeight - yBegin;
 	dotCount = maxFreqIndex - minFreqIndex;
-	if (widthOfDot == -1) {
-		widthOfDot = startMenu.actualWidth / dotCount;
+	//std::cout << dotCount << std::endl;
+	if ((widthOfDot == -1 || needToRecalculateWidth) && !enderedWidth) {
+		widthOfDot = xEnd / dotCount; //ked si druhykrat zada sirku treba tam dat needToRecalculateWidth = true//edit netreba
+		needToRecalculateWidth = false;
 	}
 	if (widthOfDot < 1) widthOfDot = 1;
 }
