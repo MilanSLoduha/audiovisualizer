@@ -1,6 +1,4 @@
 #include "window.hpp"
-#include "Globals.hpp"
-#include "FFT.hpp"
 #include <thread>         // std::this_thread::sleep_for
 #include <chrono>
 #include <atomic>

@@ -32,9 +32,11 @@ public:
 	std::vector <double> magnitudesOld;
 	std::vector<double> new_values;
 
+	sf::SoundBufferRecorder recorder;
+	std::vector<sf::Int16> recorded;
+
 	int smoothing;
 	int smoothingDots = 3; //how many dots will be added between two dots (count + 1)
 
-private:
-	
+	void onProcessSamples(const sf::Int16* samples, std::size_t sampleCount);
 };

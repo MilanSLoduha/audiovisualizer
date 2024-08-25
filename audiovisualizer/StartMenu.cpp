@@ -1,6 +1,5 @@
 #include "StartMenu.hpp"
 #include <iostream>
-#include <SFML/Graphics.hpp>
 
 StartMenu::StartMenu()
 {

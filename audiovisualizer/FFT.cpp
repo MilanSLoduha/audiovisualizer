@@ -120,3 +120,17 @@ void FFT::loadMusic(std::string& path)
 	channelCount = music.getChannelCount();
 	sampleRate = music.getSampleRate();
 }
+
+void FFT::onProcessSamples(const sf::Int16* samples, std::size_t sampleCount) {
+	std::size_t bufferSize = static_cast<std::size_t>(44100 * 2 * 0.1);
+	std::size_t samplesToCopy = std::min(sampleCount, bufferSize - recorded.size());
+	recorded.insert(recorded.end(), samples, samples + samplesToCopy);
+
+	if (recorded.size() >= 44100 * 2 * 0.1) {
+		sf::SoundBuffer soundBuffer;
+		soundBuffer.loadFromSamples(recorded.data(), recorded.size(), 2, 44100);
+		applyFFT(soundBuffer.getSamples(), magnitudes);
+		recorded.clear();
+	}
+}
+

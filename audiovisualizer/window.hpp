@@ -1,7 +1,6 @@
 #pragma once
 
 #include "FFT.hpp"
-#include <SFML/Graphics.hpp>
 #include "Globals.hpp"
 #include "StartMenu.hpp"
 
