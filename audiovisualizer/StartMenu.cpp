@@ -96,8 +96,6 @@ StartMenu::StartMenu()
 
 	rightResolution.setTexture(rightResolutionTexture);
 
-	ApplyResolutionButton.setTexture(ApplyButtonTexture);
-
 	background.setTexture(backgroundTexture);
 
 	formName.setFillColor(sf::Color::Cyan);
@@ -129,49 +127,10 @@ StartMenu::StartMenu()
 	backgroundText.setFillColor(sf::Color::White);
 	backgroundText.setFont(font);
 
-	formMax.setTexture(formTexture);
-	formMin.setTexture(formTexture);
-
-	xbeginString = "0";
-	formXbeginText.setFillColor(sf::Color::Blue);
-	formXbeginText.setString(xbeginString);
-	formXbeginText.setFont(font);
-	formXbeginText.setOrigin(formXbeginText.getGlobalBounds().width / 2, formXbeginText.getGlobalBounds().height / 2);
-
-	ybeginString = "0";
-	formYbeginText.setFillColor(sf::Color::Cyan);
-	formYbeginText.setString(ybeginString);
-	formYbeginText.setFont(font);
-
-	xendString = "Default";
-	formXendText.setFillColor(sf::Color::Green);
-	formXendText.setString(xendString);
-	formXendText.setFont(font);
-
 	/*yendString = "Default";
 	formYendText.setFillColor(sf::Color::Black);
 	formYendText.setString(yendString);
 	formYendText.setFont(font);*/
-
-	maxMagString = "Off";
-	formMaxMagText.setFillColor(sf::Color::Magenta);
-	formMaxMagText.setString(maxMagString);
-	formMaxMagText.setFont(font);
-
-	formMaxText.setFillColor(sf::Color::Black);
-	formMinText.setFillColor(sf::Color::Black);
-	formMinString = "Default";
-	formMaxString = "Default";
-	formMaxText.setFont(font);
-	formMinText.setFont(font);
-	formMaxText.setString(formMaxString);
-	formMinText.setString(formMinString);
-
-	formMaxMag.setTexture(formTexture);
-	formXbegin.setTexture(formTexture);
-	formYbegin.setTexture(formTexture);
-	formXend.setTexture(formTexture);
-	//formYend.setTexture(formTexture);
 
 	Form.setTexture(formTexture);
 
@@ -221,19 +180,20 @@ void StartMenu::setSizes()
 	StartButton.setScale(actualWidth / 48000., actualHeight / 27000.);
 
 	browseText.setCharacterSize(actualWidth / 64);
-	browseText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 2);
+	browseText.setOrigin(browseText.getLocalBounds().width / 2, browseText.getLocalBounds().height / 2);
+	browseText.setPosition(BrowseButton.getPosition().x + BrowseButton.getGlobalBounds().width / 2, BrowseButton.getPosition().y + BrowseButton.getGlobalBounds().height / 3);
+	//browseText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 2);
 
 	startText.setCharacterSize(actualWidth / 64);
-	startText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 8);
+	startText.setOrigin(startText.getLocalBounds().width / 2, startText.getLocalBounds().height / 2);
+	startText.setPosition(StartButton.getPosition().x + StartButton.getGlobalBounds().width / 2, StartButton.getPosition().y + StartButton.getGlobalBounds().height / 3);
+	//startText.setPosition(actualWidth / 10 * 8, actualHeight / 10 * 8);
 
 	leftResolution.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 3);
 	leftResolution.setScale(actualWidth / 4800., actualHeight / 2700.);
 
 	rightResolution.setPosition(actualWidth / 10 * 9.2, actualHeight / 10 * 3);
 	rightResolution.setScale(actualWidth / 4800., actualHeight / 2700.);
-
-	ApplyResolutionButton.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 3);
-	ApplyResolutionButton.setScale(actualWidth / 4800., actualHeight / 2700.);
 
 	background.setScale(actualWidth / 1920., actualHeight / 1080.);
 
@@ -248,50 +208,6 @@ void StartMenu::setSizes()
 
 	yesFull.setPosition(actualWidth / 10 * 7, actualHeight / 10 * 3);
 	yesFull.setScale(actualWidth / 4800., actualHeight / 2700.);
-
-	ChooseColorButton.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 5);
-	ChooseColorButton.setScale(actualWidth / 4800., actualHeight / 2700.);
-
-	ApplyColor.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 6);
-	ApplyColor.setScale(actualWidth / 4800., actualHeight / 2700.);
-
-	formMax.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 7);
-	formMax.setScale(actualWidth / 12000., actualHeight / 9000.);
-
-	formMin.setPosition(actualWidth / 10 * 6.4, actualHeight / 10 * 7);
-	formMin.setScale(actualWidth / 12000., actualHeight / 9000.);
-
-	formMinText.setCharacterSize(actualWidth / 64);
-	formMinText.setPosition(actualWidth / 10 * 6.5, actualHeight / 10 * 7.3);;
-
-	formMaxText.setCharacterSize(actualWidth / 64);
-	formMaxText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 7.3);
-
-	formXbegin.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 4);
-	formXbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
-	formXbeginText.setCharacterSize(actualWidth / 64);
-	formXbeginText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 4.3);
-	
-	formYbegin.setPosition(actualWidth / 10 * 5.6, actualHeight / 10 * 4);
-	formYbegin.setScale(actualWidth / 12000., actualHeight / 9000.);
-	formYbeginText.setCharacterSize(actualWidth / 64);
-	formYbeginText.setPosition(actualWidth / 10 * 5.7, actualHeight / 10 * 4.3);
-	
-	formXend.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 5);
-	formXend.setScale(actualWidth / 12000., actualHeight / 9000.);
-	formXendText.setCharacterSize(actualWidth / 64);
-	formXendText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 5.3);
-	/*
-	formYend.setPosition(actualWidth / 10 * 7.6, actualHeight / 10 * 5);
-	formYend.setScale(actualWidth / 12000., actualHeight / 9000.);
-	formYendText.setCharacterSize(actualWidth / 64);
-	formYendText.setPosition(actualWidth / 10 * 7.7, actualHeight / 10 * 5.3);*/
-
-	formMaxMag.setPosition(actualWidth / 10 * 4.4, actualHeight / 10 * 6);
-	formMaxMag.setScale(actualWidth / 12000., actualHeight / 9000.);
-	formMaxMagText.setCharacterSize(actualWidth / 64);
-	formMaxMagText.setPosition(actualWidth / 10 * 4.5, actualHeight / 10 * 6.3);
-
 }
 
 	bool StartMenu::clickBrowse(const sf::RenderWindow & window)

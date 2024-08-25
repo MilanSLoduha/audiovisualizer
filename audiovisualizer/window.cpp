@@ -109,8 +109,8 @@ void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
 }
 void window::drawVisualization(std::vector<double> magnitudes){
 	for (int i = minFreqIndex; i <= maxFreqIndex; i++) {
-		if(i % 3 == 0) dot.setFillColor(sf::Color::Cyan);
-		else dot.setFillColor(sf::Color::White);
+		/*if(i % 3 == 0) dot.setFillColor(sf::Color::Cyan);
+		else dot.setFillColor(sf::Color::White);*/
 		dot.setSize(sf::Vector2f(magnitudes[i], widthOfDot)); /// (magnitudes.size() - i) // / 10 / (magnitudes.size() - 0)
 		dot.setPosition(sf::Vector2f((i - minFreqIndex) * shift + xBegin, YofViz));
 		//dot.setPosition(sf::Vector2f(20,20));
@@ -220,7 +220,7 @@ void window::startInput()
 				}
 			}
 
-			if (startMenu.formMaxString != "Default" && stoi(startMenu.formMaxString) > 22000) {
+		/*	if (startMenu.formMaxString != "Default" && stoi(startMenu.formMaxString) > 22000) {
 				startMenu.formMaxString = "22000";
 				startMenu.formMaxText.setString(startMenu.formMaxString);
 			}
@@ -236,7 +236,7 @@ void window::startInput()
 					startMenu.formMinString = "18000";
 					startMenu.formMinText.setString(startMenu.formMinString);
 				}
-			}
+			}*/
 
 
 		}
@@ -344,8 +344,8 @@ void window::startInput()
 void window::prepareStart() {
 	fft.loadMusic(startMenu.MusicPath);
 
-	xBegin = std::stoi(startMenu.xbeginString);
-	yBegin = std::stoi(startMenu.ybeginString);
+	/*xBegin = std::stoi(startMenu.xbeginString);
+	yBegin = std::stoi(startMenu.ybeginString);*/
 
 	if (startMenu.color.getFillColor() != sf::Color::White) dot.setFillColor(startMenu.color.getFillColor());
 	if (!startMenu.BackgroundPath.empty()) {
