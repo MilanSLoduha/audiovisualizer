@@ -41,25 +41,68 @@ void window::windowRun()
 {
 	runStartMenu();
 
-    fft.song.play();
-    while (Window.isOpen())
-    {
-        while (Window.pollEvent(event))
-        {
-            handleInput(event, Window, fft);
-        }
+	if (startMenu.mode == startMenu.Music) {
+		fft.song.play();
+		musicPlaying();
+	}
+	else if (startMenu.mode == startMenu.Microphone) {
+		fft.recorder.start(44100);
+		recording();
+	}
+}
+
+void window::musicPlaying() {
+	while (Window.isOpen())
+	{
+		while (Window.pollEvent(event))
+		{
+			handleInput(event, Window, fft);
+		}
 		if (clock.getElapsedTime().asMilliseconds() > 23)
 		{
 			fft.applyFFT(fft.samples_fft, magnitudes);
 			clock.restart();
 		}
 
-        Window.clear();
+		Window.clear();
 		Window.draw(background);
 		drawVisualization(magnitudes);
 		if (timeVisible) drawTime();
-        Window.display();
-    }
+		Window.display();
+	}
+}
+
+void window::recording() {
+	fft.sampleCount = 90000;
+	fft.channelCount = 2;
+	fft.sampleRate = 44100;
+	while (Window.isOpen())
+	{
+		while (Window.pollEvent(event))
+		{
+			handleInput(event, Window, fft);
+		}
+		if (clock.getElapsedTime().asMilliseconds() > 10000)
+		{
+			/*sf::SoundBuffer jozef = fft.recorder.getBuffer();
+			std::cout << clock.getElapsedTime().asMilliseconds() << " " << jozef.getSampleCount() << std::endl;*/
+			fft.applyFFT(fft.recorder.getBuffer().getSamples(), magnitudes);
+			clock.restart();
+			//fft.recorder.getBuffer().~SoundBuffer();
+		}
+
+		Window.clear();
+		Window.draw(background);
+		drawVisualization(fft.magnitudesVirgin);
+		if (timeVisible) {
+			/*fft.recorder.stop();
+			sf::SoundBuffer jozre = fft.recorder.getBuffer();
+			jozre.saveToFile("jozre.wav");*/
+			drawTime();
+		}
+		Window.display();
+	}
+
 }
 
 void window::handleInput(sf::Event& event, sf::RenderWindow& window, FFT& fft) {
@@ -162,6 +205,11 @@ void window::startInput()
 			break;
 		}
 		case sf::Event::KeyPressed: {
+			if (event.key.code == sf::Keyboard::Space) {
+				startMenu.startMenu = false;
+				startMenu.mode = startMenu.Microphone;
+				prepareStart();
+			}
 			if (startMenu.formSelected) { //startMenu.formYendSelected
 				if (event.key.code >= sf::Keyboard::Num0 && event.key.code <= sf::Keyboard::Num9) {
 					if (startMenu.formStrings[startMenu.wantedForm] == startMenu.defaultStrings[startMenu.wantedForm]) {
@@ -340,7 +388,7 @@ void window::startInput()
 }
 
 void window::prepareStart() {
-	fft.loadMusic(startMenu.MusicPath);
+	if(startMenu.mode == startMenu.Music) fft.loadMusic(startMenu.MusicPath);
 
 	/*xBegin = std::stoi(startMenu.xbeginString);
 	yBegin = std::stoi(startMenu.ybeginString);*/
@@ -403,15 +451,19 @@ void window::prepareStart() {
 
 	//if (startMenu.yendString != "Default") yEnd = std::stoi(startMenu.yendString);
 	//else yEnd = startMenu.actualHeight;
-	if (fft.smoothing == 2) {
-		maxFreqIndex = static_cast<float>(maxFreq) * static_cast<float>(N) / static_cast<float>(fft.sampleRate) * static_cast<float>(fft.smoothingDots) - 2;
-		minFreqIndex = minFreq * N / fft.sampleRate * fft.smoothingDots;
+	if (startMenu.mode == startMenu.Music) {
+		if (fft.smoothing == 2) {
+			maxFreqIndex = static_cast<float>(maxFreq) * static_cast<float>(N) / static_cast<float>(fft.sampleRate) * static_cast<float>(fft.smoothingDots) - 2;
+			minFreqIndex = minFreq * N / fft.sampleRate * fft.smoothingDots;
+		}
+		else {
+			maxFreqIndex = maxFreq * N / fft.sampleRate;
+			minFreqIndex = minFreq * N / fft.sampleRate;
+		}
+		needToRecalculateWidth = true;
 	}
-	else {
-		maxFreqIndex = maxFreq * N / fft.sampleRate;
-		minFreqIndex = minFreq * N / fft.sampleRate;
-	}
-	needToRecalculateWidth = true;
+	maxFreqIndex = 512;
+	minFreqIndex = 0;
 	setSizes();
 }
 
@@ -420,11 +472,13 @@ void window::setSizes()
 	time.setCharacterSize(startMenu.actualWidth / 64);
 	time.setPosition(startMenu.actualWidth / 16 * 13.5, startMenu.actualHeight / 54); // (width[startMenu.curRes] / 16 * 15, height[startMenu.curRes] / 54)
 	YofViz = startMenu.actualHeight - yBegin;
-	dotCount = maxFreqIndex - minFreqIndex;
-	//std::cout << dotCount << std::endl;
-	if ((widthOfDot == -1 || needToRecalculateWidth) && !enderedWidth) {
-		widthOfDot = xEnd / dotCount; //ked si druhykrat zada sirku treba tam dat needToRecalculateWidth = true//edit netreba
-		needToRecalculateWidth = false;
+	if (startMenu.mode == startMenu.Music) {
+		dotCount = maxFreqIndex - minFreqIndex;
+		//std::cout << dotCount << std::endl;
+		if ((widthOfDot == -1 || needToRecalculateWidth) && !enderedWidth) {
+			widthOfDot = xEnd / dotCount; //ked si druhykrat zada sirku treba tam dat needToRecalculateWidth = true//edit netreba
+			needToRecalculateWidth = false;
+		}
 	}
 	if (widthOfDot < 1) widthOfDot = 1;
 

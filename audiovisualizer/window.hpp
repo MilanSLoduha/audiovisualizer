@@ -66,6 +66,8 @@ private:
 	void startInput();
 	void prepareStart();
 	//std::vector<sf::Int16> samples;
+	void recording();
+	void musicPlaying();
 };
 
 //window::~window()

@@ -31,6 +31,13 @@ public:
 		Side = 9
 	};
 
+	enum selectedMode {
+		Music = 0,
+		Microphone = 1
+	};
+
+	int mode;
+
 	int actualWidth = width[0];
 	int actualHeight = height[0];
 
